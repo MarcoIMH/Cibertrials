@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wall : MonoBehaviour {
+public class Pared : MonoBehaviour {
 
     public Sprite[] sprites;
-    public int health = 2;
+    public int salud = 2;
     SpriteRenderer spriteRend;
 
 	
@@ -19,14 +19,14 @@ public class Wall : MonoBehaviour {
     /// A medida que va bajando la vida cambia el sprite del muro
     /// </summary>
     /// <param name="damage">daño que causamos al muro</param>
-    public void DamageWall(int damage)
+    public void DamageWall(int daño)
     {
-        health -= damage;
-        if (health < 0)
+        salud -= daño;
+        if (salud < 0)
         {
-            health = 0;
+            salud = 0;
             GameObject.Destroy(this.gameObject);
         }
-        spriteRend.sprite = sprites[health];   
+        spriteRend.sprite = sprites[salud];   
     }
 }

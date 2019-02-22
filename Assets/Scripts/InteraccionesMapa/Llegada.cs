@@ -24,13 +24,13 @@ public class Arrival : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("player1"))
         {
-            GameManager.instance.EndRound(Player.player1);
-            Debug.Log(" PLAYER 1");
+            GameManager.instance.EndRound(Player.jugador1);
+            Debug.Log(" PLAYER 1 WINS");
         }
         else if (other.gameObject.CompareTag("player2"))
         {
-            GameManager.instance.EndRound(Player.player2);
-            Debug.Log(" PLAYER 2");
+            GameManager.instance.EndRound(Player.jugador2);
+            Debug.Log(" PLAYER 2 WINS");
         }
     }
 

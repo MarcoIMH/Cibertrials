@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PowerUpPico : MonoBehaviour {
 
-    public float seconds = 5f; //tiempo que dura el powerUp
-	public int damageToAdd =2; //daño que aumentamos
-    private int reduceDamage; //daño que reducimos
+    public float segundos = 5f; //tiempo que dura el powerUp
+	public int aumentoDaño =2; //daño que aumentamos
+    private int reduceDaño; //daño que reducimos
    
 	void Start ()
     {
-        reduceDamage = damageToAdd;
+        reduceDaño = aumentoDaño;
 	}
 		
 	void Update ()
@@ -20,11 +20,11 @@ public class PowerUpPico : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {                
-         DestroyWalls destroy = collision.GetComponent<DestroyWalls>();
+         RomperParedes romper = collision.GetComponent<RomperParedes>();
 
-         if (destroy)
+         if (romper)
          {
-            StartCoroutine(Pickup(destroy));
+            StartCoroutine(Pickup(romper));
          }                      
     }
 
@@ -35,19 +35,19 @@ public class PowerUpPico : MonoBehaviour {
     /// Reducimos el daño que causamos al muro
     /// Destruimos el powerUp
     /// </summary>
-    /// <param name="destroy">variable del tipo DestroyWalls que usamos para llamar a los metodos
+    /// <param name="romper">variable del tipo DestroyWalls que usamos para llamar a los metodos
     /// que aumentan y reducen el daño causado al muro</param>
     /// <returns></returns>
-    IEnumerator Pickup(DestroyWalls destroy) //Corrutina
+    IEnumerator Pickup(DestroyWalls romper) //Corrutina
     {       
-        destroy.IncreaseDamage(damageToAdd); 
+        romper.AumentaDaño(aumentoDaño); 
     
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<BoxCollider2D>().enabled = false;
 
-        yield return new WaitForSeconds(seconds); 
+        yield return new WaitForSeconds(segundos); 
 
-        destroy.ReduceDamage(reduceDamage); 
+        romper.ReduceDamage(reduceDaño); 
        
         GameObject.Destroy(this.gameObject); 
     }
