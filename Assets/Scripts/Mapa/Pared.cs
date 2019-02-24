@@ -8,18 +8,18 @@ public class Pared : MonoBehaviour {
     public int salud = 2;
     SpriteRenderer spriteRend;
 
-	
+
 	void Start ()
     {
         spriteRend = GetComponent<SpriteRenderer>();
-	}
-	
+	  }
+
 	/// <summary>
     /// Decrementa la vida del muro y si es menor de 0 se destuye
     /// A medida que va bajando la vida cambia el sprite del muro
     /// </summary>
     /// <param name="damage">daño que causamos al muro</param>
-    public void DamageWall(int daño)
+    public void DañarPared(int daño)
     {
         salud -= daño;
         if (salud < 0)
@@ -27,6 +27,6 @@ public class Pared : MonoBehaviour {
             salud = 0;
             GameObject.Destroy(this.gameObject);
         }
-        spriteRend.sprite = sprites[salud];   
+        spriteRend.sprite = sprites[salud];
     }
 }

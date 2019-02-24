@@ -5,28 +5,30 @@ using UnityEngine;
 public class PowerUpPico : MonoBehaviour {
 
     public float segundos = 5f; //tiempo que dura el powerUp
-	public int aumentoDaño =2; //daño que aumentamos
-    private int reduceDaño; //daño que reducimos
-   
+	  public int dañoModificado; //daño que aumentamos
+
+
 	void Start ()
     {
-        reduceDaño = aumentoDaño;
-	}
-		
+
+  	}
+
 	void Update ()
     {
-        
-	}
+
+  	}
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {                
+    {
          RomperParedes romper = collision.GetComponent<RomperParedes>();
 
-         if (romper)
+         if (romper != null)
          {
-            StartCoroutine(Pickup(romper));
-         }                      
-    }
+            romper.IncreaseDamage(dañoModificado, segundos);
+            Destroy(this.gameObject);
+           // StartCoroutine(Pickup(romper));
+         }
+     }
 
     /// <summary>
     /// Aumentamos el daño que causamos al muro
@@ -38,17 +40,19 @@ public class PowerUpPico : MonoBehaviour {
     /// <param name="romper">variable del tipo DestroyWalls que usamos para llamar a los metodos
     /// que aumentan y reducen el daño causado al muro</param>
     /// <returns></returns>
+    /*
     IEnumerator Pickup(DestroyWalls romper) //Corrutina
-    {       
-        romper.AumentaDaño(aumentoDaño); 
-    
+    {
+        romper.AumentaDaño(aumentoDaño);
+
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<BoxCollider2D>().enabled = false;
 
-        yield return new WaitForSeconds(segundos); 
+        yield return new WaitForSeconds(segundos);
 
-        romper.ReduceDamage(reduceDaño); 
-       
-        GameObject.Destroy(this.gameObject); 
+        romper.ReduceDamage(reduceDaño);
+
+        GameObject.Destroy(this.gameObject);
     }
+    */
 }

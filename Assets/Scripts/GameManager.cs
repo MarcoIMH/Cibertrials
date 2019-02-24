@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    
+
     //Declaracion de ambos jugadores
     Player player1, player2;
 
@@ -30,14 +30,14 @@ public class GameManager : MonoBehaviour
         //Ambos jugadores comienzan la partida con 0 rondas ganadas
         roundsPlayer1 = roundsPlayer2 = 0;
 
-        
-	}
-	
+
+	  }
+
 	// Update is called once per frame
 	void Update ()
     {
 		
-	}
+	  }
 
     /// <summary>
     /// este método se llama cuando uno de los jugadores alcanza la llegada (arrival)

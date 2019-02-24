@@ -9,44 +9,47 @@ public class RomperParedes : MonoBehaviour {
     public GameObject origen; //objeto a partir del cual sale disparado el rayo
     public KeyCode tecla;      //letra con la que usamos el pico
 
+    int auxDaño; // guarda el daño original
 
-	void Start ()
+	  void Start ()
     {
-       
-	}
-	
-    
-	void Update ()
+        auxDaño = daño;
+	  }
+
+
+	  void Update ()
     {
         RaycastHit2D contacto = Physics2D.Raycast(origen.gameObject.transform.position, origen.gameObject.transform.right, distancia);
 
-        
         if (contacto.collider != null) // si colisionamos con algo
-        {          
+        {
             Pared pared = contacto.collider.gameObject.GetComponent<Pared>();
 
             if (pared != null && Input.GetKeyDown(tecla))//si ese algo es el componente Wall
             {
-                pared.DañarPared(daño); //dañamos al muro            
+                pared.DañarPared(daño); //dañamos al muro
             }
-        }  
-	}   
-    
+        }
+  	 }
+
     /// <summary>
     /// aumentamos el daño del pico
     /// </summary>
     /// <param name="cantidad">cantidad de daño que aumentamos al pico</param>
-    public void IncreaseDamage(int cantidad)
+    public void IncreaseDamage(int cantidad, float segundos)
     {
         daño += cantidad;
+        Invoke("ReduceDamage", segundos);
+          //AÑADIR AQUI EL CAMBIO DE COLOR DEL SPRITE
     }
 
     /// <summary>
     /// reducimos el daño del pico
     /// </summary>
     /// <param name="cantidad">cantidad de daño que reducimos al pico</param>
-    public void ReduceDamage(int cantidad)
+    public void ReduceDamage()
     {
-        daño -= cantidad;
-    }    
+        daño = auxDaño;
+        //AÑADIR AQUI PARA QUITAR EL COLOR DEL SPRITE
+    }
 }
