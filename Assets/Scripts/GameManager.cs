@@ -6,11 +6,11 @@ public class GameManager : MonoBehaviour
 {
 
     //Declaracion de ambos jugadores
-    Player player1, player2;
+    Player jugador1, jugador2;
 
     //variables que indican el numero de rondas ganadas por cada jugador
-    int roundsPlayer1;
-    int roundsPlayer2;
+    int rondasJugador1;
+    int rondasJugador2;
 
     //Asegurarse de que solo hay una instancia
     public static GameManager instance = null;
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     void Start ()
     {
         //Ambos jugadores comienzan la partida con 0 rondas ganadas
-        roundsPlayer1 = roundsPlayer2 = 0;
+        rondasJugador1 = rondasJugador2 = 0;
 
 
 	  }
@@ -37,19 +37,19 @@ public class GameManager : MonoBehaviour
 	void Update ()
     {
 		
-	  }
+	}
 
     /// <summary>
     /// este método se llama cuando uno de los jugadores alcanza la llegada (arrival)
     /// </summary>
-    /// <param name="winner"></param>
-    public void EndRound(Player winner)
+    /// <param name="ganador"></param>
+    public void FinalizarRonda(Player ganador)
     {
-        if(winner == player1)
+        if(ganador == jugador1)
         {
-            roundsPlayer1++;
+            rondasJugador1++;
         }
-        else roundsPlayer2++;
+        else rondasJugador2++;
 
         //-----------> aqui habría que desactivar el componente "playercontroller" de ambos jugadores
     }

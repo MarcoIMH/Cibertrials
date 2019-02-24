@@ -14,8 +14,9 @@ public class ZonaMuerte : MonoBehaviour {
         Respawn respawn = other.GetComponent<Respawn>();
         if (respawn != null)
         {
-              // Llama al método en el script respawn para cambiarle la posicion al jugador
-              respawn.CambiarPos();                
+             // Llama al método en el script respawn para cambiarle la posicion al jugador
+             respawn.CambiarPos(other.transform);
+             print("patata");
         }
     }
 }

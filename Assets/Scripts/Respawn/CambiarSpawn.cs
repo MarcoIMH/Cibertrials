@@ -10,9 +10,11 @@ public class CambiarSpawn : MonoBehaviour {
     /// <param name="other"></param>
     void OnTriggerEnter2D(Collider2D other)
     {
-        //respawn = other.
-        if(other.gameObject.respawn()!=null){
-            other.gameObject.respawn.CambiarSpawn(other.transform);
+        print("spawn");
+
+        if (other.gameObject.GetComponent<Respawn>()!=null){
+            other.gameObject.GetComponent<Respawn>().CambiaSpawn(this.transform);
+            print("uboub");
         }
 
      }

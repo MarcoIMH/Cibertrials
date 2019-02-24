@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrival : MonoBehaviour {
+public class Llegada : MonoBehaviour {
 
 	// Use this for initialization
 	void Start ()
@@ -22,14 +22,14 @@ public class Arrival : MonoBehaviour {
     /// <param name="other"></param>
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("player1"))
+        if (other.gameObject.CompareTag("jugador1"))
         {
-            GameManager.instance.EndRound(Player.jugador1);
+            GameManager.instance.FinalizarRonda(Player.jugador1);
             Debug.Log(" PLAYER 1 WINS");
         }
-        else if (other.gameObject.CompareTag("player2"))
+        else if (other.gameObject.CompareTag("jugador2"))
         {
-            GameManager.instance.EndRound(Player.jugador2);
+            GameManager.instance.FinalizarRonda(Player.jugador2);
             Debug.Log(" PLAYER 2 WINS");
         }
     }

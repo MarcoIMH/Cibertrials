@@ -17,7 +17,7 @@ public class GoombaStun : MonoBehaviour {
         if (other.gameObject.CompareTag("jugador1") || other.gameObject.CompareTag("jugador2"))
         {
             // Accedes al script playerController del jugador
-            controladorJugador = other.gameObject.GetComponent<PlayerController>();
+            controladorJugador = other.gameObject.GetComponent<ControladorJugador>();
 
             // Solo usarlo si existe para evitar errores en ejecución
             if (controladorJugador != null)
@@ -25,7 +25,7 @@ public class GoombaStun : MonoBehaviour {
                 // Activa el método para reproducir el Stun en el jugador
 
                 // Ahora el método PlayStun está hecho en el script "Stuneado" ----- Cambiar, deberia estar hecho en el PlayerController
-                controladorJugador.ReproducirStun();
+                //controladorJugador.ReproduceStun();
                 Debug.Log("Stun provocado a alguno de los jugadores");
             }
         }

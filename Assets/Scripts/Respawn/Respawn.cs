@@ -11,13 +11,19 @@ public class Respawn : MonoBehaviour {
 
     }
 
+    private void Update()
+    {
+        Debug.Log(spawn.position.x);
+    }
+
     /// <summary>
     /// Recoloca al jugador en el ultimo punto guardado
     /// </summary>
     /// <param name="jugador"></param>
-    public void CambiarPos()
+    public void CambiarPos(Transform other)
     {
-        transform.position = spawn.position;
+        other.position = spawn.position;
+        //transform.position = spawn.position;
     }
 
     /// <summary>
@@ -27,6 +33,7 @@ public class Respawn : MonoBehaviour {
     /// <param name="jugador"></param>
     public void CambiaSpawn(Transform posicionNueva)
     {
+        //print("holo");
         spawn = posicionNueva;
     }
 }
