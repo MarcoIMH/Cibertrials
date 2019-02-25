@@ -7,7 +7,7 @@ public class ControladorJugador : MonoBehaviour {
     public int alturaSalto;
     public string axisHorizontal, axisVertical;
 
-    public float reduceVelocidad; //cantidad de velocidad reducida en %
+    public float cantidadVelocidadReducida; //cantidad de velocidad reducida en %
     public KeyCode teclaRodar;
 
     public float velocidadX, fuerzaDeSalto, maxVelocidadX;
@@ -18,9 +18,9 @@ public class ControladorJugador : MonoBehaviour {
     CircleCollider2D colliderRueda;
 
     Rigidbody2D rb;
-    bool salto;
+    bool salto, estadoControles = true, estadoReduceVelocidad = false;
 
-    float velocidadAux;  //variable auxiliar donde guardamos la velocidad original
+    float maxVelocidadAux;  //variable auxiliar donde guardamos la velocidad original
     bool rodando, empezarRodar, pararRodar;
 
     // Use this for initialization
@@ -30,7 +30,7 @@ public class ControladorJugador : MonoBehaviour {
         colliderCorre = GetComponent<BoxCollider2D>();
         colliderRueda = GetComponent<CircleCollider2D>();
 
-        velocidadAux = velocidadX;
+        maxVelocidadAux = velocidadX;
 
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = (2 * maxVelocidadX / 2 * maxVelocidadX / 2) / (alturaSalto * alturaSalto);
@@ -40,54 +40,57 @@ public class ControladorJugador : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        //RODAR
-        //tecla con la que se pulsa para rodar
-        //ponemos GetKey para que sea mientras esta se mantiene
-        //En caso de meter animaciones intercalas entre correr y rodar habrá que meter GetKeyDown y GetKeyUp
-        empezarRodar = Input.GetKeyDown(teclaRodar); //----> Hay que mirar los axis y ver si esta o no bien
-        pararRodar = Input.GetKeyUp(teclaRodar);
-
-        if(colliderCorre!=null && colliderRueda != null)
+        if (estadoControles)
         {
-            //si pulsamos tecla
-            if (empezarRodar)
+            //RODAR
+            //tecla con la que se pulsa para rodar
+            //ponemos GetKey para que sea mientras esta se mantiene
+            //En caso de meter animaciones intercalas entre correr y rodar habrá que meter GetKeyDown y GetKeyUp
+            empezarRodar = Input.GetKeyDown(teclaRodar); //----> Hay que mirar los axis y ver si esta o no bien
+            pararRodar = Input.GetKeyUp(teclaRodar);
+
+            if (colliderCorre != null && colliderRueda != null)
             {
-                rodando = true;
+                //si pulsamos tecla
+                if (empezarRodar)
+                {
+                    rodando = true;
 
-                colliderCorre.enabled = false;
-                colliderRueda.enabled = true;
-                CambiaVelocidad(reduceVelocidad);
+                    colliderCorre.enabled = false;
+                    colliderRueda.enabled = true;
+                    CambiaVelocidad(cantidadVelocidadReducida);
+                }
+                else if (pararRodar)//revisar si esto es necesario
+                {
+                    rodando = false;
+
+                    colliderCorre.enabled = true;
+                    colliderRueda.enabled = false;
+                    velocidadX = maxVelocidadAux;
+
+                    // AnimacionCorrer (anim.correr)
+                }
+                if (rodando)
+                {
+                    // AnimacionRodar (anim.rodar)
+                }
             }
-            else if (pararRodar)//revisar si esto es necesario
+
+
+            //SALTO
+            //RaycastHit2D enSuelo = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - transform.localScale.y/1.95f), -Vector2.up);
+            //Debug.DrawRay(transform.position, transform.up);
+
+            if (Input.GetAxis(axisVertical) > 0 && Mathf.Abs(rb.velocity.y) < 0.05f)
             {
-                rodando = false;
-
-                colliderCorre.enabled = true;
-                colliderRueda.enabled = false;
-                velocidadX = velocidadAux;
-
-                // AnimacionCorrer (anim.correr)
+                deltaY = 1;
+                salto = true;
             }
-            if (rodando)
+            if (Mathf.Abs(rb.velocity.x) < maxVelocidadX)
             {
-                // AnimacionRodar (anim.rodar)
+                deltaX = Input.GetAxis(axisHorizontal);
             }
-        }
-        
-
-        //SALTO
-        //RaycastHit2D enSuelo = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - transform.localScale.y/1.95f), -Vector2.up);
-        //Debug.DrawRay(transform.position, transform.up);
-
-        if (Input.GetAxis(axisVertical) > 0 && Mathf.Abs(rb.velocity.y) < 0.05f)
-        {
-            deltaY = 1;
-            salto = true;
-        }
-        if (Mathf.Abs(rb.velocity.x) < maxVelocidadX)
-        {
-            deltaX = Input.GetAxis(axisHorizontal);
-        }
+        }        
     }
     private void FixedUpdate()
     {
@@ -97,9 +100,8 @@ public class ControladorJugador : MonoBehaviour {
             rb.velocity = new Vector2(deltaX * velocidadX, deltaY * fuerzaDeSalto);
             salto = false;
         }
-
-        else
-            //mov horizontal
+      //  else
+            //mov horizontal       
             rb.velocity = new Vector2(deltaX * velocidadX, rb.velocity.y);
     }
 
@@ -109,6 +111,33 @@ public class ControladorJugador : MonoBehaviour {
     /// <param name="cambioVelocidad"> Porcentaje por el que será modificada la velocidad </param>
     public void CambiaVelocidad(float cambioVelocidad)
     {
-        velocidadX = cambioVelocidad * velocidadAux;
+        velocidadX = cambioVelocidad * maxVelocidadAux;
+    }  
+
+    public void SetActivaControles(bool estado)
+    {
+        if (!estado) ReseteaStats();
+        Debug.Log(estado);
+        estadoControles = estado;
+    }
+
+    public void SetActivaReduceVelocidad(bool estado)
+    {
+        estadoReduceVelocidad = estado;
+        if (estado)
+        {
+            maxVelocidadX = maxVelocidadX - cantidadVelocidadReducida;
+        }
+        else
+        {
+            maxVelocidadX = maxVelocidadAux;
+        }
+    }
+
+    void ReseteaStats()
+    {
+        deltaX = 0;
+        deltaY = 0;
+        rb.velocity = Vector3.zero;
     }
 }
