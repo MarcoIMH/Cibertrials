@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class ControladorJugador : MonoBehaviour {
 
-    public int alturaSalto;
-    public string axisHorizontal, axisVertical;
+    public int alturaSalto, distanciaRecorrida;
+    public float VelocidadRodar, //cantidad de velocidad reducida en % (de 0 a 1)
+                    velocidadX;
 
-    public float cantidadVelocidadReducida; //cantidad de velocidad reducida en %
+    public string axisHorizontal, axisVertical;
     public KeyCode teclaRodar;
 
-    public float velocidadX, fuerzaDeSalto, maxVelocidadX;
+   
 
-    float deltaX, deltaY;
+    float deltaX, deltaY, g , velocidadY;
 
     BoxCollider2D colliderCorre;
     CircleCollider2D colliderRueda;
@@ -20,21 +21,26 @@ public class ControladorJugador : MonoBehaviour {
     Rigidbody2D rb;
     bool salto, estadoControles = true, estadoReduceVelocidad = false;
 
-    float maxVelocidadAux;  //variable auxiliar donde guardamos la velocidad original
+
+    float velocidadEstandar;  //variable auxiliar donde guardamos la velocidad original
+
     bool rodando, empezarRodar, pararRodar;
 
     // Use this for initialization
     void Start()
     {
-
+        g = (-2 * alturaSalto * velocidadX * velocidadX) / ((distanciaRecorrida / 2) * (distanciaRecorrida / 2)); //gravedad calculada
+        rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = g / Physics2D.gravity.y; //gravedad del jugador
+        velocidadY = (2*alturaSalto*velocidadX)/(distanciaRecorrida/2); //velocidad del salto
+        
         colliderCorre = GetComponent<BoxCollider2D>();
         colliderRueda = GetComponent<CircleCollider2D>();
 
-        maxVelocidadAux = velocidadX;
-
-        rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = (2 * maxVelocidadX / 2 * maxVelocidadX / 2) / (alturaSalto * alturaSalto);
+        velocidadEstandar = velocidadX;
+        
         salto = false;
+
     }
 
     // Update is called once per frame
@@ -58,7 +64,7 @@ public class ControladorJugador : MonoBehaviour {
 
                     colliderCorre.enabled = false;
                     colliderRueda.enabled = true;
-                    CambiaVelocidad(cantidadVelocidadReducida);
+                    CambiosPerdidaControl(PerdidaControles.ralentizar, VelocidadRodar, true);
                 }
                 else if (pararRodar)//revisar si esto es necesario
                 {
@@ -66,7 +72,7 @@ public class ControladorJugador : MonoBehaviour {
 
                     colliderCorre.enabled = true;
                     colliderRueda.enabled = false;
-                    velocidadX = maxVelocidadAux;
+                    velocidadX = velocidadEstandar;
 
                     // AnimacionCorrer (anim.correr)
                 }
@@ -78,18 +84,16 @@ public class ControladorJugador : MonoBehaviour {
 
 
             //SALTO
-            //RaycastHit2D enSuelo = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - transform.localScale.y/1.95f), -Vector2.up);
-            //Debug.DrawRay(transform.position, transform.up);
 
-            if (Input.GetAxis(axisVertical) > 0 && Mathf.Abs(rb.velocity.y) < 0.05f)
+
+            if (Input.GetAxis(axisVertical) > 0 && Mathf.Abs(rb.velocity.y) < 0.01f)
             {
                 deltaY = 1;
                 salto = true;
             }
-            if (Mathf.Abs(rb.velocity.x) < maxVelocidadX)
-            {
-                deltaX = Input.GetAxis(axisHorizontal);
-            }
+            
+            deltaX = Input.GetAxis(axisHorizontal);
+            
         }        
     }
     private void FixedUpdate()
@@ -97,42 +101,66 @@ public class ControladorJugador : MonoBehaviour {
         //salto
         if (salto)
         {
-            rb.velocity = new Vector2(deltaX * velocidadX, deltaY * fuerzaDeSalto);
+            rb.velocity = new Vector2(rb.velocity.x, deltaY * velocidadY);
             salto = false;
         }
-      //  else
-            //mov horizontal       
-            rb.velocity = new Vector2(deltaX * velocidadX, rb.velocity.y);
+
+        // USAR ADDFORCE 
+        //salto en pared
+
+        //mov horizontal       
+        rb.velocity = new Vector2(deltaX * velocidadX, rb.velocity.y);
     }
+
+    
+
 
     /// <summary>
-    ///  Sirve para modificar la velocidad del player
+    /// Metodo de eleccion de perdida de control
     /// </summary>
-    /// <param name="cambioVelocidad"> Porcentaje por el que será modificada la velocidad </param>
-    public void CambiaVelocidad(float cambioVelocidad)
+    /// <param name="caso"> Tipo de CC </param>
+    /// <param name="cambioVelocidad"> Porcentaje a modificar de la velocida en X (escrito como 0,...)</param>
+    /// <param name="estado"> si estado=false personaje stun</param>
+    public void CambiosPerdidaControl (PerdidaControles caso, float cambioVelocidad, bool estado)
     {
-        velocidadX = cambioVelocidad * maxVelocidadAux;
+        switch(caso)
+        {
+          case PerdidaControles.ralentizar:
+            velocidadX = cambioVelocidad * velocidadEstandar;
+            break;
+          case PerdidaControles.stun:
+                if (!estado) ReseteaStats();
+                Debug.Log(estado);
+                estadoControles = estado;
+                break;
+           
+        }
+    }
+
+    public void CambiosPoderes(Poderes caso)
+    {
+        switch (caso)
+        {
+            case Poderes.cambioControles:
+                //codigo cambio controles
+                break;
+            case Poderes.cubito:
+                //codigo cubito
+                break;
+            case Poderes.muro:
+                //codigo muro 
+                break;
+            case Poderes.neblina:
+                //codigo neblina
+                break;
+        }
+    }
+
+    public void RestauraVelocidad()
+    {
+        velocidadX =  velocidadEstandar;
     }  
 
-    public void SetActivaControles(bool estado)
-    {
-        if (!estado) ReseteaStats();
-        Debug.Log(estado);
-        estadoControles = estado;
-    }
-
-    public void SetActivaReduceVelocidad(bool estado)
-    {
-        estadoReduceVelocidad = estado;
-        if (estado)
-        {
-            maxVelocidadX = maxVelocidadX - cantidadVelocidadReducida;
-        }
-        else
-        {
-            maxVelocidadX = maxVelocidadAux;
-        }
-    }
 
     void ReseteaStats()
     {

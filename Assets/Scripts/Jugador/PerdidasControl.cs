@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PerdidasControl : MonoBehaviour {
 
-    bool controlesActivados = true;
-    bool reduceVelocidad = false;
+    public float  segundosModificaVelocidad;
 
     ControladorJugador controles;
 
@@ -17,23 +16,24 @@ public class PerdidasControl : MonoBehaviour {
 
     public void ActivaControles()
     {
-        controles.SetActivaControles(true);
+        controles.CambiosPerdidaControl(PerdidaControles.stun, 1, true);
     }
 
     public void DesactivaControles(int segundos)
     {
-        controles.SetActivaControles(false);
+        controles.CambiosPerdidaControl(PerdidaControles.stun, 1, false);
         Invoke("ActivaControles", segundos);
     }
 
-    public void ActivaReduceVelocidad()
+    public void ActivaModificaVelocidad( float velocidadModificada)
     {
-        controles.SetActivaReduceVelocidad(true);
+        controles.CambiosPerdidaControl(PerdidaControles.ralentizar, velocidadModificada, true);
+        Invoke("DesactivaModificaVelocidad", segundosModificaVelocidad);
     }
 
-    public void DesactivaReduceVelocidad(int segundos)
+    public void DesactivaModificaVelocidad()
     {
-        controles.SetActivaReduceVelocidad(false);
-        Invoke("ActivaControles", segundos);
+        controles.RestauraVelocidad();
+        
     }
 }

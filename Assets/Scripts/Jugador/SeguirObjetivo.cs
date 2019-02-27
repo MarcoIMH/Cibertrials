@@ -9,6 +9,7 @@ public class SeguirObjetivo : MonoBehaviour {
 
     private void Start()
     {
+       
         distancia = transform.position - transformJugador.position;
     }
 
