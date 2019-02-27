@@ -391,7 +391,7 @@ MonoBehaviour:
   - {fileID: 968301557}
   - {fileID: 1306854149}
   velocidad: 10
-  magnitud: 0.2
+  amplitud: 0.2
   frecuencia: 20
 --- !u!50 &172214283
 Rigidbody2D:
@@ -1386,7 +1386,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 968301556}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25, y: 16.05, z: 0}
+  m_LocalPosition: {x: 16.8, y: 19.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1549908020}
