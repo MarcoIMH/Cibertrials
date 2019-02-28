@@ -3,36 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ControladorJugador : MonoBehaviour {
-
-    public int alturaSalto, distanciaRecorrida;
-    public float VelocidadRodar, //cantidad de velocidad reducida en % (de 0 a 1)
-                    velocidadX;
-
-    public string axisHorizontal, axisVertical;
     public KeyCode teclaRodar;
-
+    public int alturaSalto, distanciaRecorrida;
+    public float VelocidadRodar, velocidadX; //cantidad de velocidad reducida en % (de 0 a 1)                    
+    public string axisHorizontal, axisVertical;
    
-
-    float deltaX, deltaY, g , velocidadY;
-
+    
     BoxCollider2D colliderCorre;
     CircleCollider2D colliderRueda;
-
     Rigidbody2D rb;
-    bool salto, estadoControles = true, estadoReduceVelocidad = false;
-
-
-    float velocidadEstandar;  //variable auxiliar donde guardamos la velocidad original
-
-    bool rodando, empezarRodar, pararRodar;
+    float deltaX, deltaY, g, velocidadY, velocidadEstandar;                                                         //velocidadEstandar = variable auxiliar donde guardamos la velocidad original
+    bool salto, estadoControles = true, estadoReduceVelocidad = false, rodando, empezarRodar, pararRodar;  
 
     // Use this for initialization
     void Start()
     {
-        g = (-2 * alturaSalto * velocidadX * velocidadX) / ((distanciaRecorrida / 2) * (distanciaRecorrida / 2)); //gravedad calculada
+        g = (-2 * alturaSalto * velocidadX * velocidadX) / ((distanciaRecorrida / 2) * (distanciaRecorrida / 2));   //gravedad calculada
         rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = g / Physics2D.gravity.y; //gravedad del jugador
-        velocidadY = (2*alturaSalto*velocidadX)/(distanciaRecorrida/2); //velocidad del salto
+        rb.gravityScale = g / Physics2D.gravity.y;                                                                  //gravedad del jugador
+        velocidadY = (2*alturaSalto*velocidadX)/(distanciaRecorrida/2);                                             //velocidad del salto
         
         colliderCorre = GetComponent<BoxCollider2D>();
         colliderRueda = GetComponent<CircleCollider2D>();
@@ -40,7 +29,6 @@ public class ControladorJugador : MonoBehaviour {
         velocidadEstandar = velocidadX;
         
         salto = false;
-
     }
 
     // Update is called once per frame
@@ -61,7 +49,6 @@ public class ControladorJugador : MonoBehaviour {
                 if (empezarRodar)
                 {
                     rodando = true;
-
                     colliderCorre.enabled = false;
                     colliderRueda.enabled = true;
                     CambiosPerdidaControl(PerdidaControles.ralentizar, VelocidadRodar, true);
@@ -69,33 +56,30 @@ public class ControladorJugador : MonoBehaviour {
                 else if (pararRodar)//revisar si esto es necesario
                 {
                     rodando = false;
-
                     colliderCorre.enabled = true;
                     colliderRueda.enabled = false;
                     velocidadX = velocidadEstandar;
 
                     // AnimacionCorrer (anim.correr)
                 }
+
                 if (rodando)
                 {
                     // AnimacionRodar (anim.rodar)
                 }
             }
 
-
             //SALTO
-
-
             if (Input.GetAxis(axisVertical) > 0 && Mathf.Abs(rb.velocity.y) < 0.01f)
             {
                 deltaY = 1;
                 salto = true;
             }
             
-            deltaX = Input.GetAxis(axisHorizontal);
-            
+            deltaX = Input.GetAxis(axisHorizontal);            
         }        
     }
+
     private void FixedUpdate()
     {
         //salto
@@ -111,9 +95,6 @@ public class ControladorJugador : MonoBehaviour {
         //mov horizontal       
         rb.velocity = new Vector2(deltaX * velocidadX, rb.velocity.y);
     }
-
-    
-
 
     /// <summary>
     /// Metodo de eleccion de perdida de control

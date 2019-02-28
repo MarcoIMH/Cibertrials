@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeguirObjetivo : MonoBehaviour {
+public class Camara : MonoBehaviour {
 
     public Transform transformJugador;
     Vector3 distancia;

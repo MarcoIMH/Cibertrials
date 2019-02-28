@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class VisionVigilante : MonoBehaviour {
-
     public float reduccionVelVigilante;
     public float maxAngulo, minAngulo, varAngulo;
+
     Vector3 vectorRotacion;
 
     // Use this for initialization
@@ -16,10 +16,8 @@ public class VisionVigilante : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update ()
-    {
-        
-        transform.Rotate(vectorRotacion);
-       
+    {        
+        transform.Rotate(vectorRotacion);       
 
         if(transform.rotation.z >= maxAngulo || transform.rotation.z <= minAngulo)
         {
@@ -29,12 +27,20 @@ public class VisionVigilante : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        PerdidasControl pc = other.GetComponent<PerdidasControl>();
-        if (pc != null)
+        /* PerdidasControl pc = other.GetComponent<PerdidasControl>();
+         if (pc != null)
+         {
+
+             pc.ActivaModificaVelocidad(reduccionVelVigilante);
+         }*/
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Lineas de testing para "SeguirObjevito.cs"   -> Comento la pérdida de control para que se ejecute esto en su lugar. Habría que progamar aquí en "qué modo" está la visión del enemigo (stun, freeze, seguir, etc)
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (this.gameObject.GetComponentInParent<SeguirObjetivo>() != null)
         {
-            
-            pc.ActivaModificaVelocidad(reduccionVelVigilante);
+            SeguirObjetivo so = this.gameObject.GetComponentInParent<SeguirObjetivo>();
+            if(so.PuedeIniciarNuevaPatrulla()) so.PatrullaHaciaPosicion(other.transform);
         }
-        
     }
 }
