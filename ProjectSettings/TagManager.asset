@@ -17,8 +17,8 @@ TagManager:
   - 
   - pared
   - colliderPared
-  - 
-  - 
+  - suelo
+  - colliderSalto
   - 
   - 
   - 

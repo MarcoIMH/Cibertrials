@@ -13,7 +13,7 @@ public class ControladorJugador : MonoBehaviour {
     CircleCollider2D colliderRueda;
     Rigidbody2D rb;
     float deltaX, deltaY, g, velocidadY, velocidadEstandar;                                                         //velocidadEstandar = variable auxiliar donde guardamos la velocidad original
-    bool salto, estadoControles = true, estadoReduceVelocidad = false, rodando, empezarRodar, pararRodar;  
+    bool salto, estadoControles = true, estadoReduceVelocidad = false, rodando, empezarRodar, pararRodar, puedeSaltar;  
 
     // Use this for initialization
     void Start()
@@ -70,10 +70,11 @@ public class ControladorJugador : MonoBehaviour {
             }
 
             //SALTO
-            if (Input.GetAxis(axisVertical) > 0 && Mathf.Abs(rb.velocity.y) < 0.01f)
+            if (Input.GetAxis(axisVertical) > 0 && puedeSaltar)
             {
                 deltaY = 1;
                 salto = true;
+                puedeSaltar = false;
             }
             
             deltaX = Input.GetAxis(axisHorizontal);            
@@ -149,4 +150,12 @@ public class ControladorJugador : MonoBehaviour {
         deltaY = 0;
         rb.velocity = Vector3.zero;
     }
+
+    /// <summary>
+    /// Metodo que se llama desde checksalto cuando el jugador toca el suelo
+    /// </summary>
+    public void ActivaPuedeSaltar()
+    {
+        puedeSaltar = true;
+    } 
 }
