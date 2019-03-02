@@ -6,8 +6,7 @@ public class ControladorJugador : MonoBehaviour {
     public KeyCode teclaRodar;
     public int alturaSalto, distanciaRecorrida;
     public float VelocidadRodar, velocidadX; //cantidad de velocidad reducida en % (de 0 a 1)                    
-    public string axisHorizontal, axisVertical;
-   
+    public string axisHorizontal, axisVertical;   
     
     BoxCollider2D colliderCorre;
     CircleCollider2D colliderRueda;
@@ -93,8 +92,9 @@ public class ControladorJugador : MonoBehaviour {
         // USAR ADDFORCE 
         //salto en pared
 
-        //mov horizontal       
-        rb.velocity = new Vector2(deltaX * velocidadX, rb.velocity.y);
+        //mov horizontal   
+        if(deltaX!=0)
+            rb.velocity = new Vector2(deltaX * velocidadX, rb.velocity.y);
     }
 
     /// <summary>
@@ -114,8 +114,7 @@ public class ControladorJugador : MonoBehaviour {
                 if (!estado) ReseteaStats();
                 Debug.Log(estado);
                 estadoControles = estado;
-                break;
-           
+                break;           
         }
     }
 
@@ -143,7 +142,6 @@ public class ControladorJugador : MonoBehaviour {
         velocidadX =  velocidadEstandar;
     }  
 
-
     void ReseteaStats()
     {
         deltaX = 0;
@@ -157,5 +155,5 @@ public class ControladorJugador : MonoBehaviour {
     public void ActivaPuedeSaltar()
     {
         puedeSaltar = true;
-    } 
+    }     
 }

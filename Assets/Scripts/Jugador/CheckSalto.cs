@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CheckSalto : MonoBehaviour {
-
-
     ControladorJugador controladorJugador;
 
     // Use this for initialization
