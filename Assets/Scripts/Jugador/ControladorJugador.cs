@@ -11,8 +11,9 @@ public class ControladorJugador : MonoBehaviour {
     BoxCollider2D colliderCorre;
     CircleCollider2D colliderRueda;
     Rigidbody2D rb;
-    float deltaX, deltaY, g, velocidadY, velocidadEstandar;                                                         //velocidadEstandar = variable auxiliar donde guardamos la velocidad original
-    bool salto, estadoControles = true, estadoReduceVelocidad = false, rodando, empezarRodar, pararRodar, puedeSaltar;  
+    float deltaX, deltaY, g, velocidadY, velocidadEstandar;       //velocidadEstandar = variable auxiliar donde guardamos la velocidad original
+    bool salto, estadoControles = true, rodando, empezarRodar, pararRodar, puedeSaltar, 
+         entreParedes=false;  //vemos si el jugador se encuentra entre paredes(mientras que rueda)
 
     // Use this for initialization
     void Start()
@@ -38,8 +39,7 @@ public class ControladorJugador : MonoBehaviour {
             //RODAR
             //tecla con la que se pulsa para rodar
             //ponemos GetKey para que sea mientras esta se mantiene
-            //En caso de meter animaciones intercalas entre correr y rodar habrá que meter GetKeyDown y GetKeyUp
-            empezarRodar = Input.GetKeyDown(teclaRodar); //----> Hay que mirar los axis y ver si esta o no bien
+            empezarRodar = Input.GetKeyDown(teclaRodar); 
             pararRodar = Input.GetKeyUp(teclaRodar);
 
             if (colliderCorre != null && colliderRueda != null)
@@ -52,7 +52,7 @@ public class ControladorJugador : MonoBehaviour {
                     colliderRueda.enabled = true;
                     CambiosPerdidaControl(PerdidaControles.ralentizar, VelocidadRodar, true);
                 }
-                else if (pararRodar)//revisar si esto es necesario
+                else if (pararRodar && !entreParedes)//revisar si esto es necesario
                 {
                     rodando = false;
                     colliderCorre.enabled = true;
@@ -137,6 +137,19 @@ public class ControladorJugador : MonoBehaviour {
         }
     }
 
+
+    /// <summary>
+    /// Cambia el estado de ver si esta o no entre paredes
+    /// </summary>
+    /// <param name="check"></param>
+    public void CheckDejarRodar(bool check)
+    {
+        entreParedes = check;
+    }
+
+    /// <summary>
+    /// Velocidad en X vuelve a su estado original
+    /// </summary>
     public void RestauraVelocidad()
     {
         velocidadX =  velocidadEstandar;
