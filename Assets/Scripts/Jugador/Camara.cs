@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camara : MonoBehaviour {
+public class Camara : MonoBehaviour
+{
 
     public Transform transformJugador;
-    Vector3 distancia;
+    public float distanciaX, distanciaY;
 
     private void Start()
     {
-       
-        distancia = transform.position - transformJugador.position;
+
     }
 
     private void LateUpdate()
     {
-        transform.position = transformJugador.position + distancia;
+        if (transformJugador != null)
+        {
+            transform.position = new Vector3(transformJugador.position.x + distanciaX, transformJugador.position.y + distanciaY, transformJugador.position.z);
+        }
     }
 }

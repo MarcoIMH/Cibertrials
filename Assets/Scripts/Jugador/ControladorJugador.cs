@@ -68,15 +68,19 @@ public class ControladorJugador : MonoBehaviour {
                 }
             }
 
+            deltaX = Input.GetAxis(axisHorizontal); 
             //SALTO
-            if (Input.GetAxis(axisVertical) > 0 && puedeSaltar)
+            deltaY = Input.GetAxis(axisVertical);
+
+
+            if (deltaY > 0.01 && puedeSaltar)
             {
-                deltaY = 1;
                 salto = true;
                 puedeSaltar = false;
             }
+            Debug.Log(deltaY);
             
-            deltaX = Input.GetAxis(axisHorizontal);            
+                       
         }        
     }
 
@@ -85,7 +89,7 @@ public class ControladorJugador : MonoBehaviour {
         //salto
         if (salto)
         {
-            rb.velocity = new Vector2(rb.velocity.x, deltaY * velocidadY);
+            rb.velocity = new Vector2(rb.velocity.x, velocidadY);
             salto = false;
         }
 
@@ -93,8 +97,7 @@ public class ControladorJugador : MonoBehaviour {
         //salto en pared
 
         //mov horizontal   
-        if(deltaX!=0)
-            rb.velocity = new Vector2(deltaX * velocidadX, rb.velocity.y);
+        rb.velocity = new Vector2(deltaX * velocidadX, rb.velocity.y);
     }
 
     /// <summary>
