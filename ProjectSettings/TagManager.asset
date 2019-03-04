@@ -19,8 +19,8 @@ TagManager:
   - colliderPared
   - suelo
   - colliderSalto
-  - 
-  - 
+  - colliderVision
+  - jugador
   - 
   - 
   - 

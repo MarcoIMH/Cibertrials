@@ -4,33 +4,33 @@ using UnityEngine;
 
 public class MovimientoEnemigos : MonoBehaviour {  
     
-    public Transform[] posiciones;                                                                  //Instanciar y asignar tantas posiciones como se deseen a través de la interfaz de Unity.
+    public Transform[] posiciones;                                                   //Instanciar y asignar tantas posiciones como se deseen a través de la interfaz de Unity.
     public SpriteRenderer spriteVision;
-    public float velocidad, amplitud, frecuencia, tiempoPausa;                                      //tiempoPausa= el tiempo de pausa en caso de desear que el enemigo haga una pausa en cada posición de patrulla                                                         
+    public float velocidad, amplitud, frecuencia, tiempoPausa;                       //tiempoPausa= el tiempo de pausa en caso de desear que el enemigo haga una pausa en cada posición de patrulla                                                         
 
-    int bandera=1;                                                                                  //Inicializamos bandera en 1 para que haga el movimiento posicion0 -> posicion1 y continue 
-    bool mueveEnemigo = true;                                                                       //a partir de ahí. Importante inicializar posicion enemigo en posicion 0!!  
+    int bandera=1;                                                                   //Inicializamos bandera en 1 para que haga el movimiento posicion0 -> posicion1 y continue 
+    bool mueveEnemigo = true;                                                        //a partir de ahí. Importante inicializar posicion enemigo en posicion 0!!  
     
     private void Start()
     {
-        if (posiciones != null && posiciones.Length > 1)                                            //Comprobamos que no sea nulo y que tenga mínimo dos puntos
+        if (posiciones != null && posiciones.Length > 1)                             //Comprobamos que no sea nulo y que tenga mínimo dos puntos
         {
             
-            bool check = true;                                                                      //Comprobamos que ninguna posición sea null
+            bool check = true;                                                       //Comprobamos que ninguna posición sea null
             for (int x = 0; x < posiciones.Length;x++)
-                if (posiciones[x] == null) check = false;                                           //Si alguna posición es nula cambiamos el valor de check para no inicializar la posición del enemigo
-            if (check) transform.position = posiciones[0].position;                                 //Si se cumple todo nos aseguramos de inicializar la posición del enemigo en la posición 0
+                if (posiciones[x] == null) check = false;                            //Si alguna posición es nula cambiamos el valor de check para no inicializar la posición del enemigo
+            if (check) transform.position = posiciones[0].position;                  //Si se cumple todo nos aseguramos de inicializar la posición del enemigo en la posición 0
         }
                 
-        if (GetComponent<Rigidbody2D>() != null &&                                                  //Nos aseguramos de que no le afecte la gravedad en caso de que el enemigo sea dinámico.
+        if (GetComponent<Rigidbody2D>() != null &&                                   //Nos aseguramos de que no le afecte la gravedad en caso de que el enemigo sea dinámico.
             GetComponent<Rigidbody2D>().bodyType== RigidbodyType2D.Dynamic)
                 GetComponent<Rigidbody2D>().gravityScale = 0;   
     }
 
     private void Update()
     {        
-        if(mueveEnemigo && transform.position == posiciones[bandera].position)                      //Si la posición del enemigo alcanza la posición del punto al que se dirige 
-        {                                                                                           // apuntamos bandera a la siguiente posición del vector
+        if(mueveEnemigo && transform.position == posiciones[bandera].position)        //Si la posición del enemigo alcanza la posición del punto al que se dirige 
+        {                                                                             // apuntamos bandera a la siguiente posición del vector
             if (tiempoPausa>0)
             {
                 mueveEnemigo = false;
@@ -38,7 +38,7 @@ public class MovimientoEnemigos : MonoBehaviour {
             }
             int posicionAnterior = bandera;
             bandera++;
-            if (bandera == posiciones.Length) bandera = 0;                                          //Si la bandera llega al fin del vector la reseteamos   
+            if (bandera == posiciones.Length) bandera = 0;                            //Si la bandera llega al fin del vector la reseteamos   
             
             CompruebaFlip(posicionAnterior);            
         }
@@ -54,7 +54,7 @@ public class MovimientoEnemigos : MonoBehaviour {
         mueveEnemigo = true;
     }
 
-    void CompruebaFlip(int posicionAnterior)                                                          //Comprobamos la coordenada x de la siguiente posición, si es menor cambia el flip
+    void CompruebaFlip(int posicionAnterior)                                          //Comprobamos la coordenada x de la siguiente posición, si es menor cambia el flip
     {
         if (posiciones[bandera].position.x < posiciones[posicionAnterior].position.x)
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ControladorJugador : MonoBehaviour {
-    public KeyCode teclaRodar;
+    public KeyCode teclaRodar, teclaSaltar;
     public int alturaSalto, distanciaRecorrida;
     public float VelocidadRodar, velocidadX; //cantidad de velocidad reducida en % (de 0 a 1)                    
     public string axisHorizontal, axisVertical;   
@@ -11,7 +11,7 @@ public class ControladorJugador : MonoBehaviour {
     BoxCollider2D colliderCorre;
     CircleCollider2D colliderRueda;
     Rigidbody2D rb;
-    float deltaX, deltaY, g, velocidadY, velocidadEstandar;       //velocidadEstandar = variable auxiliar donde guardamos la velocidad original
+    float deltaX, g, velocidadY, velocidadEstandar;       //velocidadEstandar = variable auxiliar donde guardamos la velocidad original
     bool salto, estadoControles = true, rodando, empezarRodar, pararRodar, puedeSaltar, 
          entreParedes=false;  //vemos si el jugador se encuentra entre paredes(mientras que rueda)
 
@@ -68,19 +68,15 @@ public class ControladorJugador : MonoBehaviour {
                 }
             }
 
-            deltaX = Input.GetAxis(axisHorizontal); 
+            deltaX = Input.GetAxis(axisHorizontal);
+
             //SALTO
-            deltaY = Input.GetAxis(axisVertical);
 
-
-            if (deltaY > 0.01 && puedeSaltar)
+            if (Input.GetKey(teclaSaltar) && puedeSaltar)
             {
                 salto = true;
                 puedeSaltar = false;
-            }
-            Debug.Log(deltaY);
-            
-                       
+            }          
         }        
     }
 
@@ -161,7 +157,7 @@ public class ControladorJugador : MonoBehaviour {
     void ReseteaStats()
     {
         deltaX = 0;
-        deltaY = 0;
+        //deltaY = 0;
         rb.velocity = Vector3.zero;
     }
 
