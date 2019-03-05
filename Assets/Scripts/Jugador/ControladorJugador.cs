@@ -117,7 +117,7 @@ public class ControladorJugador : MonoBehaviour {
         }
     }
 
-    public void CambiosPoderes(Poderes caso)
+    public void CambiosPoderes(Poderes caso, bool congelado)
     {
         switch (caso)
         {
@@ -125,7 +125,7 @@ public class ControladorJugador : MonoBehaviour {
                 //codigo cambio controles
                 break;
             case Poderes.cubito:
-                //codigo cubito
+                estadoControles = !congelado;
                 break;
             case Poderes.muro:
                 //codigo muro 

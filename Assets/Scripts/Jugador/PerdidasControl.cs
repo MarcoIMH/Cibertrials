@@ -5,6 +5,9 @@ using UnityEngine;
 public class PerdidasControl : MonoBehaviour {
 
     public float  segundosModificaVelocidad;
+    public CubitoHielo cuboHielo;
+
+    bool congelado = false;
 
     ControladorJugador controles;
 
@@ -12,6 +15,8 @@ public class PerdidasControl : MonoBehaviour {
     {
         if(this.gameObject.GetComponent<ControladorJugador>()!=null)
         controles = this.gameObject.GetComponent<ControladorJugador>();
+
+        AplicarCuboDeHielo();
     }
 
     public void ActivaControles()
@@ -35,5 +40,18 @@ public class PerdidasControl : MonoBehaviour {
     {
         controles.RestauraVelocidad();
         
+    }
+
+    public void AplicarCuboDeHielo()
+    {
+        congelado = true;
+        controles.CambiosPoderes(Poderes.cubito, congelado);
+        CubitoHielo newCuboHielo = Instantiate<CubitoHielo>(cuboHielo, transform);
+    }
+
+    public void DesactivarCuboDeHielo()
+    {
+        congelado = false;
+        controles.CambiosPoderes(Poderes.cubito, congelado);
     }
 }

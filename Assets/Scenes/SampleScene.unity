@@ -383,6 +383,12 @@ Prefab:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 114838896539212912, guid: 7d468191650ee5c4bbb0a8c6372203c1,
+        type: 2}
+      propertyPath: cuboHielo
+      value: 
+      objectReference: {fileID: 114972949037073324, guid: 53f3f365e4151884c85690dd1e39c0fb,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d468191650ee5c4bbb0a8c6372203c1, type: 2}
   m_IsPrefabAsset: 0
@@ -4439,6 +4445,12 @@ Prefab:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 114326232048513372, guid: 63c80bd8cce5db14092647f100ca21f8,
+        type: 2}
+      propertyPath: cuboHielo
+      value: 
+      objectReference: {fileID: 114972949037073324, guid: 53f3f365e4151884c85690dd1e39c0fb,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63c80bd8cce5db14092647f100ca21f8, type: 2}
   m_IsPrefabAsset: 0
