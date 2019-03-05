@@ -89,8 +89,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1709512387688990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30.5, y: 24.8, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalPosition: {x: -70.6, y: -42.2, z: 0}
+  m_LocalScale: {x: 0.65282446, y: 0.65282446, z: 2.1760814}
   m_Children:
   - {fileID: 4083971773542818}
   - {fileID: 4849399968443680}
@@ -121,7 +121,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.6
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -255,10 +255,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teclaRodar: 115
-  alturaSalto: 7
-  distanciaRecorrida: 12
+  teclaSaltar: 119
+  alturaSalto: 16
+  distanciaRecorrida: 26
   VelocidadRodar: 0.8
-  velocidadX: 15
+  velocidadX: 40
   axisHorizontal: axisHorizontal
   axisVertical: axisVertical
 --- !u!114 &114575136807355918

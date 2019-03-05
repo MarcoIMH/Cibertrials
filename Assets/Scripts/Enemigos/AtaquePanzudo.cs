@@ -21,13 +21,16 @@ public class AtaquePanzudo : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Rebote rebote = collision.gameObject.GetComponent<Rebote>();
-        
+
+        // Se usa en el if para ver si el jugador tiene el estado fantasma o no
+        EstadoFantasma est = collision.gameObject.GetComponent<EstadoFantasma>();
+
         ContactPoint2D p = collision.GetContact(0);        
         Vector2 normal = p.normal;
 
         float angulo = Vector2.Angle(normal,Vector2.up);
        
-        if (rebote != null)
+        if (rebote != null && est != null && !est.CogerEstadoFantasma())
         {
             //lo multiplicamos por -1 porque queremos que la fuerza se aplique en la direccion contraria al vector de la normal
             //Comprobamos si el angulo es 90,es decir si choca lateralmente con el enemigo

@@ -13,10 +13,12 @@ public class GoombaStun : MonoBehaviour {
     /// /// <param name="other"></param> El que ha colisionado con el enemigo
     void OnTriggerEnter2D(Collider2D other)
     {
+        // Se usa en el if para ver si el jugador tiene el estado fantasma o no
+        EstadoFantasma est = other.GetComponent<EstadoFantasma>();
+
         PerdidasControl pc = other.GetComponent<PerdidasControl>();
-        if (pc != null)
-        {
-           
+        if (pc != null && est != null && !est.CogerEstadoFantasma())
+        {          
             pc.DesactivaControles(segundos);
         }
 

@@ -27,6 +27,9 @@ public class VisionVigilante : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // Se usa en el if para ver si el jugador tiene el estado fantasma o no
+        EstadoFantasma est = other.GetComponent<EstadoFantasma>();
+
         /* PerdidasControl pc = other.GetComponent<PerdidasControl>();
          if (pc != null)
          {
@@ -36,11 +39,11 @@ public class VisionVigilante : MonoBehaviour {
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //Lineas de testing para "SeguirObjevito.cs"   -> Comento la pérdida de control para que se ejecute esto en su lugar. Habría que progamar aquí en "qué modo" está la visión del enemigo (stun, freeze, seguir, etc)
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (this.gameObject.GetComponentInParent<SeguirObjetivo>() != null)
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////     
+        if (this.gameObject.GetComponentInParent<SeguirObjetivo>() != null && est != null)
         {
             SeguirObjetivo so = this.gameObject.GetComponentInParent<SeguirObjetivo>();
-            if(so.PuedeIniciarNuevaPatrulla()) so.PatrullaHaciaPosicion(other.transform);
+            if (!est.CogerEstadoFantasma() && so.PuedeIniciarNuevaPatrulla()) so.PatrullaHaciaPosicion(other.transform);
         }
     }
 }
