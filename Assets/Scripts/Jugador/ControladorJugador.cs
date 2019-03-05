@@ -146,12 +146,24 @@ public class ControladorJugador : MonoBehaviour {
         entreParedes = check;
     }
 
+    
+    /// <summary>
+    /// Aumenta la velocidadX durante un tiempo y luego se vuelve a su valor original
+    /// </summary>
+    /// <param name="cantidad">cantidad de velocidad que aumentamos a velocidadX</param>
+    /// <param name="duracion">tiempo que dura el aumento</param>
+    public void AumentaVelocidad(float cantidad,float duracion)
+    {
+        velocidadX += cantidad;
+        Invoke("RestauraVelocidad", duracion);
+    }
+
     /// <summary>
     /// Velocidad en X vuelve a su estado original
     /// </summary>
     public void RestauraVelocidad()
     {
-        velocidadX =  velocidadEstandar;
+        velocidadX = velocidadEstandar;
     }  
 
     void ReseteaStats()
