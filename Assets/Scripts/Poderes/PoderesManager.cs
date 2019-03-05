@@ -29,8 +29,9 @@ public class PoderesManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-        if(Input.GetKey(teclaPoder) && habilidadActiva) 
+
+        print(habilidadActiva);
+        if(Input.GetKeyDown(teclaPoder) && habilidadActiva) 
         {
             print("patata");
             ResetStats();
@@ -61,26 +62,27 @@ public class PoderesManager : MonoBehaviour {
     }
     public bool AñadirGemas()
     {
+        
         if (gemas < gemasMax)
         {
             gemas++;
+            //print("gemas:"+gemas);
             GameManager.instance.ActualizaGemas(gemas, jugador);
+            if (gemas == gemasMax)
+            {
+                BuscaHabilidad();
+                habilidadActiva = true;
+            }
             return true;
         }
+        else return false;
         
-        else
-        {
-            print("comprueba");
-            BuscaHabilidad();
-            habilidadActiva = true;
-            return false;
-        }
        
             
     }
     void BuscaHabilidad()
     {
-        //ramdom
+        
         poderUsar = poder[Random.Range(0,4)];
     }
    

@@ -19,6 +19,7 @@ public class CogerGemas : MonoBehaviour {
         PoderesManager pm = other.GetComponent<PoderesManager>();
         if (pm != null)
         {
+           
             if (pm.AñadirGemas())
             {
                 Destroy(this.gameObject);
