@@ -9,8 +9,10 @@ public class GameManager : MonoBehaviour
     Player jugador1, jugador2;
 
     //variables que indican el numero de rondas ganadas por cada jugador
-    int rondasJugador1;
-    int rondasJugador2;
+    int rondasJugador1, rondasJugador2;
+
+    UIManager UI;
+
 
     //Asegurarse de que solo hay una instancia
     public static GameManager instance = null;
@@ -25,19 +27,19 @@ public class GameManager : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         //Ambos jugadores comienzan la partida con 0 rondas ganadas
         rondasJugador1 = rondasJugador2 = 0;
 
 
-	  }
+    }
 
-	// Update is called once per frame
-	void Update ()
+    // Update is called once per frame
+    void Update()
     {
-		
-	}
+
+    }
 
     /// <summary>
     /// este método se llama cuando uno de los jugadores alcanza la llegada (arrival)
@@ -45,7 +47,7 @@ public class GameManager : MonoBehaviour
     /// <param name="ganador"></param>
     public void FinalizarRonda(Player ganador)
     {
-        if(ganador == jugador1)
+        if (ganador == jugador1)
         {
             rondasJugador1++;
         }
@@ -53,4 +55,19 @@ public class GameManager : MonoBehaviour
 
         //-----------> aqui habría que desactivar el componente "playercontroller" de ambos jugadores
     }
+
+    public void ActualizaGemas(int gema, Player jugador)
+    {
+        UI.ActualizaGema(gema, jugador);
+    }
+
+    /// <summary>
+    /// Recogemos UI
+    /// </summary>
+    /// <param name="UIM"></param>
+    public void SetUI(UIManager UIM)
+    {
+        UI = UIM;
+    }
+
 }
