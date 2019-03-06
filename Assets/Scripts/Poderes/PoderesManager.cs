@@ -64,11 +64,11 @@ public class PoderesManager : MonoBehaviour {
     }
     public bool AñadirGemas()
     {
-        
+        print(gemas);
         if (gemas < gemasMax)
         {
             gemas++;
-            //print("gemas:"+gemas);
+            print("gemas:"+gemas);
             GameManager.instance.ActualizaGemas(gemas, jugador);
             if (gemas == gemasMax)
             {
