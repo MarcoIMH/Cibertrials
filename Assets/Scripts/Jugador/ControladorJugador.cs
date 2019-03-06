@@ -121,11 +121,13 @@ public class ControladorJugador : MonoBehaviour {
     {
         switch (caso)
         {
-            case Poderes.cambioControles:
-                //codigo cambio controles
+            case Poderes.inversionControles:
+                velocidadX *= (-1);
+                SwapTeclas(ref teclaRodar, ref teclaSaltar);
                 break;
             case Poderes.cubito:
                 estadoControles = !congelado;
+                ReseteaStats();
                 break;
             case Poderes.muro:
                 //codigo muro 
@@ -179,5 +181,12 @@ public class ControladorJugador : MonoBehaviour {
     public void ActivaPuedeSaltar()
     {
         puedeSaltar = true;
-    }     
+    }
+    
+    void SwapTeclas(ref KeyCode a, ref KeyCode b)
+    {
+        KeyCode aux = a;
+        a = b;
+        b = aux;
+    }
 }

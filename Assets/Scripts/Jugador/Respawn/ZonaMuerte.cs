@@ -5,6 +5,8 @@ using UnityEngine;
 public class ZonaMuerte : MonoBehaviour {
 
     public int segundosRespawn;
+
+    PerdidasControl pc;
     /// <summary>
     /// Si colisiona con zonas de muerte, llama para cambiar la posicion de uno de los 2 jugadores
     /// </summary>
@@ -20,8 +22,15 @@ public class ZonaMuerte : MonoBehaviour {
 
             if (other.GetComponent<PerdidasControl>() != null)
             {
-                other.GetComponent<PerdidasControl>().DesactivaControles(segundosRespawn);
+                pc = other.GetComponent<PerdidasControl>();
+                pc.DesactivaControles(segundosRespawn);
             }
+
+            if (pc.EstablecerCongelado() && other.GetComponentInChildren<CubitoHielo>() != null)
+            {
+                Destroy(other.GetComponentInChildren<CubitoHielo>().gameObject);
+            }
+            
             respawn.CambiarPos(other.transform);             
         }
     }

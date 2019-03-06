@@ -5,7 +5,7 @@ using UnityEngine;
 public class PerdidasControl : MonoBehaviour {
 
     //segundos que dura la modificacion de velocidad
-    public float  segundosModificaVelocidad;
+    public float  segundosModificaVelocidad, segundosInversionControles;
 
     //acceso al prefab del cubo de hielo para instanciarlo
     public CubitoHielo cuboHielo;
@@ -22,16 +22,21 @@ public class PerdidasControl : MonoBehaviour {
         if(this.gameObject.GetComponent<ControladorJugador>()!=null)
         controles = this.gameObject.GetComponent<ControladorJugador>();
 
-        //AplicarCuboDeHielo();
+        
     }
 
-    //cambia el estado de los controles a true
+    /// <summary>
+    /// cambia el estado de los controles a true
+    /// </summary>
     public void ActivaControles()
     {
         controles.CambiosPerdidaControl(PerdidaControles.stun, 1, true);
     }
 
-    //cambia el estado de los controles a false
+    /// <summary>
+    /// cambia el estado de los controles a false
+    /// </summary>
+    /// <param name="segundos"></param>
     public void DesactivaControles(int segundos)
     {
         //desactiva los controles
@@ -40,22 +45,29 @@ public class PerdidasControl : MonoBehaviour {
         Invoke("ActivaControles", segundos);
     }
 
-    //modifica la velocidad
+    /// <summary>
+    /// modifica la velocidad
+    /// </summary>
+    /// <param name="velocidadModificada"></param>
     public void ActivaModificaVelocidad( float velocidadModificada)
     {
-        //modifica la velocidad
+        //modifica la velocidad multiplicandola por "velocidadModificada"
         controles.CambiosPerdidaControl(PerdidaControles.ralentizar, velocidadModificada, true);
         //la devuelve a su valor normal pasados "segundosModificaVelocidad" segundos
         Invoke("DesactivaModificaVelocidad", segundosModificaVelocidad);
     }
 
-    //restaura la velocidad del jugador
+    /// <summary>
+    /// restaura la velocidad del jugador
+    /// </summary>
     public void DesactivaModificaVelocidad()
     {
         controles.RestauraVelocidad(); 
     }
 
-    //activa el cubode hielo y congela al jugador poniendo el estado de los controles a false
+    /// <summary>
+    /// //activa el cubode hielo y congela al jugador poniendo el estado de los controles a false
+    /// </summary>
     public void AplicarCuboDeHielo()
     {
         congelado = true;
@@ -65,10 +77,37 @@ public class PerdidasControl : MonoBehaviour {
         CubitoHielo newCuboHielo = Instantiate<CubitoHielo>(cuboHielo, transform);
     }
 
-    //reactiva los controles
+    /// <summary>
+    /// reactiva los controles
+    /// </summary>
     public void DesactivarCuboDeHielo()
     {
         congelado = false;
         controles.CambiosPoderes(Poderes.cubito, congelado);
     }
+
+    /// <summary>
+    /// Invierte la velocidad en X e intercambia las teclas de rodar y saltar
+    /// </summary>
+    public void ActivaInvierteControles()
+    {
+        //hace dichos cambios
+        controles.CambiosPoderes(Poderes.inversionControles, false);
+        //los revierte pasados "segundos" segundos
+        Invoke("DesactivaInvierteControles", segundosInversionControles);
+    }
+
+    /// <summary>
+    /// Invierte la velocidad en X e intercambia las teclas de rodar y saltar
+    /// Hace lo mismo que el metodo de activar pero si no el invoke entraria en bucle
+    /// </summary>
+    public void DesactivaInvierteControles()
+    {
+        controles.CambiosPoderes(Poderes.inversionControles, false);
+    }
+    public bool EstablecerCongelado()
+    {
+        return congelado;
+    }
+
 }

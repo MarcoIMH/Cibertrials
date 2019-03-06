@@ -14,7 +14,7 @@ public class PoderesManager : MonoBehaviour {
     Poderes poderUsar;
     bool habilidadActiva;
 
-
+    PerdidasControl per;
     
 	void Start () {
         gemas = 0;
@@ -22,27 +22,29 @@ public class PoderesManager : MonoBehaviour {
 
         //asignamos los poderes
         poder[0] = Poderes.cubito;
-        poder[1] = Poderes.cambioControles;
+        poder[1] = Poderes.inversionControles;
         poder[2] = Poderes.muro;
         poder[3] = Poderes.neblina;
+
+        if(jugadorContrario.gameObject.GetComponent<PerdidasControl>() != null) per = jugadorContrario.gameObject.GetComponent<PerdidasControl>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        print(habilidadActiva);
+        //print(habilidadActiva);
         if(Input.GetKeyDown(teclaPoder) && habilidadActiva) 
         {
-            print("patata");
+            //print("patata");
             ResetStats();
             habilidadActiva = false;
             switch (poderUsar)
             {
-                case Poderes.cambioControles:
-                    //codigo cambio controles
+                case Poderes.inversionControles:
+                    per.ActivaInvierteControles();
                     break;
                 case Poderes.cubito:
-                    //codigo cubito
+                    per.AplicarCuboDeHielo();
                     break;
                 case Poderes.muro:
                     //codigo muro 
@@ -81,8 +83,7 @@ public class PoderesManager : MonoBehaviour {
             
     }
     void BuscaHabilidad()
-    {
-        
+    {       
         poderUsar = poder[Random.Range(0,4)];
     }
    
