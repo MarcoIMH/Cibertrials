@@ -2,58 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class SaltoParedes : MonoBehaviour
+{
+    public float fuerzaSalto, x, y, velocidadBajarsePared;
+    public KeyCode salto, izquierda, derecha;
 
-/* MAÑANA PONGO LOS COMENTARIOS Y EXPLICO EL CODIGO. SON LAS 1.33 AM Y LLEVO HORA Y PICO INTENTANDO SOLUCIONAR UN BUG MUY CURIOSO QUE HAY EN CONTROLESJUGADOR
- * PERO NO HE SIDO CAPAZ, MAÑANA OS INFORMO */
-
-public class SaltoParedes : MonoBehaviour {
-    public float fuerzaSalto, x, y;
     Muros pared;
     Rigidbody2D rb;
-    ControladorJugador controlador;
-    Vector2 direccion;    
+    Vector2 direccion;
     float gravedadPorDefecto;
-    bool puedeSaltar = false;
+    bool puedeSaltarParedes = false;
 
     // Use this for initialization
     void Start()
     {
-        controlador = GetComponent<ControladorJugador>();
         rb = GetComponent<Rigidbody2D>();
         Invoke("SetGravedadPorDefecto", 0.2f);
     }
-    
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.W) && puedeSaltar)
+        if (Input.GetKeyDown(salto) && puedeSaltarParedes)
         {
-            puedeSaltar = false;
-            controlador.enabled = false;
-            SaltoPared();                
-        }        
+            puedeSaltarParedes = false;
+            SaltoPared();
+        }
+
+        if (Input.GetKeyDown(derecha) && puedeSaltarParedes && pared == Muros.izquierda)
+            rb.velocity = new Vector2(velocidadBajarsePared, 0);
+
+        if (Input.GetKeyDown(izquierda) && puedeSaltarParedes && pared == Muros.derecha)
+            rb.velocity = new Vector2(-velocidadBajarsePared, 0);
     }
 
     public void SetSalto(bool puede, Muros lado)
-    {     
-        if(puede) rb.gravityScale = 0.1f;
+    {
+        if (puede) rb.gravityScale = 0.1f;
         else rb.gravityScale = gravedadPorDefecto;
 
         pared = lado;
-        puedeSaltar = puede;
-    }    
+        puedeSaltarParedes = puede;
+    }
 
     public void SaltoPared()
     {
         if (pared == Muros.izquierda) direccion = new Vector2(x, y);
         else direccion = new Vector2(-x, y);
         rb.AddForce(direccion * fuerzaSalto, ForceMode2D.Impulse);
-        Invoke("RestauraControles", 1f);
-    }   
-
-    void RestauraControles()
-    {
-        controlador.enabled = true;        
     }
 
     void SetGravedadPorDefecto()

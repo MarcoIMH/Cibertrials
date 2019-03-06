@@ -956,7 +956,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 428438811}
-  - component: {fileID: 428438810}
   - component: {fileID: 428438809}
   - component: {fileID: 428438808}
   - component: {fileID: 428438812}
@@ -1038,26 +1037,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &428438810
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 428438807}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!4 &428438811
 Transform:
   m_ObjectHideFlags: 0
@@ -1065,7 +1044,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 428438807}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -38.4, y: 61.5, z: 0}
+  m_LocalPosition: {x: -31.6, y: 61.5, z: 0}
   m_LocalScale: {x: 2, y: 60, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1571,6 +1550,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &853436861 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1709512387688990, guid: 63c80bd8cce5db14092647f100ca21f8,
+    type: 2}
+  m_PrefabInternal: {fileID: 2068401835}
+--- !u!114 &853436862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 853436861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4196a74179118142a72ffb03eb7205e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuerzaSalto: 15
+  x: 1
+  y: 3.5
+  velocidadBajarsePared: 5
+  salto: 119
+  izquierda: 97
+  derecha: 100
 --- !u!1 &921440564
 GameObject:
   m_ObjectHideFlags: 0
@@ -2251,7 +2253,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1080850971}
-  - component: {fileID: 1080850970}
   - component: {fileID: 1080850968}
   - component: {fileID: 1080850969}
   - component: {fileID: 1080850972}
@@ -2333,26 +2334,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &1080850970
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1080850967}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!4 &1080850971
 Transform:
   m_ObjectHideFlags: 0
@@ -2360,7 +2341,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1080850967}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -52.1, y: 51.6, z: 0}
+  m_LocalPosition: {x: -52.27, y: 64.1, z: 0}
   m_LocalScale: {x: 2, y: 60, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3953,7 +3934,8 @@ Prefab:
       propertyPath: jugadorContrario
       value: 
       objectReference: {fileID: 1161835470}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114836687635150428, guid: 63c80bd8cce5db14092647f100ca21f8, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 63c80bd8cce5db14092647f100ca21f8, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &2076206266

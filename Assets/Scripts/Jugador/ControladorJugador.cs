@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControladorJugador : MonoBehaviour {
+public class ControladorJugador : MonoBehaviour
+{
     public KeyCode teclaRodar, teclaSaltar;
     public int alturaSalto, distanciaRecorrida;
     public float VelocidadRodar, velocidadX; //cantidad de velocidad reducida en % (de 0 a 1)                    
-    public string axisHorizontal, axisVertical;   
-    
+    public string axisHorizontal, axisVertical;
+
     BoxCollider2D colliderCorre;
     CircleCollider2D colliderRueda;
     Rigidbody2D rb;
     float deltaX, g, velocidadY, velocidadEstandar;       //velocidadEstandar = variable auxiliar donde guardamos la velocidad original
-    bool salto, estadoControles = true, rodando, empezarRodar, pararRodar, puedeSaltar, 
-         entreParedes=false;  //vemos si el jugador se encuentra entre paredes(mientras que rueda)
+    bool salto, estadoControles = true, rodando, empezarRodar, pararRodar, puedeSaltar,
+         entreParedes = false, enPared = false, movHorizontal = false;  //vemos si el jugador se encuentra entre paredes(mientras que rueda)
 
     // Use this for initialization
     void Start()
@@ -21,13 +22,13 @@ public class ControladorJugador : MonoBehaviour {
         g = (-2 * alturaSalto * velocidadX * velocidadX) / ((distanciaRecorrida / 2) * (distanciaRecorrida / 2));   //gravedad calculada
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = g / Physics2D.gravity.y;                                                                  //gravedad del jugador
-        velocidadY = (2*alturaSalto*velocidadX)/(distanciaRecorrida/2);                                             //velocidad del salto
-        
+        velocidadY = (2 * alturaSalto * velocidadX) / (distanciaRecorrida / 2);                                             //velocidad del salto
+
         colliderCorre = GetComponent<BoxCollider2D>();
         colliderRueda = GetComponent<CircleCollider2D>();
 
         velocidadEstandar = velocidadX;
-        
+
         salto = false;
     }
 
@@ -39,7 +40,7 @@ public class ControladorJugador : MonoBehaviour {
             //RODAR
             //tecla con la que se pulsa para rodar
             //ponemos GetKey para que sea mientras esta se mantiene
-            empezarRodar = Input.GetKeyDown(teclaRodar); 
+            empezarRodar = Input.GetKeyDown(teclaRodar);
             pararRodar = Input.GetKeyUp(teclaRodar);
 
             if (colliderCorre != null && colliderRueda != null)
@@ -68,16 +69,21 @@ public class ControladorJugador : MonoBehaviour {
                 }
             }
 
-            deltaX = Input.GetAxis(axisHorizontal);
+            //mov horizontal 
+            if (Input.GetAxis(axisHorizontal) != 0 && !enPared)
+            {
+                deltaX = Input.GetAxis(axisHorizontal);
+                movHorizontal = true;
+            }
+            else movHorizontal = false;
 
-            //SALTO
-
+            //salto
             if (Input.GetKey(teclaSaltar) && puedeSaltar)
             {
                 salto = true;
                 puedeSaltar = false;
-            }          
-        }        
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -89,11 +95,9 @@ public class ControladorJugador : MonoBehaviour {
             salto = false;
         }
 
-        // USAR ADDFORCE 
-        //salto en pared
-
-        //mov horizontal   
-        rb.velocity = new Vector2(deltaX * velocidadX, rb.velocity.y);
+        //mov horizontal  
+        if (movHorizontal && !enPared)
+            rb.velocity = new Vector2(deltaX * velocidadX, rb.velocity.y);
     }
 
     /// <summary>
@@ -102,18 +106,18 @@ public class ControladorJugador : MonoBehaviour {
     /// <param name="caso"> Tipo de CC </param>
     /// <param name="cambioVelocidad"> Porcentaje a modificar de la velocida en X (escrito como 0,...)</param>
     /// <param name="estado"> si estado=false personaje stun</param>
-    public void CambiosPerdidaControl (PerdidaControles caso, float cambioVelocidad, bool estado)
+    public void CambiosPerdidaControl(PerdidaControles caso, float cambioVelocidad, bool estado)
     {
-        switch(caso)
+        switch (caso)
         {
-          case PerdidaControles.ralentizar:
-            velocidadX = cambioVelocidad * velocidadEstandar;
-            break;
-          case PerdidaControles.stun:
+            case PerdidaControles.ralentizar:
+                velocidadX = cambioVelocidad * velocidadEstandar;
+                break;
+            case PerdidaControles.stun:
                 if (!estado) ReseteaStats();
                 Debug.Log(estado);
                 estadoControles = estado;
-                break;           
+                break;
         }
     }
 
@@ -138,7 +142,6 @@ public class ControladorJugador : MonoBehaviour {
         }
     }
 
-
     /// <summary>
     /// Cambia el estado de ver si esta o no entre paredes
     /// </summary>
@@ -148,13 +151,12 @@ public class ControladorJugador : MonoBehaviour {
         entreParedes = check;
     }
 
-    
     /// <summary>
-    /// Aumenta la velocidadX durante un tiempo y luego se vuelve a su valor original
+    /// Aumenta la velocidadX durante un tiempo e invoca a RestauraVelocidad tras el tiempo "duracion"
     /// </summary>
     /// <param name="cantidad">cantidad de velocidad que aumentamos a velocidadX</param>
     /// <param name="duracion">tiempo que dura el aumento</param>
-    public void AumentaVelocidad(float cantidad,float duracion)
+    public void AumentaVelocidad(float cantidad, float duracion)
     {
         velocidadX += cantidad;
         Invoke("RestauraVelocidad", duracion);
@@ -166,13 +168,6 @@ public class ControladorJugador : MonoBehaviour {
     public void RestauraVelocidad()
     {
         velocidadX = velocidadEstandar;
-    }  
-
-    void ReseteaStats()
-    {
-        deltaX = 0;
-        //deltaY = 0;
-        rb.velocity = Vector3.zero;
     }
 
     /// <summary>
@@ -182,7 +177,31 @@ public class ControladorJugador : MonoBehaviour {
     {
         puedeSaltar = true;
     }
-    
+
+    /// <summary>
+    /// Método que se utiliza para comunicar a los controles si está en pared o no
+    /// </summary>
+    /// <param name="estado"></param>
+    public void EstaEnPared(bool estado)
+    {
+        enPared = estado;
+    }
+
+    /// <summary>
+    /// Método para resetear valores de movimiento
+    /// </summary>
+    void ReseteaStats()
+    {
+        deltaX = 0;
+        //deltaY = 0;
+        rb.velocity = Vector3.zero;
+    }
+
+    /// <summary>
+    /// Método para cambiar el input de las teclas
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
     void SwapTeclas(ref KeyCode a, ref KeyCode b)
     {
         KeyCode aux = a;
