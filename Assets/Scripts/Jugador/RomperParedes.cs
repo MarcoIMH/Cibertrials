@@ -6,20 +6,21 @@ public class RomperParedes : MonoBehaviour {
 
     public int daño = 1;
     public float distancia = 1f; // distancia a partir de la cual se puede empezar a picar el muro
-    public GameObject origen; //objeto a partir del cual sale disparado el rayo
     public KeyCode tecla;      //letra con la que usamos el pico
 
+    int capa;
     int auxDaño; // guarda el daño original
 
 	  void Start ()
     {
+        capa = LayerMask.GetMask("Muro");
         auxDaño = daño;
 	  }
 
 
 	  void Update ()
     {
-        RaycastHit2D contacto = Physics2D.Raycast(origen.gameObject.transform.position, origen.gameObject.transform.right, distancia);
+        RaycastHit2D contacto = Physics2D.Raycast(transform.position, transform.right, distancia, capa);
 
         if (contacto.collider != null) // si colisionamos con algo
         {

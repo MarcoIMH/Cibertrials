@@ -84,7 +84,7 @@ public class PoderesManager : MonoBehaviour {
     }
     void BuscaHabilidad()
     {       
-        poderUsar = poder[Random.Range(0,4)];
+        poderUsar = poder[Random.Range(0, 4)];
     }
    
 }

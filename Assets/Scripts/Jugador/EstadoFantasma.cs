@@ -5,6 +5,10 @@ using UnityEngine;
 public class EstadoFantasma : MonoBehaviour {
 
     bool estadoFantasma;
+    private void Start()
+    {
+        
+    }
 
     /// <summary>
     /// metodo que se llama desde el objeto con el power up

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpPico : MonoBehaviour {
+public class MejoraPico : MonoBehaviour {
 
     public float segundos = 5f; //tiempo que dura el powerUp
 	  public int dañoModificado; //daño que aumentamos

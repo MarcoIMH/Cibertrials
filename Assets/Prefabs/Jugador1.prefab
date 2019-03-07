@@ -61,9 +61,9 @@ GameObject:
   - component: {fileID: 61138514295061730}
   - component: {fileID: 58275888247601692}
   - component: {fileID: 114326232048513372}
-  - component: {fileID: 114836687635150428}
   - component: {fileID: 114642832242878402}
   - component: {fileID: 114715483228306460}
+  - component: {fileID: 114793189399979392}
   m_Layer: 13
   m_Name: Jugador1
   m_TagString: jugador1
@@ -315,6 +315,24 @@ MonoBehaviour:
   jugadorContrario: {fileID: 0}
   jugador: 0
   teclaPoder: 98
+--- !u!114 &114793189399979392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1709512387688990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4196a74179118142a72ffb03eb7205e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuerzaSalto: 15
+  x: 1
+  y: 3.5
+  velocidadBajarsePared: 5
+  salto: 119
+  izquierda: 97
+  derecha: 100
 --- !u!114 &114802132739146722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -326,20 +344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be667d3eb6a204b4db57d23813445dbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114836687635150428
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1709512387688990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4196a74179118142a72ffb03eb7205e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fuerzaSalto: 13
-  x: 1
-  y: 2.5
 --- !u!212 &212207100986395694
 SpriteRenderer:
   m_ObjectHideFlags: 1
