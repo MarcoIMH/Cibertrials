@@ -70,4 +70,12 @@ public class GameManager : MonoBehaviour
         UI = UIM;
     }
 
+    /// <summary>
+    /// Método para informar de la escena que se está cargando. TERMINAR EL CÓDIGO CUANDO ESTÉN TODAS LAS ESCENAS Y EL CAMBIO DE ESCENA HECHO
+    /// </summary>
+    /// <returns></returns>
+    public string NombreEscena()    
+    {
+        return "Mapa3";
+    }
 }

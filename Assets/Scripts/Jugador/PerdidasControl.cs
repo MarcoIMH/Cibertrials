@@ -20,9 +20,7 @@ public class PerdidasControl : MonoBehaviour {
     {
         //acceso al controlador jugador para llamar al switch
         if(this.gameObject.GetComponent<ControladorJugador>()!=null)
-        controles = this.gameObject.GetComponent<ControladorJugador>();
-
-        
+            controles = this.gameObject.GetComponent<ControladorJugador>();        
     }
 
     /// <summary>
@@ -49,7 +47,7 @@ public class PerdidasControl : MonoBehaviour {
     /// modifica la velocidad
     /// </summary>
     /// <param name="velocidadModificada"></param>
-    public void ActivaModificaVelocidad( float velocidadModificada)
+    public void ActivaModificaVelocidad(float velocidadModificada)
     {
         //modifica la velocidad multiplicandola por "velocidadModificada"
         controles.CambiosPerdidaControl(PerdidaControles.ralentizar, velocidadModificada, true);
@@ -105,9 +103,9 @@ public class PerdidasControl : MonoBehaviour {
     {
         controles.CambiosPoderes(Poderes.inversionControles, false);
     }
+
     public bool EstablecerCongelado()
     {
         return congelado;
     }
-
 }

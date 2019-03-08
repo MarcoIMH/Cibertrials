@@ -115,7 +115,6 @@ public class ControladorJugador : MonoBehaviour
                 break;
             case PerdidaControles.stun:
                 if (!estado) ReseteaStats();
-                Debug.Log(estado);
                 estadoControles = estado;
                 break;
         }
