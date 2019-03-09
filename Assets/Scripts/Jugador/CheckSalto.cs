@@ -22,7 +22,7 @@ public class CheckSalto : MonoBehaviour
         if (controladorJugador != null)
         {
             controladorJugador.ActivaPuedeSaltar();
-            controladorJugador.EstaEnPared(false);
+            controladorJugador.EstaEnPared(false);                                  //Invocación de seguridad para desactivar el salto en paredes de ControladorJugador.
         }
     }
 }

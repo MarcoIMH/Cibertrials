@@ -49,11 +49,18 @@ public class MovimientoEnemigos : MonoBehaviour {
         if(mueveEnemigo) PatrullaHastaPosicion(posiciones[bandera]);                                                  
     }
 
+    /// <summary>
+    /// Método que se utiliza para indicar cuando tiene que terminar la pausa, en caso de que la haya
+    /// </summary>
     void TerminarPausa()
     {
         mueveEnemigo = true;
     }
 
+    /// <summary>
+    /// Método para comprobar si hay que hacer flip al enemigo y su sprite, en caso de que lo tenga.
+    /// </summary>
+    /// <param name="posicionAnterior"></param>
     void CompruebaFlip(int posicionAnterior)                                          //Comprobamos la coordenada x de la siguiente posición, si es menor cambia el flip
     {
         if (posiciones[bandera].position.x < posiciones[posicionAnterior].position.x)
@@ -82,7 +89,7 @@ public class MovimientoEnemigos : MonoBehaviour {
     }    
 
     /// <summary>
-    /// Configura si debe lanzarse o no el movimiento del enemigo.
+    /// Configura si debe lanzarse o no el movimiento del enemigo. También se usa para reiniciar el movimiento de este en caso de que tenga la capacidad de seguir a un jugador
     /// </summary>
     /// <param name="confirmacion"></param>
     public void SetMueveEnemigo(bool confirmacion)

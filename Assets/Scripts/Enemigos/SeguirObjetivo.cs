@@ -9,15 +9,15 @@ public class SeguirObjetivo : MonoBehaviour {
     public float velocidadEnemigo, tiempoSeguir;                                                                        //tiempoSeguir= tiempo que el enemigo estará persiguiendo al objetivo
 
     SpriteRenderer sr;
-    Transform objetivo;    
-    bool estadoPatrulla = false, regresaPosicionInicial=false;                                                          //Variables para controlar si queremos que esté de patrulla o "de regreso" a la posición inicial
-    float r, g, b;
+    Transform jugador;    
+    bool seguirJugador = false, regresaPosicionInicial=false;                                                          //Variables para controlar si queremos que esté de patrulla o "de regreso" a la posición inicial
+    float r, g, b;                                                                                                      //Variables para almacenar el color del sprite de visión.
 
     // Use this for initialization
     void Start () {
         if (GetComponent<SpriteRenderer>() != null) sr = GetComponent<SpriteRenderer>();                                //Inicializamos el sprite para controlar el flip
                                                                                                                         //Inicializamos la posiciónInicial en la posición del enemigo, este será su punto de regreso   
-        r = spriteVision.color.r;
+        r = spriteVision.color.r;                                                                                       //Guardamos los colores del sprite de visión para poder indicar al jugador cuando lo ha detectado
         g = spriteVision.color.g;
         b = spriteVision.color.b;
     }
@@ -29,22 +29,46 @@ public class SeguirObjetivo : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (estadoPatrulla) Patrulla(objetivo);
+        if (seguirJugador) Patrulla(jugador);                                                                         
 
         if (regresaPosicionInicial)                                                                                     //Si esta activo dirigimos al enemigo a la posición inicial
         {          
-            Patrulla(posicionInicial);
+            Patrulla(posicionInicial);                                                                                  //Le indicamos que patrulle hasta la posición inicial
             if (transform.position == posicionInicial.position)                                                        //Cuando llegue a la posición inicial cancelamos el regreso e inicializamos el movimiento de patrulla
             {
                 regresaPosicionInicial = false;
-                MovimientoEnemigos movEnemigo = GetComponent<MovimientoEnemigos>();
-                movEnemigo.SetMueveEnemigo(true);
+                if(GetComponent<MovimientoEnemigos>()!=null)
+                    GetComponent<MovimientoEnemigos>().SetMueveEnemigo(true);
             }
         }
-    }   
+    }
 
     /// <summary>
-    /// Ejecuta el movimiento del enemigo hacia el nuevo objetivo a la velocidad asignada -> "velocidadEnemigo" y controla el flip de la imagen
+    /// Método para preguntar por el estado del seguimiento, de esta forma evitaremos que se reasigne un nuevo objetivo hasta que no haya terminado el seguimiento iniciado
+    /// </summary>
+    public bool PuedeIniciarSeguimiento()
+    {
+        if (!seguirJugador && !regresaPosicionInicial) return true;
+        else return false;
+    }
+
+    /// <summary>
+    /// Método para invocar el seguimiento del enemigo a la posición del jugador, este efecto durará el tiempo asignado -> "tiempoSeguir"
+    /// Desautoriza la patrulla del enemigo para inicializar este movimiento, al finalizar el seguimiento la vuelve a autorizar. Este método se autoriza desde VisionVigilante
+    /// </summary>
+    /// <param name="posicion">Posición del jugador al que queremos que siga</param>
+    public void SigueAlJugador(Transform posicion)
+    {
+        MovimientoEnemigos movEnemigo = GetComponent<MovimientoEnemigos>();                                         //Paramos el movimiento de patrulla normal entre puntos del enemigo
+        movEnemigo.SetMueveEnemigo(false);
+        jugador = posicion;                                                                                        //Establecemos nuevo objetivo a seguir
+        seguirJugador = true;                                                                                      //Activamos patrulla        
+        CambiaColorSpriteVision(true);
+        Invoke("CancelaPatrulla", tiempoSeguir);
+    }
+
+    /// <summary>
+    /// Ejecuta el movimiento del enemigo desde su posición hacia el nuevo objetivo, a la velocidad asignada -> "velocidadEnemigo" y controla el flip de la imagen.
     /// </summary>
     /// <param name="nuevoObjetivo">Posición del objetivo al que seguir</param>
     void Patrulla(Transform nuevoObjetivo)
@@ -60,46 +84,26 @@ public class SeguirObjetivo : MonoBehaviour {
             spriteVision.flipX = false;
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, nuevoObjetivo.position, velocidadEnemigo*Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, nuevoObjetivo.position, velocidadEnemigo * Time.deltaTime);
     }
 
     /// <summary>
-    /// Cancela la patrulla e inicializa el regreso a la posición inicial
+    /// Cancela el seguimiento e inicializa el regreso a la posición inicial. 
     /// </summary>
-    void CancelaPatrulla()
+    void CancelaSeguimiento()
     {
-        estadoPatrulla = false;
+        seguirJugador = false;
         regresaPosicionInicial = true;
-        CambiaColorSpriteVision(false);
+        CambiaColorSpriteVision(false);                                                                             //Devolvemos el color del sprite a su versión original para indicar al jugador que ya no le sigue
     }
 
+    /// <summary>
+    /// Método para gestionar el cambio de color del sprite de visión. Esto ayudará al jugador a reconocer si lo han detectado o no
+    /// </summary>
+    /// <param name="cambia"></param>
     void CambiaColorSpriteVision(bool cambia)
     {
-        if(cambia) spriteVision.color = Color.red;
-        else spriteVision.color = new Color(r,g,b);
-    }
-
-    /// <summary>
-    /// Método para invocar el seguimiento del enemigo a la posición indicada, este efecto durará el tiempo asignado -> "tiempoSeguir"
-    /// Para la patrulla del enemigo para inicializar este movimiento, al finalizar la vuelve a activar.
-    /// </summary>
-    /// <param name="posicion">Posición del objetivo al que queremos que siga</param>
-    public void PatrullaHaciaPosicion(Transform posicion)
-    {
-        MovimientoEnemigos movEnemigo = GetComponent<MovimientoEnemigos>();                                         //Paramos el movimiento de patrulla del enemigo
-        movEnemigo.SetMueveEnemigo(false);
-        objetivo = posicion;                                                                                        //Establecemos nuevo objetivo a seguir
-        estadoPatrulla = true;                                                                                      //Activamos patrulla        
-        CambiaColorSpriteVision(true);
-        Invoke("CancelaPatrulla", tiempoSeguir);
-    }
-
-    /// <summary>
-    /// Método para preguntar por el estado de la patrulla, de esta forma evitaremos que se reasigne un nuevo objetivo hasta que no haya terminado la patrulla iniciada
-    /// </summary>
-    public bool PuedeIniciarNuevaPatrulla()
-    {
-        if (!estadoPatrulla && !regresaPosicionInicial) return true;
-        else return false;
+        if (cambia) spriteVision.color = Color.red;
+        else spriteVision.color = new Color(r, g, b);
     }
 }
