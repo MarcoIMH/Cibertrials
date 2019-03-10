@@ -10,6 +10,7 @@ public class PoderesManager : MonoBehaviour {
     public KeyCode teclaPoder;
     public int gemasMax;
     public float segundosInversionControles;
+    
 
     PerdidasControl pc;
     ControladorJugador controlesJugadorContrario;
@@ -192,7 +193,8 @@ public class PoderesManager : MonoBehaviour {
     /// </summary>
     public void DesactivarCuboDeHielo()
     {
-        controlesJugadorContrario.Checkcc(false);
+        GetComponent<ControladorJugador>().Checkcc(false);
+        //controlesJugadorContrario.Checkcc(false);
     }
 
     /// <summary>

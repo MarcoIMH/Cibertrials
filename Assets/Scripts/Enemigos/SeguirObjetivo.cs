@@ -64,7 +64,7 @@ public class SeguirObjetivo : MonoBehaviour {
         jugador = posicion;                                                                                        //Establecemos nuevo objetivo a seguir
         seguirJugador = true;                                                                                      //Activamos patrulla        
         CambiaColorSpriteVision(true);
-        Invoke("CancelaPatrulla", tiempoSeguir);
+        Invoke("CancelaSeguimiento", tiempoSeguir);
     }
 
     /// <summary>

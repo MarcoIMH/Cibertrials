@@ -11,6 +11,8 @@ public class RomperParedes : MonoBehaviour {
     int capa;
     int auxDaño; // guarda el daño original
 
+
+
 	  void Start ()
     {
         capa = LayerMask.GetMask("Muro");
@@ -53,4 +55,9 @@ public class RomperParedes : MonoBehaviour {
         daño = auxDaño;
         //AÑADIR AQUI PARA QUITAR EL COLOR DEL SPRITE
     }
+    public KeyCode DarTeclaRomper()
+    {
+        return tecla;
+    }
+    
 }
