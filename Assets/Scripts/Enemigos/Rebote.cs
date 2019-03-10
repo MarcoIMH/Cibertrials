@@ -27,9 +27,9 @@ public class Rebote : MonoBehaviour {
     /// <param name="tiempo">tiempo que estan los controles desactivados</param>
     public void AplicarRebote(Vector2 vector,float fuerzaRebote,float tiempo)
     {
-        controlador.enabled = false;
-        rb2d.AddForce(vector * fuerzaRebote,ForceMode2D.Impulse);
-        Invoke("ActivarMov", tiempo);
+        controlador.enabled = false; //desactiva los controles
+        rb2d.AddForce(vector * fuerzaRebote,ForceMode2D.Impulse); //aplica el impulso
+        Invoke("ActivarMov", tiempo); //reactiva los controles pasado "tiempo" tiempo
     }
 
     /// <summary>

@@ -17,11 +17,11 @@ public class VisionVigilante : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {        
-        transform.Rotate(vectorRotacion);       
+        transform.Rotate(vectorRotacion); //el collider esta rotando continuamente       
 
-        if(transform.rotation.z >= maxAngulo || transform.rotation.z <= minAngulo)
+        if(transform.rotation.z >= maxAngulo || transform.rotation.z <= minAngulo) //si alcanza los valores maximos de amplitud
         {
-            vectorRotacion *= (-1);
+            vectorRotacion *= (-1);//se invierte la rotacion
         }
 	}
 

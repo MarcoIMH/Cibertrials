@@ -12,7 +12,7 @@ public class Pared : MonoBehaviour {
 	void Start ()
     {
         spriteRend = GetComponent<SpriteRenderer>();
-	  }
+	}
 
 	/// <summary>
     /// Decrementa la vida del muro y si es menor de 0 se destuye

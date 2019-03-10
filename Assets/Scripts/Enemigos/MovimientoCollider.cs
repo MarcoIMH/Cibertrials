@@ -15,20 +15,21 @@ public class MovimientoCollider : MonoBehaviour {
     {
         colliderVision = GetComponent<Collider2D>();
         spriteEnemigo = GetComponent<SpriteRenderer>();
-        colliderVisionPosX = colliderVision.offset.x;
+
+        colliderVisionPosX = colliderVision.offset.x; //valores del offset para ajustar el collider cuando se produzca el flip del enemigo
         colliderVisionNegX = -colliderVision.offset.x;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		if(spriteEnemigo.flipX)
+		if(spriteEnemigo.flipX)//si esta en flip
         {
-            colliderVision.offset = new Vector2(colliderVisionNegX, colliderVision.offset.y);
+            colliderVision.offset = new Vector2(colliderVisionNegX, colliderVision.offset.y);//se le asigna el offset negativo
         }
-        else
+        else//si no esta en flip
         {
-            colliderVision.offset = new Vector2( colliderVisionPosX, colliderVision.offset.y);
+            colliderVision.offset = new Vector2( colliderVisionPosX, colliderVision.offset.y);//se le asigna el offset positivo
         }
 	}
 }

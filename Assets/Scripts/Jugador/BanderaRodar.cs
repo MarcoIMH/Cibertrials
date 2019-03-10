@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class BanderaRodar : MonoBehaviour {
 
-
-    
-
-	void Start () {
+	void Start ()
+    {
 		
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		
 	}
+
     private void OnTriggerEnter2D(Collider2D other)
     {
+        //hace que el jugador no pueda rodar
         ControladorJugador cj = other.GetComponent<ControladorJugador>();
         if (cj != null)
         {
@@ -27,6 +28,7 @@ public class BanderaRodar : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        //hace que el jugador pueda rodar
         ControladorJugador cj = other.GetComponent<ControladorJugador>();
         if (cj != null)
         {
