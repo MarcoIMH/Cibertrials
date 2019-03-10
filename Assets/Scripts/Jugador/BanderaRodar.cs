@@ -33,7 +33,8 @@ public class BanderaRodar : MonoBehaviour {
         if (cj != null)
         {
             cj.CheckDejarRodar(false);
-
+            cj.PonerDePie();
         }
+        
     }
 }

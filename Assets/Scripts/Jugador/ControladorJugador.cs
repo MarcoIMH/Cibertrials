@@ -13,7 +13,7 @@ public class ControladorJugador : MonoBehaviour
     CircleCollider2D colliderRueda;
     Rigidbody2D rb;
     float deltaX, g, velocidadY, velocidadEstandar;       //velocidadEstandar = variable auxiliar donde guardamos la velocidad original
-    bool salto, estadoControles = true, rodando, empezarRodar, pararRodar, puedeSaltar,
+    bool salto, estadoControles = true, rodando, puedeSaltar,
          entreParedes = false, enPared = false, movHorizontal = false;  //vemos si el jugador se encuentra entre paredes(mientras que rueda)
 
     // Use this for initialization
@@ -38,22 +38,17 @@ public class ControladorJugador : MonoBehaviour
         if (estadoControles)
         {
             //RODAR
-            //tecla con la que se pulsa para rodar
-            //ponemos GetKey para que sea mientras esta se mantiene
-            empezarRodar = Input.GetKeyDown(teclaRodar);
-            pararRodar = Input.GetKeyUp(teclaRodar);
-
             if (colliderCorre != null && colliderRueda != null)
             {
                 //si pulsamos tecla
-                if (empezarRodar)
+                if (Input.GetKeyDown(teclaRodar))
                 {
                     rodando = true;
                     colliderCorre.enabled = false;
                     colliderRueda.enabled = true;
                     CambiosPerdidaControl(PerdidaControles.ralentizar, VelocidadRodar, true);
                 }
-                else if (pararRodar && !entreParedes)//revisar si esto es necesario
+                else if (Input.GetKeyUp(teclaRodar) && !entreParedes)
                 {
                     rodando = false;
                     colliderCorre.enabled = true;
@@ -61,7 +56,7 @@ public class ControladorJugador : MonoBehaviour
                     velocidadX = velocidadEstandar;
 
                     // AnimacionCorrer (anim.correr)
-                }
+                } 
 
                 if (rodando)
                 {
@@ -86,6 +81,7 @@ public class ControladorJugador : MonoBehaviour
         }
     }
 
+   
     private void FixedUpdate()
     {
         //salto
@@ -148,6 +144,18 @@ public class ControladorJugador : MonoBehaviour
     public void CheckDejarRodar(bool check)
     {
         entreParedes = check;
+       
+    }
+
+    public void PonerDePie()
+    {
+        if (!Input.GetKey(teclaRodar))
+        {
+            rodando = false;
+            colliderCorre.enabled = true;
+            colliderRueda.enabled = false;
+            velocidadX = velocidadEstandar;
+        }
     }
 
     /// <summary>
