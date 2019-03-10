@@ -203,11 +203,12 @@ public class ControladorJugador : MonoBehaviour
     /// <summary>
     /// Método para resetear valores de movimiento
     /// </summary>
-    void ReseteaStats()
+    public void ReseteaStats()
     {
         deltaX = 0;
         //deltaY = 0;
         rb.velocity = Vector3.zero;
+        rb.angularVelocity = 0f;
     }
 
     /// <summary>
