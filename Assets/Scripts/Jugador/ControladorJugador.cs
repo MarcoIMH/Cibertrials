@@ -116,7 +116,13 @@ public class ControladorJugador : MonoBehaviour
         }
     }
 
-    public void CambiosPoderes(Poderes caso, bool congelado)
+    public void Checkcc (bool encc)
+    {
+        estadoControles = !encc;
+        ReseteaStats();
+    }
+
+    public void CambiosPoderes(Poderes caso, bool encc)
     {
         switch (caso)
         {
@@ -125,7 +131,7 @@ public class ControladorJugador : MonoBehaviour
                 SwapTeclas(ref teclaRodar, ref teclaSaltar);
                 break;
             case Poderes.cubito:
-                estadoControles = !congelado;
+                //estadoControles = !congelado;
                 ReseteaStats();
                 break;
             case Poderes.muro:

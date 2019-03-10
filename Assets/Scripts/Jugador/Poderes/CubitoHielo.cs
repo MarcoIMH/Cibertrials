@@ -12,7 +12,7 @@ public class CubitoHielo : MonoBehaviour {
 
     //variables de acceso a otros componentes
     RomperParedes picar;
-    PerdidasControl pc;
+    PoderesManager pm;
 
 	// Use this for initialization
 	void Start ()
@@ -26,9 +26,9 @@ public class CubitoHielo : MonoBehaviour {
         }
 
         //acceso a PerdidasControl para llamar a activar/desactivar el cubo de hielo
-        if (this.gameObject.GetComponentInParent<PerdidasControl>() != null)
+        if (this.gameObject.GetComponentInParent<PoderesManager>() != null)
         {
-            pc = this.gameObject.GetComponentInParent<PerdidasControl>();
+            pm = this.gameObject.GetComponentInParent<PoderesManager>();
         }
     }
 	
@@ -36,7 +36,7 @@ public class CubitoHielo : MonoBehaviour {
 	void Update ()
     {
         //si se pulsa la tecla de picar el cubo recibe un golpe
-        if (Input.GetKeyDown(KeyCode.G)/*picar.tecla*/)
+        if (Input.GetKeyDown(picar.tecla))
         {
             GolpesRecibidos++;
         }
@@ -44,7 +44,7 @@ public class CubitoHielo : MonoBehaviour {
         //si se alcanza el numero de bloques necesarios se desactiva el cubo y se destruye
         if (GolpesRecibidos >= GolpesParaRomper)
         {
-            pc.DesactivarCuboDeHielo();
+            pm.DesactivarCuboDeHielo();
             Destroy(this.gameObject);
         }
 	}

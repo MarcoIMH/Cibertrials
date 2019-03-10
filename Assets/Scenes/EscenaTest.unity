@@ -203,11 +203,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jugadorContrario: {fileID: 1417738084}
-  muro: {fileID: 0}
-  neblina: {fileID: 0}
+  muro: {fileID: 1826254793097620, guid: 5a1d2d6cd4e061c42887eb25d87aeae1, type: 2}
+  neblina: {fileID: 1949629961110612, guid: f7bc3671cc848f147a3917be0ec2695a, type: 2}
+  cuboHielo: {fileID: 1032453531818462, guid: 53f3f365e4151884c85690dd1e39c0fb, type: 2}
   jugador: 1
   teclaPoder: 258
   gemasMax: 3
+  segundosInversionControles: 3
 --- !u!114 &39388672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,9 +235,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segundosModificaVelocidad: 5
-  segundosInversionControles: 3
-  cuboHielo: {fileID: 114972949037073324, guid: 53f3f365e4151884c85690dd1e39c0fb,
-    type: 2}
 --- !u!114 &39388674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24288,11 +24287,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jugadorContrario: {fileID: 39388668}
-  muro: {fileID: 0}
-  neblina: {fileID: 0}
+  muro: {fileID: 1826254793097620, guid: 5a1d2d6cd4e061c42887eb25d87aeae1, type: 2}
+  neblina: {fileID: 1949629961110612, guid: f7bc3671cc848f147a3917be0ec2695a, type: 2}
+  cuboHielo: {fileID: 1032453531818462, guid: 53f3f365e4151884c85690dd1e39c0fb, type: 2}
   jugador: 0
   teclaPoder: 104
   gemasMax: 3
+  segundosInversionControles: 3
 --- !u!114 &1417738087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24318,9 +24319,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segundosModificaVelocidad: 5
-  segundosInversionControles: 3
-  cuboHielo: {fileID: 114972949037073324, guid: 53f3f365e4151884c85690dd1e39c0fb,
-    type: 2}
 --- !u!58 &1417738089
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class PoderesManager : MonoBehaviour {
     
-    public GameObject jugadorContrario, muro, neblina;                                                                           //GO para gestionar el jugador contrario. Prefabs de muro y neblina para su instancia.
+    public GameObject jugadorContrario, muro, neblina, cuboHielo;                                                                           //GO para gestionar el jugador contrario. Prefabs de muro y neblina para su instancia.
     public Player jugador;
     public KeyCode teclaPoder;
     public int gemasMax;
+    public float segundosInversionControles;
 
-    PerdidasControl per;
+    PerdidasControl pc;
+    ControladorJugador controlesJugadorContrario;
 
     
     struct Coordenadas                                                                                                           //Struct para gestionar las coordenadas del mapa
@@ -35,7 +37,12 @@ public class PoderesManager : MonoBehaviour {
         poder[2] = Poderes.muro;
         poder[3] = Poderes.neblina;
 
-        if(jugadorContrario.gameObject.GetComponent<PerdidasControl>() != null) per = jugadorContrario.gameObject.GetComponent<PerdidasControl>();
+        if(jugadorContrario.gameObject.GetComponent<PerdidasControl>() != null) pc = jugadorContrario.gameObject.GetComponent<PerdidasControl>();
+
+        if (jugadorContrario.gameObject.GetComponent<ControladorJugador>() != null)
+        {
+            controlesJugadorContrario = jugadorContrario.gameObject.GetComponent<ControladorJugador>();
+        }
 
         Invoke("ConfiguraCoordenadasPoderes", 1f);                                                                               //Invocamos la carga de coordenadas del mapa un segundo después  como seguridad 
     }                                                                                                                            //para que de tiempo a todo a situarse en su lugar
@@ -51,10 +58,10 @@ public class PoderesManager : MonoBehaviour {
             switch (poderUsar)
             {
                 case Poderes.inversionControles:
-                    per.ActivaInvierteControles();
+                    ActivaInvierteControles();
                     break;
                 case Poderes.cubito:
-                    per.AplicarCuboDeHielo();
+                    AplicarCuboDeHielo();
                     break;
                 case Poderes.muro:
                     ActivaMuro();
@@ -90,7 +97,7 @@ public class PoderesManager : MonoBehaviour {
 
     void BuscaHabilidad()
     {   
-        poderUsar = poder[Random.Range(3,4)];                                                                                    //Lo pongo en 3,4 para forzar que use neblina. Por defecto es 0 4. 
+        poderUsar = poder[Random.Range(0,1)];                                                                                    //Lo pongo en 3,4 para forzar que use neblina. Por defecto es 0 4. 
                                                                                                                                  //Devolver a la normalidad cuando termine de hacer los poderes
     }
     
@@ -166,5 +173,45 @@ public class PoderesManager : MonoBehaviour {
                 bandera++;
             }
         }
+    }
+
+    /// <summary>
+    /// //activa el cubode hielo y congela al jugador poniendo el estado de los controles a false
+    /// </summary>
+    public void AplicarCuboDeHielo()
+    {
+        //pone el estado de los controles a false
+        controlesJugadorContrario.Checkcc(true);
+        //instancia el cubo de hielo entrando su script en ejecucion 
+        GameObject newCuboHielo = Instantiate<GameObject>(cuboHielo, jugadorContrario.transform);
+    }
+
+
+    /// <summary>
+    /// reactiva los controles
+    /// </summary>
+    public void DesactivarCuboDeHielo()
+    {
+        controlesJugadorContrario.Checkcc(false);
+    }
+
+    /// <summary>
+    /// Invierte la velocidad en X e intercambia las teclas de rodar y saltar
+    /// </summary>
+    public void ActivaInvierteControles()
+    {
+        //hace dichos cambios
+        controlesJugadorContrario.CambiosPoderes(Poderes.inversionControles, false);
+        //los revierte pasados "segundos" segundos
+        Invoke("DesactivaInvierteControles", segundosInversionControles);
+    }
+
+    /// <summary>
+    /// Invierte la velocidad en X e intercambia las teclas de rodar y saltar
+    /// Hace lo mismo que el metodo de activar pero si no el invoke entraria en bucle
+    /// </summary>
+    public void DesactivaInvierteControles()
+    {
+        controlesJugadorContrario.CambiosPoderes(Poderes.inversionControles, false);
     }
 }

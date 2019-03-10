@@ -25,12 +25,9 @@ public class ZonaMuerte : MonoBehaviour {
                 pc = other.GetComponent<PerdidasControl>();
                 pc.DesactivaControles(segundosRespawn); //si muere el jugador no puede volver a moverse hasta pasados "segundosRespawn" segundos
             }
-
-            if (pc.EstablecerCongelado() && other.GetComponentInChildren<CubitoHielo>() != null)
-            {
-                Destroy(other.GetComponentInChildren<CubitoHielo>().gameObject); //si se encontraba congelado al morir se le quitael cubo de hielo
-            }
             
+            //FALTA QUE CUANDO MUERES SE TE QUITAN LOS CCS
+
             respawn.CambiarPos(other.transform);            
         }
     }
