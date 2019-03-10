@@ -14,7 +14,7 @@ public class ControladorJugador : MonoBehaviour
     Rigidbody2D rb;
     float deltaX, g, velocidadY, velocidadEstandar;       //velocidadEstandar = variable auxiliar donde guardamos la velocidad original
     bool salto, estadoControles = true, rodando, puedeSaltar,
-         entreParedes = false, enPared = false, movHorizontal = false;  //vemos si el jugador se encuentra entre paredes(mientras que rueda)
+         entreParedes = false, enPared = false, movHorizontal = false, congelado=false;  
 
     // Use this for initialization
     void Start()
@@ -35,7 +35,7 @@ public class ControladorJugador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (estadoControles)
+        if (estadoControles && !congelado)
         {
             //RODAR
             if (colliderCorre != null && colliderRueda != null)
@@ -118,7 +118,7 @@ public class ControladorJugador : MonoBehaviour
 
     public void Checkcc (bool encc)
     {
-        estadoControles = !encc;
+        congelado = encc;
         ReseteaStats();
     }
 

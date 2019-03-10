@@ -36,7 +36,7 @@ public class CubitoHielo : MonoBehaviour {
 	void Update ()
     {
         //si se pulsa la tecla de picar el cubo recibe un golpe
-        if (Input.GetKeyDown(picar.tecla))
+        if (Input.GetKeyDown(picar.DarTeclaRomper()))
         {
             GolpesRecibidos++;
         }
