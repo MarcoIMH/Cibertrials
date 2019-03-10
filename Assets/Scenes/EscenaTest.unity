@@ -202,10 +202,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc354ae339dfef54a9f9857f34175db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gemasMax: 3
   jugadorContrario: {fileID: 1417738084}
+  muro: {fileID: 0}
+  neblina: {fileID: 0}
   jugador: 1
   teclaPoder: 258
+  gemasMax: 3
 --- !u!114 &39388672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24357,10 +24359,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc354ae339dfef54a9f9857f34175db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gemasMax: 3
   jugadorContrario: {fileID: 39388668}
+  muro: {fileID: 0}
+  neblina: {fileID: 0}
   jugador: 0
   teclaPoder: 104
+  gemasMax: 3
 --- !u!114 &1417738087
 MonoBehaviour:
   m_ObjectHideFlags: 0
