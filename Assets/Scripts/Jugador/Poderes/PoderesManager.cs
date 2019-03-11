@@ -98,7 +98,7 @@ public class PoderesManager : MonoBehaviour {
 
     void BuscaHabilidad()
     {   
-        poderUsar = poder[Random.Range(0,1)];                                                                                    //Lo pongo en 3,4 para forzar que use neblina. Por defecto es 0 4. 
+        poderUsar = poder[Random.Range(0,4)];                                                                                    //Lo pongo en 3,4 para forzar que use neblina. Por defecto es 0 4. 
                                                                                                                                  //Devolver a la normalidad cuando termine de hacer los poderes
     }
     
