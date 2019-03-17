@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 39388670}
   - component: {fileID: 39388669}
   - component: {fileID: 39388681}
+  - component: {fileID: 39388682}
   m_Layer: 13
   m_Name: Jugador2
   m_TagString: jugador2
@@ -390,6 +391,17 @@ MonoBehaviour:
   "da\xF1o": 1
   distancia: 1
   tecla: 259
+--- !u!114 &39388682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 39388668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61edc77cd2cde9e4b9a7d138030b3082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &58437072
 Prefab:
   m_ObjectHideFlags: 0
@@ -427,7 +439,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4948942223023708, guid: cb9a4f296d5ca06438c8030e6dbc6023, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224807052015788510, guid: cb9a4f296d5ca06438c8030e6dbc6023,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb9a4f296d5ca06438c8030e6dbc6023, type: 2}
@@ -662,7 +679,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1417738084
 GameObject:
@@ -685,6 +702,7 @@ GameObject:
   - component: {fileID: 1417738085}
   - component: {fileID: 1417738090}
   - component: {fileID: 1417738097}
+  - component: {fileID: 1417738098}
   m_Layer: 13
   m_Name: 'Jugador1 '
   m_TagString: jugador1
@@ -941,6 +959,17 @@ MonoBehaviour:
   "da\xF1o": 1
   distancia: 1
   tecla: 106
+--- !u!114 &1417738098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1417738084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61edc77cd2cde9e4b9a7d138030b3082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1955653762
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,5 +1060,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
