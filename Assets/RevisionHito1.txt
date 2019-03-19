@@ -51,8 +51,7 @@ Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 
 
 ///Guillotina.cs///		-> Limpiar código.
 
-///Llegada.cs///		-> ** Nombre poco representativo. Cambiar a otro (x.ejem: Victoria,Ganar,etc).
-			 	   ** Implementar que al jugador que llegue se le desactiven los controles.
+///Llegada.cs///		-> Its ok.
 
 ///Pared.cs///			-> Its ok.
 

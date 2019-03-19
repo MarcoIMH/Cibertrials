@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Llegada : MonoBehaviour {
+public class Victoria : MonoBehaviour {
 
 	// Use this for initialization
 	void Start ()
@@ -31,6 +31,12 @@ public class Llegada : MonoBehaviour {
         {
             GameManager.instance.FinalizarRonda(Player.jugador2); //suma una ronda al jugador 2
             Debug.Log(" PLAYER 2 WINS");
+        }
+
+        //desactiva los controles del jugador que alcanza la meta
+        if(other.GetComponent<ControladorJugador>() != null)
+        {
+            other.GetComponent<ControladorJugador>().CambiosPerdidaControl(PerdidaControles.stun, 0, false);
         }
     }
 
