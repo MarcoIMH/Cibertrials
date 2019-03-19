@@ -1,0 +1,135 @@
+Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 : "Añadido Prefab Mapa1"
+
+/*\ Esta revisión representa una lista de cosas pendientes por hacer (items) referentes a la programación existente hasta la fecha. 
+    La idea es ir borrando los items cuando se hayan hecho hasta dejar el script "vacío" antes de empezar la fase de diseño/testing.
+    ** este símbolo representa que el *.cs en cuestión tiene más de un item pendiente. 
+
+/*\ if(Limpiar código) *.cs = tiene espacios innecesarios y/o comentarios que necesitan ser borrados y/o código movido.
+			       	  Mantener estructura limpia, iguales para todos los scripts y lo más legible posible.
+
+/*\ Necesario establecer un "orden" a los comentarios no-summarys, llegar a un acuerdo sobre su estructura y reordenarlos.
+
+/*\ Opcional, someter a votación: Crear un componente para gestionar los cambios en todos los controles de las mecánicas de los jugadores.
+			      	  Además se podrá usar este componente para gestionar los cambios desde el menú y hacer controles configurables,
+				  facilitaría la labor de QA y aportaría una visión global y sencilla de todos los enlaces de las mecánicas.
+
+			      	  Crear otro similar para los datos "configurables" (atributos) referentes a poderes y power ups. 
+			      	  Esto facilitaría inmensamente la labor de QA y la gestión de todos los parámetros de forma simple y rápida.
+
+
+---------------------------------MANAGERS JUEGO-----------------------------
+
+///GameManager.cs///		-> ** Limpiar código.
+				   ** Hacer método para tener control de que jugador tiene llave y poder informar a la ui.
+				   ** Hacer método para cambiar escenas.
+				   ** NombreEscena() Parametrizar e informar desde método para cambiar escena, adaptar cuando esté hecho.
+				   ** Implementar gestión de torneos.
+
+///UI.cs///			-> ** Limpiar código.
+				   ** Cambiar tamaño de array 6 a por defecto.
+				   ** Implementar método para el control de la posesión de la llave
+
+---------------------------------ENEMIGOS-----------------------------------
+
+///AtaquePanzudo.cs///  	-> Its ok.
+
+///GoombaStun.cs///		-> Its ok.
+
+///MovimientoCollider.cs///	-> Its ok.
+
+///MovimientoEnemigos.cs///	-> Limpiar código.
+
+///Rebote.cs///			-> Its ok.
+
+///SeguirObjetivo.cs///		-> ** Añadir offset respecto al jugador que sigue.
+				   ** Calcular nueva velocidad al "perseguir" para que el jugador tenga opción a escapar.
+
+///VisionVigilante.cs///	-> Reubicar variable "est" encima del "código" donde se usa.
+
+-----------------------------------MAPA-----------------------------------
+
++++PlantaCarnivora+++		-> Directorio innecesario. Borrar.
+
+  	///ControlPlantaAbierta.cs///	-> No es necesario el componente. Borrar.
+
+  	///ControlPlantaCerrada.cs///	-> No es necesario el componente. Borrar.
+
+  	///PlantaCarnivora.cs///	-> ** Pasar referencia de los go (o lo que sea necesario) a este script y reubicar código de los otros 2 componentes aquí.
+				  	   ** Convertir los métodos públicos en privados.
+
+					   Dato: Con este cambio evitaremos tener 4 métodos públicos y 2 componentes adicionales en memoria por cada planta.
+
+///Guillotina.cs///		-> Limpiar código.
+
+///Llegada.cs///		-> ** Nombre poco representativo. Cambiar a otro (x.ejem: Victoria,Ganar,etc).
+			 	   ** Implementar que al jugador que llegue se le desactiven los controles.
+
+///Pared.cs///			-> Its ok.
+
+///Paredes.cs///		-> Adaptar llamada a EstaEnPared() por método de cambiar bool de "congelado" cuando este sea generalizado.
+
+				   Dato: Estudiar y llegar a un consenso sobre los nombres Pared.cs, Paredes.cs, Muro de enums, etc. se crea confusión.
+  
+///Tuberia.cs///		-> Adaptar código para controlar desde Unity cuando se empieza a caer la tuberia.
+	
+
+---------------------------------JUGADOR------------------------------------
+
++++Mejoras+++
+
+ 	 ///MejoraFantasma.cs///	-> Its ok.
+	 ///MejoraPico.cs///		-> Its ok.
+	 ///MejoraVelocidad.cs///	-> Its ok.
+
++++Poderes+++
+
+ 	///CogerGemas.cs///		-> Its ok.
+
+ 	///CubitoHielo.cs///		-> Its ok.
+
+  	///Neblina.cs///		-> Its ok pero el método que usa de PC desactiva el freeze ya que este no es genérico.
+
+ 	///PoderesManager.cs///		-> ** Adaptar Neblina y muro al tener el prefab mapa que se instancie. Borrar GO innecesarios tras el cambio.
+					   ** Rehabilitar muro y random a la normalidad.
+					   ** Limpiar código
+					   ** ConfiguraCoordenadasPoderes(). Adaptar método cuando GameManager tenga lo de cambiar escenas e informar.
+					   ** ActivaInvierteControles() trabaja con CambioPoderes de Controlador, adaptar código.
+					   ** DesactivaInvierteControles() igual que el anterior.
+
++++Respawn+++
+
+  	///CambiarSpawn.cs///		-> Arreglar para que pille la última posición, no la primera. Solución: Crear while en el OnTriggerEnter o cambiar enter por exit.	
+
+  	///Respawn.cs///		-> ** CambiarPos nombre poco representativo. Cambiar a otro (x.ejem: RespawnJugador, JugadorASpawn, etc.).
+				           ** Limpiar código.
+
+  	///ZonaMuerte.cs///		-> Llamada a ReseteaStats innecesaria, ya lo hace el método DesactivaControles y llama a este justo después.
+
+
+///BanderaRodar.cs///		-> Limpiar código.
+
+///Camara.cs///			-> Its ok.
+
+///CheckSalto.cs///		-> Variable de controlador que se usa no se usa de forma local en el método, está siempre en memoria y es innecesario.
+
+///ControladorJugador.cs///	-> ** Limpiar código
+				   ** Revisar número de variables.
+				   ** Cambiar booleana congelado por algo más genérico. (Existe estadoControles en el script y creo que cumple la misma función) 
+				   ** Adaptar CambiosPerdidaControl(), parámetros no genéricos.
+				   ** Quitar del script método CambiosPoderes().
+				   ** PonerDePie() comentar método.
+				   ** CheckCC comentar método. Nombre crea confusión.
+
+///EstadoFantasma.cs///		-> Its ok. 
+
+///PerdidasControl.cs///	-> ** ActivaMOdificaVelocidad(): quitar invoke para desactivar o parametrizar el tiempo para generalizar uso con otras interacciones.
+				   ** segundosModificaVelocidad, quitar variable global y parametrizar método en el que se utiliza o hacer que su valor
+								se pueda modificar desde fuera para que otras interacciones puedan usarlo y reducir código.
+				  Dato: Revisar seriamente las interacciones de las velocidades, se está modificando desde varios sitios diferentes 
+ 					por diferentes vías. Generalizar y reutilizar!!!
+
+///RomperParedes.cs///		-> Variable global capa no es necesaria tenerla pública ni en memoria ya que la podemos especificar desde el propio método a menos
+					que la intención sea que el diseñador pueda elegir la capa pero no le veo sentido ya que solo existe una capa para eso y además
+					esta capa solo actúa para estas paredes por lo que se podría especificar desde código.
+
+///SaltoParedes.cs///		-> Its ok. Mejora opcional: Implementar un segundo cálculo de físicas específico para SaltoParedes en vez de usar AddForce.
