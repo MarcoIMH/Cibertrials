@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212061265149459916}
   - component: {fileID: 61262317751952532}
   - component: {fileID: 114168701633269458}
-  - component: {fileID: 114832144309332552}
   m_Layer: 10
   m_Name: CapulloPlantaCerrado
   m_TagString: Untagged
@@ -54,7 +53,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4470758771064058}
   - component: {fileID: 212364826784268856}
-  - component: {fileID: 114489294437567274}
   m_Layer: 10
   m_Name: CapulloPlanta
   m_TagString: Untagged
@@ -73,7 +71,7 @@ GameObject:
   - component: {fileID: 212378595911930920}
   - component: {fileID: 61068867300653694}
   - component: {fileID: 50312061780558234}
-  - component: {fileID: 114289278410421786}
+  - component: {fileID: 114726448633731456}
   m_Layer: 10
   m_Name: BasePlanta
   m_TagString: Untagged
@@ -129,7 +127,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1851627599255584}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.6, y: -5.5, z: 0}
+  m_LocalPosition: {x: 566.8058, y: 39.310993, z: 0}
   m_LocalScale: {x: 6.368922, y: 7.2349315, z: 0.5090018}
   m_Children:
   - {fileID: 4543062423202650}
@@ -218,7 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segundosRespawn: 3
---- !u!114 &114289278410421786
+--- !u!114 &114726448633731456
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,33 +224,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1982762246862886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce70b11e102a51a47b2b2dd35b4e4c66, type: 3}
+  m_Script: {fileID: 11500000, guid: 506dcd323e4b8874bb0d471546c12546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   retardo: 0.5
   reapertura: 1.5
---- !u!114 &114489294437567274
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1921333440385052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ccd4a6a49d03ee4a96a99c3157f6d0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114832144309332552
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1101523350745544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0ad225bb7c73994fb2dbb5ee76a53de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212061265149459916
 SpriteRenderer:
   m_ObjectHideFlags: 1
