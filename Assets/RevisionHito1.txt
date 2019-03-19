@@ -48,16 +48,6 @@ Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 
 
 -----------------------------------MAPA-----------------------------------
 
-+++PlantaCarnivora+++		-> Directorio innecesario. Borrar.
-
-  	///ControlPlantaAbierta.cs///	-> No es necesario el componente. Borrar.
-
-  	///ControlPlantaCerrada.cs///	-> No es necesario el componente. Borrar.
-
-  	///PlantaCarnivora.cs///	-> ** Pasar referencia de los go (o lo que sea necesario) a este script y reubicar código de los otros 2 componentes aquí.
-				  	   ** Convertir los métodos públicos en privados.
-
-					   Dato: Con este cambio evitaremos tener 4 métodos públicos y 2 componentes adicionales en memoria por cada planta.
 
 ///Guillotina.cs///		-> Limpiar código.
 
