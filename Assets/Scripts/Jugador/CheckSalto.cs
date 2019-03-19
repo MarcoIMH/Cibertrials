@@ -4,21 +4,10 @@ using UnityEngine;
 
 public class CheckSalto : MonoBehaviour
 {
-    ControladorJugador controladorJugador;
-
-    // Use this for initialization
-    void Start()
-    {
-        controladorJugador = GetComponentInParent<ControladorJugador>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        ControladorJugador controladorJugador = GetComponentInParent<ControladorJugador>();
+
         if (controladorJugador != null)
         {
             controladorJugador.ActivaPuedeSaltar();
