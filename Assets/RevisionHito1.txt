@@ -19,8 +19,7 @@ Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 
 
 ---------------------------------MANAGERS JUEGO-----------------------------
 
-///GameManager.cs///		-> ** Limpiar código.
-				   ** Hacer método para tener control de que jugador tiene llave y poder informar a la ui.
+///GameManager.cs///		-> ** Limpiar código.			   
 				   ** Hacer método para cambiar escenas.
 				   ** NombreEscena() Parametrizar e informar desde método para cambiar escena, adaptar cuando esté hecho.
 				   ** Implementar gestión de torneos.

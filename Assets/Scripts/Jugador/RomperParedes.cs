@@ -13,15 +13,15 @@ public class RomperParedes : MonoBehaviour {
 
 
 
-	  void Start ()
-    {
+	 void Start ()
+     {
         capa = LayerMask.GetMask("Muro");
         auxDaño = daño;
-	  }
+	 }
 
 
-	  void Update ()
-    {
+	 void Update ()
+     {
         RaycastHit2D contacto = Physics2D.Raycast(transform.position, transform.right, distancia, capa);
 
         if (contacto.collider != null) // si colisionamos con algo

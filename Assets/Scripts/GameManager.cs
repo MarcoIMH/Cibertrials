@@ -61,6 +61,19 @@ public class GameManager : MonoBehaviour
         UI.ActualizaGema(gema, jugador);
     }
 
+    //Descomentar cundo tengammos una imagen de la llave para la UI
+    /*
+    /// <summary>
+    /// Llama al metodo ActualizarLlave del UIManager
+    /// </summary>
+    /// <param name="jugador"></param>
+    /// <param name="activado"></param>
+    public void ActualizarLlave(Player jugador, bool activado)
+    {
+        UI.ActualizarLlave(jugador, activado);
+    }
+    */
+
     /// <summary>
     /// Recogemos UI
     /// </summary>
@@ -74,7 +87,7 @@ public class GameManager : MonoBehaviour
     /// Método para informar de la escena que se está cargando. TERMINAR EL CÓDIGO CUANDO ESTÉN TODAS LAS ESCENAS Y EL CAMBIO DE ESCENA HECHO
     /// </summary>
     /// <returns></returns>
-    public string NombreEscena()    
+    public string NombreEscena()
     {
         return "Mapa3";
     }
