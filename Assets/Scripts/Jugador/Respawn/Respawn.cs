@@ -20,7 +20,7 @@ public class Respawn : MonoBehaviour {
     /// Recoloca al jugador en el ultimo punto guardado
     /// </summary>
     /// <param name="jugador"></param>
-    public void CambiarPos(Transform other)
+    public void RespawnJugador(Transform other)
     {
         Vector3 posicion = new Vector3(spawn.position.x, spawn.position.y + other.transform.localScale.y*2, 0);
         other.position = posicion;

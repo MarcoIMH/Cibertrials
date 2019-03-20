@@ -27,8 +27,7 @@ public class AbrirPuertas : MonoBehaviour
         if (llave != null)
         {
             tieneLlave = llave.CogeLlave();
-            //Descomentar cundo tengammos una imagen de la llave para la UI
-            //GameManager.instance.ActualizarLlave(jugador, true);
+            GameManager.instance.ActualizarLlave(jugador, true);
             Destroy(llave.gameObject);
         }
     }
@@ -49,8 +48,7 @@ public class AbrirPuertas : MonoBehaviour
     public void QuitarLlave()
     {
         tieneLlave = false;
-        //Descomentar cundo tengammos una imagen de la llave para la UI
-        //GameManager.instance.ActualizarLlave(jugador, false);
+        GameManager.instance.ActualizarLlave(jugador, false);
     }
 
 }

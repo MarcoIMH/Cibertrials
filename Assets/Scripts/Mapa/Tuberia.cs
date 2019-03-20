@@ -2,27 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tuberia : MonoBehaviour {
+public class Tuberia : MonoBehaviour
+{
 
     /// <summary>
     /// Estas plataformas es posible colocarlas en modo espejo poniendo la escala del padre a su valor pero en negativo
     /// Es posible que se pueda quitar la comprobacion por tags ya que puede que no se pongan enemigos en este tipo de plataformas
     /// </summary>
+    public float tiempoCaida, tiempoRotura, tiempoReparacion, velCaida;            //Tiempos de casting
 
-
-
-    public float tiempoRotura, tiempoReparacion, velCaida;            //Tiempos de casting
-
-    private bool caida = false;             
+    private bool caida = false;
     private Vector3 posicionIni;
 
     void Start()
     {
         posicionIni = transform.position;           //Guardamos la posicioninicial de la tuberia
-        
-    }
+}
 
-    void Update ()
+    void Update()
     {
         if (caida == true)          //El tubo se desprende y comienza la caida libre rotando un poco
         {
@@ -41,18 +38,22 @@ public class Tuberia : MonoBehaviour {
     {
         if (other.contacts[0].normal == Vector2.down && other.gameObject.CompareTag("jugador1") || other.gameObject.CompareTag("jugador2"))
         {
-            caida = true;
-            Invoke("RomperTubo", tiempoRotura);             //Tiempo hasta que se ejecuta el metodo RomperTubo
-            Invoke("RepararTubo", tiempoReparacion + tiempoRotura);             //El tiempo de casting será la suma de los 2 ya que se activan a la vez y así la diferencia es el tiempoReparacion original
+            Invoke("RomperTuberia", tiempoRotura);
+            Invoke("DestruirObjetoTubo", tiempoCaida + tiempoRotura);             //Tiempo hasta que se ejecuta el metodo RomperTubo
+            Invoke("RepararTubo", tiempoReparacion + tiempoCaida + tiempoRotura);             //El tiempo de casting será la suma de los 2 ya que se activan a la vez y así la diferencia es el tiempoReparacion original
         }
     }
-	
-	void RomperTubo()       //Falsea caida y desactiva la tuberia
+
+    void DestruirObjetoTubo()       //Falsea caida y desactiva la tuberia
     {
         caida = false;
         this.gameObject.SetActive(false);
     }
 
+    void RomperTuberia()
+    {
+        caida = true;
+    }
     void RepararTubo()      //Recoloca , orienta la tuberia y la reactiva
     {
         transform.position = posicionIni;               //La posicion pasa a ser la inicial

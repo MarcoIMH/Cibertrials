@@ -159,8 +159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee52daf6d589c9439cb0bb3103b4d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiempoRotura: 3
-  tiempoReparacion: 5
+  tiempoCaida: 2
+  tiempoRotura: 0.2
+  tiempoReparacion: 1
   velCaida: 6
 --- !u!212 &212064012343546500
 SpriteRenderer:

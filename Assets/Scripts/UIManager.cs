@@ -6,26 +6,15 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
 
-    public Image[] gemaJugador = new Image[6]; //0...2 player1, de 3...5 player2
-
-    //Descomentar cuando tengamos una imagen de la llave para la UI
-    //public Image[] imagenLlaves; //0 -> jugador 1 , 1 -> jugador 2
+    public Image[] gemaJugador; //0..v.lentgh/2-1 -->Jug1, v.Lentgh/2...v.Lentgh-1 -->Jug2
+    public Image[] imagenLlaves; //0 -> jugador 1 , 1 -> jugador 2
     int gemasMax;
 
     void Start()
     {
-
         GameManager.instance.SetUI(this);
         gemasMax = gemaJugador.Length / 2;
-
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void ActualizaGema(int gema, Player jugador)
     {
 
@@ -54,8 +43,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    //Descomentar cundo tengammos una imagen de la llave para la UI
-    /*
+   
     /// <summary>
     /// Metodo que sirve para activar o desactivar la imagen de la llave de la UI
     /// </summary>
@@ -72,5 +60,5 @@ public class UIManager : MonoBehaviour
             imagenLlaves[1].gameObject.SetActive(activado);
         }
     }
-    */
+    
 }

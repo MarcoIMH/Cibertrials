@@ -14,7 +14,7 @@ public class ControladorJugador : MonoBehaviour
     Rigidbody2D rb;
     float deltaX, g, velocidadY, velocidadEstandar;       //velocidadEstandar = variable auxiliar donde guardamos la velocidad original
     bool salto, estadoControles = true, rodando, puedeSaltar,
-         entreParedes = false, enPared = false, movHorizontal = false, congelado=false;  
+         enTubería = false, enPared = false, movHorizontal = false, congelado=false;  
 
     // Use this for initialization
     void Start()
@@ -48,7 +48,7 @@ public class ControladorJugador : MonoBehaviour
                     colliderRueda.enabled = true;
                     CambiosPerdidaControl(PerdidaControles.ralentizar, VelocidadRodar, true);
                 }
-                else if (Input.GetKeyUp(teclaRodar) && !entreParedes)
+                else if (Input.GetKeyUp(teclaRodar) && !enTubería)
                 {
                     rodando = false;
                     colliderCorre.enabled = true;
@@ -90,7 +90,6 @@ public class ControladorJugador : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, velocidadY);
             salto = false;
         }
-
         //mov horizontal  
         if (movHorizontal && !enPared)
             rb.velocity = new Vector2(deltaX * velocidadX, rb.velocity.y);
@@ -116,7 +115,11 @@ public class ControladorJugador : MonoBehaviour
         }
     }
 
-    public void Checkcc (bool encc)
+    /// <summary>
+    /// Denota si el jugador esta o no congelado
+    /// </summary>
+    /// <param name="encc"></param>
+    public void CongelarJugador (bool encc)
     {
         congelado = encc;
         ReseteaStats();
@@ -149,14 +152,18 @@ public class ControladorJugador : MonoBehaviour
     /// <param name="check"></param>
     public void CheckDejarRodar(bool check)
     {
-        entreParedes = check;
-       
+        enTubería = check;
     }
 
+    /// <summary>
+    /// Pone al jugador de pie trás pasar una tubería si este no esta presionando
+    /// la tecla de rodar
+    /// </summary>
     public void PonerDePie()
     {
-        if (!Input.GetKey(teclaRodar))
+        if (!Input.GetKey(teclaRodar)) //si no presiona la tecla rodar
         {
+            //Restauramos al jugador como si corriera
             rodando = false;
             colliderCorre.enabled = true;
             colliderRueda.enabled = false;

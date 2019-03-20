@@ -105,7 +105,7 @@ public class PoderesManager : MonoBehaviour {
     public void AplicarCuboDeHielo()
     {
         //pone el estado de los controles a false
-        controlesJugadorContrario.Checkcc(true);
+        controlesJugadorContrario.CongelarJugador(true);
         //instancia el cubo de hielo entrando su script en ejecucion 
         GameObject newCuboHielo = Instantiate<GameObject>(cuboHielo, jugadorContrario.transform);
     }
@@ -116,7 +116,7 @@ public class PoderesManager : MonoBehaviour {
     /// </summary>
     public void DesactivarCuboDeHielo()
     {
-        GetComponent<ControladorJugador>().Checkcc(false);
+        GetComponent<ControladorJugador>().CongelarJugador(false);
         //controlesJugadorContrario.Checkcc(false);
     }
 

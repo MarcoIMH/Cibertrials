@@ -21,8 +21,6 @@ public class Guillotina : MonoBehaviour {
     void Update()
     {
         transform.Translate(movimiento);//movimiento siguiendo el vector
-
-        
         if (transform.position.y >= puntoArriba.position.y) //si llega a arriba
         {
             Parar();//frena la cuchilla
@@ -33,8 +31,6 @@ public class Guillotina : MonoBehaviour {
             CancelInvoke(); //para evitar que a la segunda se pase de largo
             Subir(); //hace que suba
         }
-        
-        
     }
 
     /// <summary>

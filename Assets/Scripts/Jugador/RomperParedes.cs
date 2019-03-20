@@ -11,14 +11,11 @@ public class RomperParedes : MonoBehaviour {
     int capa;
     int auxDaño; // guarda el daño original
 
-
-
 	 void Start ()
      {
         capa = LayerMask.GetMask("Muro");
         auxDaño = daño;
 	 }
-
 
 	 void Update ()
      {

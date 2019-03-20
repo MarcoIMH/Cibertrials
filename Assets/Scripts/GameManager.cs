@@ -61,8 +61,7 @@ public class GameManager : MonoBehaviour
         UI.ActualizaGema(gema, jugador);
     }
 
-    //Descomentar cundo tengammos una imagen de la llave para la UI
-    /*
+    
     /// <summary>
     /// Llama al metodo ActualizarLlave del UIManager
     /// </summary>
@@ -72,7 +71,7 @@ public class GameManager : MonoBehaviour
     {
         UI.ActualizarLlave(jugador, activado);
     }
-    */
+    
 
     /// <summary>
     /// Recogemos UI

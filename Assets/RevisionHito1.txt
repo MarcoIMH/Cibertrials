@@ -18,15 +18,15 @@ Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 
 
 
 ---------------------------------MANAGERS JUEGO-----------------------------
-
-///GameManager.cs///		-> ** Limpiar código.			   
-				   ** Hacer método para cambiar escenas.
-				   ** NombreEscena() Parametrizar e informar desde método para cambiar escena, adaptar cuando esté hecho.
-				   ** Implementar gestión de torneos.
-
+																															   \
+///GameManager.cs///		-> ** Limpiar código.																				|
+				   ** Hacer método para cambiar escenas.																		| --->No hacer aún por temas de terminar el 1er nivel
+				   ** NombreEscena() Parametrizar e informar desde método para cambiar escena, adaptar cuando esté hecho.		|
+				   ** Implementar gestión de torneos.																			|
+																															   /
 ///UI.cs///			-> ** Limpiar código.
-				   ** Cambiar tamaño de array 6 a por defecto.
-				   ** Implementar método para el control de la posesión de la llave
+				   ** Cambiar tamaño de array 6 a por defecto.																	\  HECHO!										
+				   ** Implementar método para el control de la posesión de la llave												/
 
 ---------------------------------ENEMIGOS-----------------------------------
 
@@ -43,12 +43,12 @@ Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 
 ///SeguirObjetivo.cs///		-> ** Añadir offset respecto al jugador que sigue.
 				   ** Calcular nueva velocidad al "perseguir" para que el jugador tenga opción a escapar.
 
-///VisionVigilante.cs///	-> Reubicar variable "est" encima del "código" donde se usa.
+///VisionVigilante.cs///	-> Reubicar variable "est" encima del "código" donde se usa. \  HECHO!		
 
 -----------------------------------MAPA-----------------------------------
 
 
-///Guillotina.cs///		-> Limpiar código.
+///Guillotina.cs///		-> Limpiar código. \  HECHO!		
 
 ///Llegada.cs///		-> Its ok.
 
@@ -86,27 +86,27 @@ Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 
 
 +++Respawn+++
 
-  	///CambiarSpawn.cs///		-> Arreglar para que pille la última posición, no la primera. Solución: Crear while en el OnTriggerEnter o cambiar enter por exit.	
+  	///CambiarSpawn.cs///		-> Arreglar para que pille la última posición, no la primera. Solución: Crear while en el OnTriggerEnter o cambiar enter por exit.	  \  HECHO!	 Enter-->Exit + Disposición del pivote
 
-  	///Respawn.cs///		-> ** CambiarPos nombre poco representativo. Cambiar a otro (x.ejem: RespawnJugador, JugadorASpawn, etc.).
+  	///Respawn.cs///		-> ** CambiarPos nombre poco representativo. Cambiar a otro (x.ejem: RespawnJugador, JugadorASpawn, etc.).  \  HECHO!		
 				           ** Limpiar código.
 
-  	///ZonaMuerte.cs///		-> Llamada a ReseteaStats innecesaria, ya lo hace el método DesactivaControles y llama a este justo después.
+  	///ZonaMuerte.cs///		-> Llamada a ReseteaStats innecesaria, ya lo hace el método DesactivaControles y llama a este justo después.  \  HECHO!		
 
 
-///BanderaRodar.cs///		-> Limpiar código.
+///BanderaRodar.cs///		-> Limpiar código.  \  HECHO!		
 
 ///Camara.cs///			-> Its ok.
 
-///CheckSalto.cs///		-> Variable de controlador que se usa no se usa de forma local en el método, está siempre en memoria y es innecesario.
+///CheckSalto.cs///		-> Variable de controlador que se usa no se usa de forma local en el método, está siempre en memoria y es innecesario.    \  HECHO!		
 
 ///ControladorJugador.cs///	-> ** Limpiar código
-				   ** Revisar número de variables.
-				   ** Cambiar booleana congelado por algo más genérico. (Existe estadoControles en el script y creo que cumple la misma función) 
+				   ** Revisar número de variables.   \  HECHO!		
+				   ** Cambiar booleana congelado por algo más genérico. (Existe estadoControles en el script y creo que cumple la misma función) <--NO CAMBIAR (sometido a votación)
 				   ** Adaptar CambiosPerdidaControl(), parámetros no genéricos.
 				   ** Quitar del script método CambiosPoderes().
-				   ** PonerDePie() comentar método.
-				   ** CheckCC comentar método. Nombre crea confusión.
+				   ** PonerDePie() comentar método.				\  HECHO!		
+				   ** CheckCC comentar método. Nombre crea confusión. \  HECHO!		
 
 ///EstadoFantasma.cs///		-> Its ok. 
 
@@ -118,6 +118,6 @@ Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 
 
 ///RomperParedes.cs///		-> Variable global capa no es necesaria tenerla pública ni en memoria ya que la podemos especificar desde el propio método a menos
 					que la intención sea que el diseñador pueda elegir la capa pero no le veo sentido ya que solo existe una capa para eso y además
-					esta capa solo actúa para estas paredes por lo que se podría especificar desde código.
+					esta capa solo actúa para estas paredes por lo que se podría especificar desde código. <-----La variable está para que en cada Update no se haga un GetMask...Guille nos enseño así xD
 
 ///SaltoParedes.cs///		-> Its ok. Mejora opcional: Implementar un segundo cálculo de físicas específico para SaltoParedes en vez de usar AddForce.
