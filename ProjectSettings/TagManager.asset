@@ -6,6 +6,8 @@ TagManager:
   tags:
   - jugador1
   - jugador2
+  - mundo1
+  - mundo2
   layers:
   - Default
   - TransparentFX
