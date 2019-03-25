@@ -24,8 +24,7 @@ Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 
 				   ** NombreEscena() Parametrizar e informar desde método para cambiar escena, adaptar cuando esté hecho.		|
 				   ** Implementar gestión de torneos.																			|
 																															   /
-///UI.cs///			-> ** Limpiar código.
-				   ** Cambiar tamaño de array 6 a por defecto.																	\  HECHO!										
+///UI.cs///			-> ** Limpiar código.										
 				   ** Implementar método para el control de la posesión de la llave												/
 
 ---------------------------------ENEMIGOS-----------------------------------
@@ -43,12 +42,12 @@ Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 
 ///SeguirObjetivo.cs///		-> ** Añadir offset respecto al jugador que sigue.
 				   ** Calcular nueva velocidad al "perseguir" para que el jugador tenga opción a escapar.
 
-///VisionVigilante.cs///	-> Reubicar variable "est" encima del "código" donde se usa. \  HECHO!		
+///VisionVigilante.cs///	-> Its ok.		
 
------------------------------------MAPA-----------------------------------
+----------------------------------MAPA-----------------------------------
 
 
-///Guillotina.cs///		-> Limpiar código. \  HECHO!		
+///Guillotina.cs///		-> Its ok.		
 
 ///Llegada.cs///		-> Its ok.
 
@@ -86,27 +85,23 @@ Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 
 
 +++Respawn+++
 
-  	///CambiarSpawn.cs///		-> Arreglar para que pille la última posición, no la primera. Solución: Crear while en el OnTriggerEnter o cambiar enter por exit.	  \  HECHO!	 Enter-->Exit + Disposición del pivote
+  	///CambiarSpawn.cs///		-> Todavía no actualiza bien la posición por alguna razón, revisar.
 
-  	///Respawn.cs///		-> ** CambiarPos nombre poco representativo. Cambiar a otro (x.ejem: RespawnJugador, JugadorASpawn, etc.).  \  HECHO!		
-				           ** Limpiar código.
+  	///Respawn.cs///		-> Limpiar código.
 
-  	///ZonaMuerte.cs///		-> Llamada a ReseteaStats innecesaria, ya lo hace el método DesactivaControles y llama a este justo después.  \  HECHO!		
+  	///ZonaMuerte.cs///		-> It's ok.	
 
 
-///BanderaRodar.cs///		-> Limpiar código.  \  HECHO!		
+///BanderaRodar.cs///		-> Its ok.		
 
 ///Camara.cs///			-> Its ok.
 
-///CheckSalto.cs///		-> Variable de controlador que se usa no se usa de forma local en el método, está siempre en memoria y es innecesario.    \  HECHO!		
+///CheckSalto.cs///		-> Its ok.		
 
 ///ControladorJugador.cs///	-> ** Limpiar código
 				   ** Revisar número de variables.   \  HECHO!		
 				   ** Cambiar booleana congelado por algo más genérico. (Existe estadoControles en el script y creo que cumple la misma función) <--NO CAMBIAR (sometido a votación)
-				   ** Adaptar CambiosPerdidaControl(), parámetros no genéricos.
-				   ** Quitar del script método CambiosPoderes().
-				   ** PonerDePie() comentar método.				\  HECHO!		
-				   ** CheckCC comentar método. Nombre crea confusión. \  HECHO!		
+				   ** Quitar del script método CambiosPoderes().	
 
 ///EstadoFantasma.cs///		-> Its ok. 
 

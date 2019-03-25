@@ -21,19 +21,20 @@ public class PerdidasControl : MonoBehaviour {
     /// </summary>
     public void ActivaControles()
     {
-        controles.CambiosPerdidaControl(PerdidaControles.stun, 1, true);
+        controles.SetEstadoControlador(true);
     }
 
     /// <summary>
     /// cambia el estado de los controles a false
     /// </summary>
     /// <param name="segundos"></param>
-    public void DesactivaControles(int segundos)
+    public void DesactivaControles(float segundos)
     {
         //desactiva los controles
-        controles.CambiosPerdidaControl(PerdidaControles.stun, 1, false);
-        //los vuelve a activar pasados "segundos" segundos
-        Invoke("ActivaControles", segundos);
+        controles.ReseteaStats();
+        controles.SetEstadoControlador(false);        
+        //los vuelve a activar pasados "segundos" segundos. Utilizamos el valor (-1) para indicar que no los vuelva a activar porque se hará sin invoke cuando corresponda.
+        if(segundos!=-1) Invoke("ActivaControles", segundos);
     }
 
     /// <summary>
@@ -43,7 +44,7 @@ public class PerdidasControl : MonoBehaviour {
     public void ActivaModificaVelocidad(float velocidadModificada)
     {
         //modifica la velocidad multiplicandola por "velocidadModificada"
-        controles.CambiosPerdidaControl(PerdidaControles.ralentizar, velocidadModificada, true);
+        controles.ModificaVelocidad(velocidadModificada);
         //la devuelve a su valor normal pasados "segundosModificaVelocidad" segundos
         Invoke("DesactivaModificaVelocidad", segundosModificaVelocidad);
     }

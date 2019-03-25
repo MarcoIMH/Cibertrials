@@ -55,7 +55,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4287039468893176
 Transform:
   m_ObjectHideFlags: 1
@@ -75,8 +75,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1541015126566852}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.8, y: -56.3, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4287039468893176}
@@ -215,16 +215,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jugadorContrario: {fileID: 0}
-  muro: {fileID: 1826254793097620, guid: 5a1d2d6cd4e061c42887eb25d87aeae1, type: 2}
+  mundoContrario: {fileID: 0}
+  muro: {fileID: 1911966008199246, guid: c79cbcc33e03229489755034d835f6f4, type: 2}
   neblina: {fileID: 1949629961110612, guid: f7bc3671cc848f147a3917be0ec2695a, type: 2}
   cuboHielo: {fileID: 1032453531818462, guid: 53f3f365e4151884c85690dd1e39c0fb, type: 2}
-  neb1: {fileID: 0}
-  neb2: {fileID: 0}
   jugador: 1
   teclaPoder: 258
   gemasMax: 3
   segundosInversionControles: 3
-  tiempoNeblina: 5
+  tiempoNeblina: 15
 --- !u!114 &114578498448597732
 MonoBehaviour:
   m_ObjectHideFlags: 1

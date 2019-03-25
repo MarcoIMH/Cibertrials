@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoombaStun : MonoBehaviour {
 
-    public int segundos;
+    public float segundos;
     
 
     /// <summary>

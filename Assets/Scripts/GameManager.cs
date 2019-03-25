@@ -6,13 +6,16 @@ public class GameManager : MonoBehaviour
 {
     public GameObject mapPrefab;
     UIManager UI;
-    GameObject mundoJ1, mundoJ2;        
-    Transform transformJ1, transformJ2, puntoInicialJ1, puntoInicialJ2;    
+    GameObject mundoJ1, mundoJ2;
+    Transform[] coordPoderesMapa;
+    Transform transformJ1, transformJ2, puntoInicialJ1, puntoInicialJ2;
 
     //variables que indican el numero de rondas ganadas por cada jugador
     int rondasJugador1, rondasJugador2;
 
-    string mapa;
+    string mapa="Mapa1";
+
+    bool hayGanador=false;
 
     //Asegurarse de que solo hay una instancia
     public static GameManager instance = null;
@@ -32,8 +35,8 @@ public class GameManager : MonoBehaviour
         //Ambos jugadores comienzan la partida con 0 rondas ganadas
         rondasJugador1 = rondasJugador2 = 0;
 
-        Invoke("CargaMapaEnMundos", 0.1f);
-        Invoke("ColocaJugadores", 0.2f);
+        Invoke("CargaMapaEnMundos", 0.05f);     //Preguntar a Guille sobre como podría hacer y ordenar el Script Execution Order para no necesitar estos invokes.
+        Invoke("ColocaJugadores", 0.07f);       //De ser así se podrían quitar y hacer que la carga fuera "limpia" al iniciar la ejecución.
     }
 
     // Update is called once per frame
@@ -48,21 +51,23 @@ public class GameManager : MonoBehaviour
     /// <param name="ganador"></param>
     public void FinalizarRonda(Player ganador)
     {
-        if (ganador == Player.jugador1)
+        if (!hayGanador)
         {
-            rondasJugador1++;
+            if (ganador == Player.jugador1)
+            {
+                rondasJugador1++;
+            }
+            else rondasJugador2++;
+            hayGanador = true;
         }
-        else rondasJugador2++;
-
-        //-----------> aqui habría que desactivar el componente "playercontroller" de ambos jugadores
     }
 
     public void ActualizaGemas(int gema, Player jugador)
     {
-        UI.ActualizaGema(gema, jugador);
+        //UI.ActualizaGema(gema, jugador);          <---------------- DESCOMENTAR CUANDO ESTÉ IMPLEMENTADA LA UI ENTERA, DA ERROR AL USAR LOS PODERES DEL J2 PORQUE NO EXISTEN LOS OBJETOS
     }
 
-    
+
     /// <summary>
     /// Llama al metodo ActualizarLlave del UIManager
     /// </summary>
@@ -72,7 +77,7 @@ public class GameManager : MonoBehaviour
     {
         UI.ActualizarLlave(jugador, activado);
     }
-    
+
 
     /// <summary>
     /// Recogemos UI
@@ -84,7 +89,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Getter para informar del mapa que se está gestionando al resto de componentes.
+    /// Getter para informar del mapa que se está gestionando a los componentes que lo necesiten.
     /// </summary>
     /// <returns></returns>
     public string GetNombreEscena()
@@ -101,6 +106,24 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Método para informar al GameManager de las coordenadas que se usarán para la gestión de los poderes.
+    /// </summary>
+    /// <param name="coords"></param>
+    public void SetCoordenadasPoderes(Transform[] coords)
+    {
+        coordPoderesMapa = coords;
+    }
+
+    /// <summary>
+    /// Método para informar a los componentes que lo necesiten de las coordenadas que se usarán para los poderes.
+    /// </summary>
+    /// <returns></returns>
+    public Transform[] GetCoordenadasPoderes()
+    {
+        return coordPoderesMapa;
+    }
+
+    /// <summary>
     /// Setter para que el controlador PuntoInicial pueda informar del punto inicial de cada mapa para cada jugador
     /// </summary>
     /// <param name="tr"></param>
@@ -111,6 +134,12 @@ public class GameManager : MonoBehaviour
         else puntoInicialJ2 = tr;
     }
 
+    /// <summary>
+    /// Método para tomar control en GameManager de cada mundo y su jugador.
+    /// </summary>
+    /// <param name="mundo">Tipo de Mundo(enum) para identificar la referencia de cada mundo y jugador</param>
+    /// <param name="goMundo">Referencia al GO del mundo en cuestión</param>
+    /// <param name="tr">Transform del jugador correspondiente a ese mundo</param>
     public void SetMundoYJugador(Mundos mundo, GameObject goMundo, Transform tr)
     {//Cambiar a bool y adaptar ControlMundos cuando implemente una forma de comprobar que realmente se ha cargado todo -> pensar detenidamente
         if (mundo == Mundos.mundoJ1)
@@ -125,18 +154,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Método para instanciar mapa "reseteado", colocarlo, y asignarlo a su mundo correspondiente.
+    /// </summary>
     void CargaMapaEnMundos()
     {
-        GameObject mapInstance = Instantiate(mapPrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-        mapInstance.transform.parent = mundoJ1.transform;
+        var mapInstanceJ1 = Instantiate(mapPrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        mapInstanceJ1.transform.parent = mundoJ1.transform;
 
-        GameObject mapInstance2 = Instantiate(mapPrefab, new Vector3(0, -100, 0), Quaternion.identity) as GameObject;        
-        mapInstance2.transform.parent = mundoJ2.transform;
+        var mapInstanceJ2 = Instantiate(mapPrefab, new Vector3(0, -100, 0), Quaternion.identity) as GameObject;
+        mapInstanceJ2.transform.parent = mundoJ2.transform;
     }
-    
+
+    /// <summary>
+    /// Coloca los jugadores en sus puntos iniciales correspondientes en cada mapa y los hace visible para los jugadores y activa sus controles.
+    /// </summary>
     void ColocaJugadores()
     {
         transformJ1.position = puntoInicialJ1.position;
         transformJ2.position = puntoInicialJ2.position;
+
+        transformJ1.gameObject.SetActive(true);
+        transformJ2.gameObject.SetActive(true);
+
+        transformJ1.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(true);
+        transformJ2.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(true);
     }
 }
