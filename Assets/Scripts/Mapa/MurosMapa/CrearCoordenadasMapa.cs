@@ -17,6 +17,9 @@ public class CrearCoordenadasMapa : MonoBehaviour {
 		
 	}
 
+    /// <summary>
+    /// Método para ordenar el vector de coordenadas de menor a mayor respecto al eje de las X antes de entregárselo al GM
+    /// </summary>
     void OrdenaCoordenadasSpawn()
     {
         for(int x = 0; x+1 < spawns.Length; x++)
@@ -29,8 +32,6 @@ public class CrearCoordenadasMapa : MonoBehaviour {
                     spawns[j] = trAux;
                 }
         }
-        for (int x = 0; x < spawns.Length; x++)
-            Debug.Log(spawns[x].position.x + "," + spawns[x].position.y);
         GameManager.instance.SetCoordenadasPoderes(spawns);
         Destroy(this);
     }
