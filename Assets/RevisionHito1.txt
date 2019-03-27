@@ -93,20 +93,12 @@ Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 
 
 ///CheckSalto.cs///		-> Its ok.		
 
-///ControladorJugador.cs///	-> ** Limpiar código
-				   ** Revisar número de variables.   \  HECHO!		
-				   ** Cambiar booleana congelado por algo más genérico. (Existe estadoControles en el script y creo que cumple la misma función) <--NO CAMBIAR (sometido a votación)
+///ControladorJugador.cs///	-> Its ok.
 
 ///EstadoFantasma.cs///		-> Its ok. 
 
-///PerdidasControl.cs///	-> ** ActivaMOdificaVelocidad(): quitar invoke para desactivar o parametrizar el tiempo para generalizar uso con otras interacciones.
-				   ** segundosModificaVelocidad, quitar variable global y parametrizar método en el que se utiliza o hacer que su valor
-								se pueda modificar desde fuera para que otras interacciones puedan usarlo y reducir código.
-				  Dato: Revisar seriamente las interacciones de las velocidades, se está modificando desde varios sitios diferentes 
- 					por diferentes vías. Generalizar y reutilizar!!!
+///PerdidasControl.cs///	-> Its ok.
 
-///RomperParedes.cs///		-> Variable global capa no es necesaria tenerla pública ni en memoria ya que la podemos especificar desde el propio método a menos
-					que la intención sea que el diseñador pueda elegir la capa pero no le veo sentido ya que solo existe una capa para eso y además
-					esta capa solo actúa para estas paredes por lo que se podría especificar desde código. <-----La variable está para que en cada Update no se haga un GetMask...Guille nos enseño así xD
+///RomperParedes.cs///		-> Its ok.
 
 ///SaltoParedes.cs///		-> Its ok. Mejora opcional: Implementar un segundo cálculo de físicas específico para SaltoParedes en vez de usar AddForce.
