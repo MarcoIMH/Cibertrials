@@ -19,7 +19,7 @@ public class GoombaStun : MonoBehaviour {
         PerdidasControl pc = other.GetComponent<PerdidasControl>();
         if (pc != null && est != null && !est.CogerEstadoFantasma())
         {          
-            pc.DesactivaControles(segundos);
+            pc.DesactivaControles(segundos, 0);
         }
 
     }

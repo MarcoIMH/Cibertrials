@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
         GameManager.instance.SetUI(this);
         gemasMax = gemaJugador.Length / 2;
     }
-    public void ActualizaGema(int gema, Player jugador)
+    public void ActualizaGema(int gema, Player jugador, Poderes poder)
     {
 
         if (gema == 0)

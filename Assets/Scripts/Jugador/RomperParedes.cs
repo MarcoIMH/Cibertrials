@@ -40,7 +40,7 @@ public class RomperParedes : MonoBehaviour {
     {
         daño += cantidad;
         Invoke("ReduceDamage", segundos);
-          //AÑADIR AQUI EL CAMBIO DE COLOR DEL SPRITE
+        GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(2, true);
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ public class RomperParedes : MonoBehaviour {
     public void ReduceDamage()
     {
         daño = auxDaño;
-        //AÑADIR AQUI PARA QUITAR EL COLOR DEL SPRITE
+        GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(2, false);
     }
     public KeyCode DarTeclaRomper()
     {

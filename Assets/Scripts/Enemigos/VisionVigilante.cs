@@ -31,7 +31,7 @@ public class VisionVigilante : MonoBehaviour {
          PerdidasControl pc = other.GetComponent<PerdidasControl>();
          if (pc != null)
          {
-             pc.ActivaModificaVelocidad(reduccionVelVigilante);
+             pc.ActivaModificaVelocidad(reduccionVelVigilante, 7);
          }
 
         EstadoFantasma est = other.GetComponent<EstadoFantasma>();

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlataformaMov : MonoBehaviour {
 
+    Transform mapa;
 	// Use this for initialization
 	void Start ()
     {
@@ -16,7 +17,10 @@ public class PlataformaMov : MonoBehaviour {
 		
 
 	}
-
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        mapa = other.gameObject.transform.parent;
+    }
     private void OnTriggerStay2D(Collider2D other)
     {     
         other.gameObject.transform.parent = this.gameObject.transform; //el objeto que se encuentra sobre la plataforma se vuelve hijo de esta
@@ -25,6 +29,6 @@ public class PlataformaMov : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D other)
     {  
-        other.gameObject.transform.parent = null; // al saltar el objeto deja de estar encima y deja de ser hijo de la plataforma
+        other.gameObject.transform.parent = mapa; // al saltar el objeto deja de estar encima y deja de ser hijo de la plataforma
     }
 }

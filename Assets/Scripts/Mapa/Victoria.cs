@@ -35,7 +35,7 @@ public class Victoria : MonoBehaviour {
 
         //desactiva los controles del jugador que alcanza la meta
         if(other.GetComponent<PerdidasControl>() != null)
-            other.GetComponent<PerdidasControl>().DesactivaControles(-1);
+            other.GetComponent<PerdidasControl>().DesactivaControles(-1, -1);
     }
 
 }

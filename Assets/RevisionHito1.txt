@@ -76,12 +76,7 @@ Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 
 
   	///Neblina.cs///		-> Its ok pero el método que usa de PC desactiva el freeze ya que este no es genérico.
 
- 	///PoderesManager.cs///		-> ** Adaptar Neblina y muro al tener el prefab mapa que se instancie. Borrar GO innecesarios tras el cambio.
-					   ** Rehabilitar muro y random a la normalidad.
-					   ** Limpiar código
-					   ** ConfiguraCoordenadasPoderes(). Adaptar método cuando GameManager tenga lo de cambiar escenas e informar.
-					   ** ActivaInvierteControles() trabaja con CambioPoderes de Controlador, adaptar código.
-					   ** DesactivaInvierteControles() igual que el anterior.
+ 	///PoderesManager.cs///		->  It's ok
 
 +++Respawn+++
 
@@ -101,7 +96,6 @@ Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 
 ///ControladorJugador.cs///	-> ** Limpiar código
 				   ** Revisar número de variables.   \  HECHO!		
 				   ** Cambiar booleana congelado por algo más genérico. (Existe estadoControles en el script y creo que cumple la misma función) <--NO CAMBIAR (sometido a votación)
-				   ** Quitar del script método CambiosPoderes().	
 
 ///EstadoFantasma.cs///		-> Its ok. 
 

@@ -24,6 +24,7 @@ public class PoderesManager : MonoBehaviour {
 
    	void Start () {
         gemas = 0;
+        poderUsar = Poderes.sinPoder;
         habilidadActiva = false;   
 
         //asignamos los poderes
@@ -47,8 +48,7 @@ public class PoderesManager : MonoBehaviour {
     void Update () {
         if(Input.GetKeyDown(teclaPoder) && habilidadActiva) 
         {
-            habilidadActiva = false;
-            ReseteaGemas();
+            habilidadActiva = false;           
             switch (poderUsar)
             {
                 case Poderes.inversionControles:
@@ -64,21 +64,30 @@ public class PoderesManager : MonoBehaviour {
                     ActivaNeblina();
                     break;
             }
+            ReseteaGemas();
         }
 	}
 
+    /// <summary>
+    /// Resetea las gemas cuando se usa el poder e informa al gameManager 
+    /// </summary>
     public void ReseteaGemas()
     {
         gemas = 0;
-        GameManager.instance.ActualizaGemas(gemas, jugador);
+        poderUsar = Poderes.sinPoder;
+        GameManager.instance.ActualizaGemas(gemas, jugador, poderUsar);
     }
 
+    /// <summary>
+    /// añade una gema si puede. En caso de tenerlas todas, busca una habilidad
+    /// </summary>
+    /// <returns></returns>
     public bool AñadirGemas()
     {
         if (gemas < gemasMax)
         {
             gemas++;
-            GameManager.instance.ActualizaGemas(gemas, jugador);
+            GameManager.instance.ActualizaGemas(gemas, jugador, poderUsar);
             if (gemas == gemasMax)
             {
                 BuscaHabilidad();
@@ -90,12 +99,12 @@ public class PoderesManager : MonoBehaviour {
     } 
 
     /// <summary>
-    /// //activa el cubode hielo y congela al jugador poniendo el estado de los controles a false
+    /// //activa el cubo de hielo y congela al jugador poniendo el estado de los controles a false
     /// </summary>
     public void AplicarCuboDeHielo()
     {
         //pone el estado de los controles a false
-        pcJC.DesactivaControles(-1);
+        pcJC.DesactivaControles(-1, -1);
         //instancia el cubo de hielo entrando su script en ejecucion 
         GameObject newCuboHielo = Instantiate<GameObject>(cuboHielo, jugadorContrario.transform);
     }
@@ -115,9 +124,12 @@ public class PoderesManager : MonoBehaviour {
     public void ActivaInvierteControles()
     {
         //hace dichos cambios
-        controlesJugadorContrario.CambiosPoderes(Poderes.inversionControles, false);
+        controlesJugadorContrario.ModificaVelocidad(-1);
+        controlesJugadorContrario.SwapTeclas();
         //los revierte pasados "segundos" segundos
         Invoke("DesactivaInvierteControles", segundosInversionControles);
+
+        jugadorContrario.GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(6, true);
     }
 
     /// <summary>
@@ -126,10 +138,15 @@ public class PoderesManager : MonoBehaviour {
     /// </summary>
     public void DesactivaInvierteControles()
     {
-        controlesJugadorContrario.CambiosPoderes(Poderes.inversionControles, false);
+        controlesJugadorContrario.ModificaVelocidad(-1);
+        controlesJugadorContrario.SwapTeclas();
+
+        jugadorContrario.GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(6, false);
     }    
 
-
+    /// <summary>
+    /// asigna un poder al jugador
+    /// </summary>
     void BuscaHabilidad()
     {
         poderUsar = poder[Random.Range(0,4)];                                                                                         
@@ -184,6 +201,9 @@ public class PoderesManager : MonoBehaviour {
         Invoke("DesactivaNeblina", tiempoNeblina);        
     }
 
+    /// <summary>
+    /// destruye la neblina que se haya instanciado
+    /// </summary>
     void DesactivaNeblina()
     {
         Destroy(nieblaAux);

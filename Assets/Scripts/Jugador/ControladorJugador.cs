@@ -14,7 +14,7 @@ public class ControladorJugador : MonoBehaviour
     Rigidbody2D rb;
     float deltaX, g, velocidadY, velocidadEstandar;       //velocidadEstandar = variable auxiliar donde guardamos la velocidad original
     bool salto, estadoControles = true, rodando, puedeSaltar,
-         enTubería = false, enPared = false, movHorizontal = false;  
+         enTubería = false, enPared = false, movHorizontal = false;
 
     // Use this for initialization
     void Start()
@@ -56,7 +56,7 @@ public class ControladorJugador : MonoBehaviour
                     velocidadX = velocidadEstandar;
 
                     // AnimacionCorrer (anim.correr)
-                } 
+                }
 
                 if (rodando)
                 {
@@ -81,7 +81,7 @@ public class ControladorJugador : MonoBehaviour
         }
     }
 
-   
+
     private void FixedUpdate()
     {
         //salto
@@ -118,17 +118,6 @@ public class ControladorJugador : MonoBehaviour
     public void EstaEnPared(bool estado)
     {
         enPared = estado;
-    }
-
-    public void CambiosPoderes(Poderes caso, bool encc) 
-    {                                                  
-        switch (caso)
-        {
-            case Poderes.inversionControles:
-                velocidadX *= (-1);
-                SwapTeclas(ref teclaRodar, ref teclaSaltar);
-                break;
-        }
     }
 
     /// <summary>
@@ -174,6 +163,7 @@ public class ControladorJugador : MonoBehaviour
     {
         velocidadX += cantidad;
         Invoke("RestauraVelocidad", duracion);
+        GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(5, true);
     }
 
     /// <summary>
@@ -182,7 +172,8 @@ public class ControladorJugador : MonoBehaviour
     public void RestauraVelocidad()
     {
         velocidadX = velocidadEstandar;
-    }    
+        GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(5, false);
+    }
 
     /// <summary>
     /// Método para resetear valores de movimiento
@@ -200,10 +191,11 @@ public class ControladorJugador : MonoBehaviour
     /// </summary>
     /// <param name="a"></param>
     /// <param name="b"></param>
-    void SwapTeclas(ref KeyCode a, ref KeyCode b)
+    public void SwapTeclas()
     {
-        KeyCode aux = a;
-        a = b;
-        b = aux;
+        KeyCode aux;
+        aux = teclaRodar;
+        teclaRodar = teclaSaltar;
+        teclaSaltar = aux;
     }
 }

@@ -16,8 +16,8 @@ public class ZonaMuerte : MonoBehaviour {
         Respawn respawn = other.GetComponent<Respawn>();
         if (respawn != null && pc!=null)
         {
-            pc.DesactivaControles(segundosRespawn); //si muere el jugador no puede volver a moverse hasta pasados "segundosRespawn" segundos
-           respawn.RespawnJugador(other.transform);            
+            pc.DesactivaControles(segundosRespawn, 4); //si muere el jugador no puede volver a moverse hasta pasados "segundosRespawn" segundos
+            respawn.RespawnJugador(other.transform);  
         }
     }
 }

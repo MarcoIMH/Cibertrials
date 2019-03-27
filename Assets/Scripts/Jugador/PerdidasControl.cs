@@ -7,6 +7,7 @@ public class PerdidasControl : MonoBehaviour {
     //segundos que dura la modificacion de velocidad
     public float segundosModificaVelocidad;
 
+    int casoFeedBack;
     ControladorJugador controles;
 
     private void Start()
@@ -22,31 +23,40 @@ public class PerdidasControl : MonoBehaviour {
     public void ActivaControles()
     {
         controles.SetEstadoControlador(true);
+        GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(casoFeedBack, false);
     }
 
     /// <summary>
     /// cambia el estado de los controles a false
     /// </summary>
     /// <param name="segundos"></param>
-    public void DesactivaControles(float segundos)
+    public void DesactivaControles(float segundos, int caso)
     {
         //desactiva los controles
         controles.ReseteaStats();
         controles.SetEstadoControlador(false);        
         //los vuelve a activar pasados "segundos" segundos. Utilizamos el valor (-1) para indicar que no los vuelva a activar porque se hará sin invoke cuando corresponda.
         if(segundos!=-1) Invoke("ActivaControles", segundos);
+
+        GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(caso, true);
+
+        //puede sobreescribirse si ocurren dos cc's a la vez
+        casoFeedBack = caso;
     }
 
     /// <summary>
     /// modifica la velocidad
     /// </summary>
     /// <param name="velocidadModificada"></param>
-    public void ActivaModificaVelocidad(float velocidadModificada)
+    public void ActivaModificaVelocidad(float velocidadModificada, int caso)
     {
         //modifica la velocidad multiplicandola por "velocidadModificada"
         controles.ModificaVelocidad(velocidadModificada);
         //la devuelve a su valor normal pasados "segundosModificaVelocidad" segundos
         Invoke("DesactivaModificaVelocidad", segundosModificaVelocidad);
+
+        GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(caso, true);
+        casoFeedBack = caso;
     }
 
     /// <summary>
@@ -54,6 +64,7 @@ public class PerdidasControl : MonoBehaviour {
     /// </summary>
     public void DesactivaModificaVelocidad()
     {
-        controles.RestauraVelocidad(); 
+        controles.RestauraVelocidad();
+        GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(casoFeedBack, false);
     }
 }
