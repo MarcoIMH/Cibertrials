@@ -6,10 +6,12 @@ public class AtaquePanzudo : MonoBehaviour {
 
     public float fuerzaRebote = 100f;
     public float tiempo = 1f;
-	
+
+    AudioSource audioSource;
+
 	void Start ()
     {
-		
+        audioSource = GetComponent<AudioSource>();
 	}
 	
 	
@@ -31,6 +33,7 @@ public class AtaquePanzudo : MonoBehaviour {
        
         if (rebote != null && est != null && !est.CogerEstadoFantasma())
         {
+            GameManager.instance.EjecutarSonido(audioSource, "Panzudo");
             //lo multiplicamos por -1 porque queremos que la fuerza se aplique en la direccion contraria al vector de la normal            
             rebote.AplicarRebote(normal * -1,fuerzaRebote,tiempo);                                     
         }        

@@ -21,6 +21,7 @@ public class CogerGemas : MonoBehaviour {
         {
             if (pm.AñadirGemas())
             {
+                GameManager.instance.EjecutarSonido("Gema", 2);
                 Destroy(this.gameObject);
             }  
         }

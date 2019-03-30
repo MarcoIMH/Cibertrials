@@ -25,6 +25,7 @@ public class Pared : MonoBehaviour {
         if (salud < 0)
         {
             salud = 0;
+            GameManager.instance.EjecutarSonido("DestruirMuro", 3);
             GameObject.Destroy(this.gameObject);
         }
         //Cuando tengamos sprite

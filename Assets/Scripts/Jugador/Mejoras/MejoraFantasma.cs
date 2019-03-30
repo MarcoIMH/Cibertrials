@@ -16,6 +16,7 @@ public class MejoraFantasma : MonoBehaviour {
 
         if (estadoFantasma != null)
         {
+            GameManager.instance.EjecutarSonido("PowerUp", 1);
             estadoFantasma.ActivaEstadoFantasma(duracionFantasma);
             Destroy(this.gameObject);  
         }

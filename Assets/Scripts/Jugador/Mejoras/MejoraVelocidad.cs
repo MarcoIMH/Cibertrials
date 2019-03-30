@@ -29,6 +29,7 @@ public class MejoraVelocidad : MonoBehaviour {
 
         if (controlador != null)
         {
+            GameManager.instance.EjecutarSonido("PowerUp", 1);
             controlador.AumentaVelocidad(aumentoVelocidad, duracion);
             GameManager.Destroy(this.gameObject);
         }

@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Puerta : MonoBehaviour
 {
+    
+
     void Start()
     {
-
+        
     }
 
     void Update()
@@ -22,6 +24,7 @@ public class Puerta : MonoBehaviour
 
         if (abrirPuertas != null && abrirPuertas.TieneLlave())
         {
+            GameManager.instance.EjecutarSonido("Puerta",3);
             abrirPuertas.QuitarLlave();
             GameObject.Destroy(this.gameObject);
         }

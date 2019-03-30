@@ -8,6 +8,7 @@ public class RomperParedes : MonoBehaviour {
     public float distancia = 1f; // distancia a partir de la cual se puede empezar a picar el muro
     public KeyCode tecla;      //letra con la que usamos el pico
 
+    AudioSource audioSource;
     int capa;
     int auxDaño; // guarda el daño original
 
@@ -15,6 +16,7 @@ public class RomperParedes : MonoBehaviour {
      {
         capa = LayerMask.GetMask("Muro");
         auxDaño = daño;
+        audioSource = GetComponent<AudioSource>();
 	 }
 
 	 void Update ()
@@ -27,6 +29,7 @@ public class RomperParedes : MonoBehaviour {
 
             if (pared != null && Input.GetKeyDown(tecla))//si ese algo es el componente Wall
             {
+                GameManager.instance.EjecutarSonido(audioSource, "Picar");
                 pared.DañarPared(daño); //dañamos al muro
             }
         }

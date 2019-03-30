@@ -12,6 +12,7 @@ public class ControladorJugador : MonoBehaviour
     BoxCollider2D colliderCorre;
     CircleCollider2D colliderRueda;
     Rigidbody2D rb;
+    AudioSource audioSource;
     float deltaX, g, velocidadY, velocidadEstandar;       //velocidadEstandar = variable auxiliar donde guardamos la velocidad original
     bool salto, estadoControles = true, rodando, puedeSaltar,
          enTubería = false, enPared = false, movHorizontal = false;
@@ -26,6 +27,7 @@ public class ControladorJugador : MonoBehaviour
 
         colliderCorre = GetComponent<BoxCollider2D>();
         colliderRueda = GetComponent<CircleCollider2D>();
+        audioSource = GetComponent<AudioSource>();
 
         velocidadEstandar = velocidadX;
 
@@ -77,6 +79,7 @@ public class ControladorJugador : MonoBehaviour
             {
                 salto = true;
                 puedeSaltar = false;
+                GameManager.instance.EjecutarSonido(audioSource, "Salto");
             }
         }
     }

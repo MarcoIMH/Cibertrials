@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Meta : MonoBehaviour {
 
-	// Use this for initialization
-	void Start ()
+    AudioSource audioSource;
+
+    // Use this for initialization
+    void Start ()
     {
-		
-	}
+        audioSource = GetComponent<AudioSource>();
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -24,11 +26,13 @@ public class Meta : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("jugador1")) //si es el jugador 1
         {
+            GameManager.instance.EjecutarSonido(audioSource, "Ganar");
             GameManager.instance.FinalizarRonda(Player.jugador1);//suma una ronda al jugador 1
             Debug.Log(" PLAYER 1 WINS");
         }
         else if (other.gameObject.CompareTag("jugador2")) //si es el jugador 1
         {
+            GameManager.instance.EjecutarSonido(audioSource, "Ganar");
             GameManager.instance.FinalizarRonda(Player.jugador2); //suma una ronda al jugador 2
             Debug.Log(" PLAYER 2 WINS");
         }

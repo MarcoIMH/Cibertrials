@@ -15,7 +15,8 @@ public class PoderesManager : MonoBehaviour {
     Transform[] coordsPoderesMapa;            //Vector para almacenar todas las coordenadas de poderes del mapa que se cargue en escena
     PerdidasControl pcJC;                           //Perdidas de control del jugador contrario
     ControladorJugador controlesJugadorContrario;   //Controles del jugador contrario
-                                                                                             
+    AudioSource audioSourceJC;         
+    
     Poderes[] poder = new Poderes[4]; //array de poderes
     Poderes poderUsar;
 
@@ -33,7 +34,9 @@ public class PoderesManager : MonoBehaviour {
         poder[2] = Poderes.muro;
         poder[3] = Poderes.neblina;
 
-        if(jugadorContrario.gameObject.GetComponent<PerdidasControl>() != null) pcJC = jugadorContrario.gameObject.GetComponent<PerdidasControl>();
+        if (jugadorContrario.gameObject.GetComponent<AudioSource>() != null) audioSourceJC = jugadorContrario.gameObject.GetComponent<AudioSource>();
+
+        if (jugadorContrario.gameObject.GetComponent<PerdidasControl>() != null) pcJC = jugadorContrario.gameObject.GetComponent<PerdidasControl>();
 
         if (jugadorContrario.gameObject.GetComponent<ControladorJugador>() != null)
         {
@@ -103,6 +106,8 @@ public class PoderesManager : MonoBehaviour {
     /// </summary>
     public void AplicarCuboDeHielo()
     {
+        GameManager.instance.EjecutarSonido(audioSourceJC, "CuboHielo");
+
         //pone el estado de los controles a false
         pcJC.DesactivaControles(-1, -1);
         //instancia el cubo de hielo entrando su script en ejecucion 
@@ -123,6 +128,8 @@ public class PoderesManager : MonoBehaviour {
     /// </summary>
     public void ActivaInvierteControles()
     {
+        GameManager.instance.EjecutarSonido(audioSourceJC, "IControles");
+
         //hace dichos cambios
         controlesJugadorContrario.ModificaVelocidad(-1);
         controlesJugadorContrario.SwapTeclas();
@@ -172,7 +179,8 @@ public class PoderesManager : MonoBehaviour {
         Vector3 pos;
         if (jugador == Player.jugador1)
             pos = new Vector3(coordsPoderesMapa[bandera].position.x, coordsPoderesMapa[bandera].position.y + muro.GetComponent<BoxCollider2D>().size.y / 2, 0);
-        else pos = new Vector3(coordsPoderesMapa[bandera].localPosition.x, coordsPoderesMapa[bandera].localPosition.y + muro.GetComponent<BoxCollider2D>().size.y / 2, 0); 
+        else pos = new Vector3(coordsPoderesMapa[bandera].localPosition.x, coordsPoderesMapa[bandera].localPosition.y + muro.GetComponent<BoxCollider2D>().size.y / 2, 0);
+        GameManager.instance.EjecutarSonido(audioSourceJC, "PonerMuro");
         muroNuevo = Instantiate(muro, pos , Quaternion.identity, mundoContrario.transform);
         muroNuevo.layer = LayerMask.NameToLayer("Muro");
     }
@@ -189,7 +197,9 @@ public class PoderesManager : MonoBehaviour {
         //Instanciamos la neblina en la siguiente coordenada al jugador contrario    
         GameObject niebla;
 
-        if(jugador == Player.jugador1)
+        GameManager.instance.EjecutarSonido(audioSourceJC, "Neblina");
+
+        if (jugador == Player.jugador1)
             niebla = Instantiate(neblina, new Vector3(coordsPoderesMapa[bandera].position.x, coordsPoderesMapa[bandera].position.y, 0), Quaternion.identity, mundoContrario.transform);
         else
             niebla = Instantiate(neblina, new Vector3(coordsPoderesMapa[bandera].localPosition.x, coordsPoderesMapa[bandera].localPosition.y, 0), Quaternion.identity, mundoContrario.transform);

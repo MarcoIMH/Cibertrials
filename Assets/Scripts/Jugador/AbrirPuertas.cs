@@ -26,6 +26,7 @@ public class AbrirPuertas : MonoBehaviour
 
         if (llave != null)
         {
+            GameManager.instance.EjecutarSonido("Llave", 3);
             tieneLlave = llave.CogeLlave();
             GameManager.instance.ActualizarLlave(jugador, true);
             Destroy(llave.gameObject);

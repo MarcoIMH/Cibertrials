@@ -14,9 +14,13 @@ public class CubitoHielo : MonoBehaviour {
     RomperParedes picar;
     PoderesManager pm;
 
+    AudioSource audioSource;
+
 	// Use this for initialization
 	void Start ()
     {
+        audioSource = GetComponent<AudioSource>();
+
         GolpesRecibidos = 0; // al principio aun no ha recibido ningun golpe
 
         //acceso a Romper Paredes para usar la misma tecla
@@ -38,12 +42,14 @@ public class CubitoHielo : MonoBehaviour {
         //si se pulsa la tecla de picar el cubo recibe un golpe
         if (Input.GetKeyDown(picar.DarTeclaRomper()))
         {
+            GameManager.instance.EjecutarSonido(audioSource,"Picar");
             GolpesRecibidos++;
         }
 
         //si se alcanza el numero de bloques necesarios se desactiva el cubo y se destruye
         if (GolpesRecibidos >= GolpesParaRomper)
         {
+            GameManager.instance.EjecutarSonido("DestruirHielo", 3);
             pm.DesactivarCuboDeHielo();
             Destroy(this.gameObject);
         }

@@ -24,6 +24,7 @@ public class MejoraPico : MonoBehaviour {
 
          if (romper != null)
          {
+            GameManager.instance.EjecutarSonido("PowerUp", 1);
             romper.IncreaseDamage(dañoModificado, segundos);
             Destroy(this.gameObject);
            // StartCoroutine(Pickup(romper));

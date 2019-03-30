@@ -20,7 +20,6 @@ public class UIManager : MonoBehaviour
     public void ActualizaGema(int gema, Player jugador, Poderes poder)
     {
         //Gemas
-        print(jugador);
         if (gema == 0)
         {
             int min, max;
@@ -44,7 +43,6 @@ public class UIManager : MonoBehaviour
             if (jugador == Player.jugador1)
             {
                 gemaJugador[gema - 1].gameObject.SetActive(true);
-                print("shdf");
             }
             else gemaJugador[gema + gemasMax - 1].gameObject.SetActive(true);
         }

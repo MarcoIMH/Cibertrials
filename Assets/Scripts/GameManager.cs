@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject mapPrefab;
     UIManager UI;
+    AudioManager audioManager;
     GameObject mundoJ1, mundoJ2;
     Transform[] coordPoderesMapa;
     Transform transformJ1, transformJ2, puntoInicialJ1, puntoInicialJ2;
@@ -84,6 +85,25 @@ public class GameManager : MonoBehaviour
     public void SetUI(UIManager UIM)
     {
         UI = UIM;
+    }
+
+    /// <summary>
+    /// Recogemos el audio manager
+    /// </summary>
+    /// <param name="AM"></param>
+    public void SetAudioManager(AudioManager AM)
+    {
+        audioManager = AM;
+    }
+
+    public void EjecutarSonido(AudioSource audioSource, string nombreSonido)
+    {
+        audioManager.EjecutarSonido(audioSource, nombreSonido);
+    }
+
+    public void EjecutarSonido(string nombreSonido, int eleccion)
+    {
+        audioManager.EjecutarSonido(nombreSonido, eleccion);
     }
 
     /// <summary>
