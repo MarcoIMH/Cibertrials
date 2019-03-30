@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pared : MonoBehaviour {
 
-    //public Sprite[] sprites;
+    public Sprite[] sprites;
     public int salud = 2;
     SpriteRenderer spriteRend;
 
@@ -28,6 +28,6 @@ public class Pared : MonoBehaviour {
             GameObject.Destroy(this.gameObject);
         }
         //Cuando tengamos sprite
-       // spriteRend.sprite = sprites[salud];
+       spriteRend.sprite = sprites[salud];
     }
 }
