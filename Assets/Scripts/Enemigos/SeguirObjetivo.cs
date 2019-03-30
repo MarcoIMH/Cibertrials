@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class SeguirObjetivo : MonoBehaviour {
 
-    public Transform posicionInicial;                                                                                    //Inicializar posición inicial con la primera posición de la patrulla
-    public SpriteRenderer spriteVision;
-    public float velocidadEnemigo, tiempoSeguir;                                                                        //tiempoSeguir= tiempo que el enemigo estará persiguiendo al objetivo
+    public Transform posicionInicial;                                                                                //Inicializar posición inicial con la primera posición de la patrulla
+    public SpriteRenderer spriteVision; 
+    public float velocidadEnemigo, tiempoSeguir,offSetX;                                                              //tiempoSeguir= tiempo que el enemigo estará persiguiendo al objetivo
 
     SpriteRenderer sr;
     Transform jugador;    
     bool seguirJugador = false, regresaPosicionInicial=false;                                                          //Variables para controlar si queremos que esté de patrulla o "de regreso" a la posición inicial
-    float r, g, b;                                                                                                      //Variables para almacenar el color del sprite de visión.
+    float velocidadAux, r, g, b;                                                                                      //Variables para almacenar el color del sprite de visión.
+    
 
     // Use this for initialization
     void Start () {
@@ -20,6 +21,8 @@ public class SeguirObjetivo : MonoBehaviour {
         r = spriteVision.color.r;                                                                                       //Guardamos los colores del sprite de visión para poder indicar al jugador cuando lo ha detectado
         g = spriteVision.color.g;
         b = spriteVision.color.b;
+
+        velocidadAux = velocidadEnemigo;
     }
 
     // Update is called once per frame
@@ -59,32 +62,41 @@ public class SeguirObjetivo : MonoBehaviour {
     /// <param name="posicion">Posición del jugador al que queremos que siga</param>
     public void SigueAlJugador(Transform posicion)
     {
-        MovimientoEnemigos movEnemigo = GetComponent<MovimientoEnemigos>();                                         //Paramos el movimiento de patrulla normal entre puntos del enemigo
-        movEnemigo.SetMueveEnemigo(false);
-        jugador = posicion;                                                                                        //Establecemos nuevo objetivo a seguir
-        seguirJugador = true;                                                                                      //Activamos patrulla        
+        if (GetComponent<MovimientoEnemigos>() != null)                                        //Paramos el movimiento de patrulla normal entre puntos del enemigo
+            GetComponent<MovimientoEnemigos>().SetMueveEnemigo(false);
+        jugador = posicion;                                                                    //Establecemos nuevo objetivo a seguir
+        seguirJugador = true;                                                                  //Activamos patrulla        
         CambiaColorSpriteVision(true);
+        velocidadEnemigo -= 4;
         Invoke("CancelaSeguimiento", tiempoSeguir);
     }
 
     /// <summary>
     /// Ejecuta el movimiento del enemigo desde su posición hacia el nuevo objetivo, a la velocidad asignada -> "velocidadEnemigo" y controla el flip de la imagen.
+    /// Guarda una pequeña distancia de seguridad entre el enemigo y el jugador, en caso de que patrulle hacia alguno de ellos -> offSetX
     /// </summary>
     /// <param name="nuevoObjetivo">Posición del objetivo al que seguir</param>
     void Patrulla(Transform nuevoObjetivo)
     {
+        Vector3 offSet;
         if (nuevoObjetivo.position.x < transform.position.x)
         {
             sr.flipX = true;
             spriteVision.flipX = true;
+            offSet = new Vector3(offSetX, 0, 0);
         }
         else
         {
             sr.flipX = false;
             spriteVision.flipX = false;
+            offSet = new Vector3(-offSetX, 0, 0);
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, nuevoObjetivo.position, velocidadEnemigo * Time.deltaTime);
+        if (nuevoObjetivo.GetComponent<ControladorJugador>() != null)
+        {             
+            transform.position = Vector3.MoveTowards(transform.position, nuevoObjetivo.position + offSet, velocidadEnemigo * Time.deltaTime);
+        }
+        else transform.position = Vector3.MoveTowards(transform.position, nuevoObjetivo.position, velocidadEnemigo * Time.deltaTime);
     }
 
     /// <summary>
@@ -92,6 +104,7 @@ public class SeguirObjetivo : MonoBehaviour {
     /// </summary>
     void CancelaSeguimiento()
     {
+        velocidadEnemigo = velocidadAux;
         seguirJugador = false;
         regresaPosicionInicial = true;
         CambiaColorSpriteVision(false);                                                                             //Devolvemos el color del sprite a su versión original para indicar al jugador que ya no le sigue

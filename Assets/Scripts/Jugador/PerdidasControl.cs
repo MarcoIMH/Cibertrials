@@ -52,8 +52,9 @@ public class PerdidasControl : MonoBehaviour {
     {
         //modifica la velocidad multiplicandola por "velocidadModificada"
         controles.ModificaVelocidad(velocidadModificada);
-        //la devuelve a su valor normal pasados "segundosModificaVelocidad" segundos
-        Invoke("DesactivaModificaVelocidad", segundosModificaVelocidad);
+        if(caso!=1)
+            //la devuelve a su valor normal pasados "segundosModificaVelocidad" segundos en caso de que no sea la Neblina
+            Invoke("DesactivaModificaVelocidad", segundosModificaVelocidad);
 
         GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(caso, true);
         casoFeedBack = caso;

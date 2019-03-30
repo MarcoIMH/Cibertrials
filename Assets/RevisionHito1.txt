@@ -19,13 +19,9 @@ Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 
 
 ---------------------------------MANAGERS JUEGO-----------------------------
 																															   \
-///GameManager.cs///		-> ** Limpiar código.																				|
-				   ** Hacer método para cambiar escenas.																		| --->No hacer aún por temas de terminar el 1er nivel
-				   ** NombreEscena() Parametrizar e informar desde método para cambiar escena, adaptar cuando esté hecho.		|
-				   ** Implementar gestión de torneos.																			|
+///GameManager.cs///		-> Its ok.																			
 																															   /
-///UI.cs///			-> ** Limpiar código.										
-				   ** Implementar método para el control de la posesión de la llave												/
+///UI.cs///			-> ** Its ok.											
 
 ---------------------------------ENEMIGOS-----------------------------------
 
@@ -35,12 +31,11 @@ Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 
 
 ///MovimientoCollider.cs///	-> Its ok.
 
-///MovimientoEnemigos.cs///	-> Limpiar código.
+///MovimientoEnemigos.cs///	-> Its ok.
 
 ///Rebote.cs///			-> Its ok.
 
-///SeguirObjetivo.cs///		-> ** Añadir offset respecto al jugador que sigue.
-				   ** Calcular nueva velocidad al "perseguir" para que el jugador tenga opción a escapar.
+///SeguirObjetivo.cs///		-> Its ok.
 
 ///VisionVigilante.cs///	-> Its ok.		
 
@@ -53,11 +48,11 @@ Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 
 
 ///Pared.cs///			-> Its ok.
 
-///Paredes.cs///		-> Adaptar llamada a EstaEnPared() por método de cambiar bool de "congelado" cuando este sea generalizado.
+///Paredes.cs///		-> Its ok.
 
 				   Dato: Estudiar y llegar a un consenso sobre los nombres Pared.cs, Paredes.cs, Muro de enums, etc. se crea confusión.
   
-///Tuberia.cs///		-> Adaptar código para controlar desde Unity cuando se empieza a caer la tuberia.
+///Tuberia.cs///		-> Its ok.
 	
 
 ---------------------------------JUGADOR------------------------------------
@@ -74,7 +69,7 @@ Revisión realizada del contenido existente hasta el 17 de Marzo. Commit 31fc645 
 
  	///CubitoHielo.cs///		-> Its ok.
 
-  	///Neblina.cs///		-> Its ok pero el método que usa de PC desactiva el freeze ya que este no es genérico.
+  	///Neblina.cs///		-> Its ok.
 
  	///PoderesManager.cs///		->  It's ok
 

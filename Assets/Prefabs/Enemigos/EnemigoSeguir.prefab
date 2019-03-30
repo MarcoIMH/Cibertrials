@@ -285,6 +285,7 @@ MonoBehaviour:
   spriteVision: {fileID: 212135504779180714}
   velocidadEnemigo: 10
   tiempoSeguir: 5
+  offSetX: 4
 --- !u!114 &114947556239092104
 MonoBehaviour:
   m_ObjectHideFlags: 1
