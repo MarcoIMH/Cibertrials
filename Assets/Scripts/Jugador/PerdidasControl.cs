@@ -7,7 +7,7 @@ public class PerdidasControl : MonoBehaviour {
     //segundos que dura la modificacion de velocidad
     public float segundosModificaVelocidad;
 
-    int casoFeedBack;
+    int casoFeedBack, casoFeedBack2;
     ControladorJugador controles;
 
     private void Start()
@@ -57,7 +57,7 @@ public class PerdidasControl : MonoBehaviour {
             Invoke("DesactivaModificaVelocidad", segundosModificaVelocidad);
 
         GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(caso, true);
-        casoFeedBack = caso;
+        casoFeedBack2 = caso;
     }
 
     /// <summary>
@@ -66,6 +66,6 @@ public class PerdidasControl : MonoBehaviour {
     public void DesactivaModificaVelocidad()
     {
         controles.RestauraVelocidad();
-        GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(casoFeedBack, false);
+        GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(casoFeedBack2, false);
     }
 }
