@@ -64,10 +64,8 @@ public class GameManager : MonoBehaviour
 
     public void ActualizaGemas(int gema, Player jugador, Poderes poder)
     {
-        //UI.ActualizaGema(gema, jugador, poder);          <---------------- DESCOMENTAR CUANDO ESTÉ IMPLEMENTADA LA UI ENTERA, DA ERROR AL USAR LOS PODERES DEL J2 PORQUE NO EXISTEN LOS OBJETOS
+        UI.ActualizaGema(gema, jugador, poder);
     }
-
-
     /// <summary>
     /// Llama al metodo ActualizarLlave del UIManager
     /// </summary>

@@ -87,12 +87,12 @@ public class PoderesManager : MonoBehaviour {
         if (gemas < gemasMax)
         {
             gemas++;
-            GameManager.instance.ActualizaGemas(gemas, jugador, poderUsar);
             if (gemas == gemasMax)
             {
                 BuscaHabilidad();
                 habilidadActiva = true;
             }
+            GameManager.instance.ActualizaGemas(gemas, jugador, poderUsar);
             return true;
         }
         else return false;             
