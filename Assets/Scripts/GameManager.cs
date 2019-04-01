@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject mapPrefab;
-    UIManager UI;
+    public GameObject mapPrefab, menuIngame;
+    public KeyCode menuKey;
+    public Dropdown resolucionesDropDown;
+
+    Resolution[] resoluciones;
+    UIManager UI;    
     AudioManager audioManager;
     GameObject mundoJ1, mundoJ2;
     Transform[] coordPoderesMapa;
@@ -13,10 +18,11 @@ public class GameManager : MonoBehaviour
 
     //variables que indican el numero de rondas ganadas por cada jugador
     int rondasJugador1, rondasJugador2;
+    float volumen=1;
 
     string mapa="Mapa1";
 
-    bool hayGanador=false;
+    bool hayGanador=false, enMenu=false;
 
     //Asegurarse de que solo hay una instancia
     public static GameManager instance = null;
@@ -36,6 +42,10 @@ public class GameManager : MonoBehaviour
         //Ambos jugadores comienzan la partida con 0 rondas ganadas
         rondasJugador1 = rondasJugador2 = 0;
 
+        menuKey = KeyCode.Escape;   //<----- CAMBIAR ASIGNACIÓN AL TERMINAR
+        resoluciones = Screen.resolutions;
+        ConfiguraDropDownResoluciones();
+
         Invoke("CargaMapaEnMundos", 0.05f);     //Preguntar a Guille sobre como podría hacer y ordenar el Script Execution Order para no necesitar estos invokes.
         Invoke("ColocaJugadores", 0.07f);       //De ser así se podrían quitar y hacer que la carga fuera "limpia" al iniciar la ejecución.
     }
@@ -43,7 +53,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(menuKey) && !enMenu)
+        {
+            PausaJuego();
+        }
+        else if(Input.GetKeyDown(menuKey) && enMenu)
+        {
+            QuitaPausaJuego();
+        }
     }
 
     /// <summary>
@@ -88,6 +105,41 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Método para controlar el juego en pantalla completa o no. Trabaja con el Toogle de MenuConfiguracionIngame (interfaz Unity). SE PUEDE USAR PARA EL MENÚ OUTGAME.
+    /// </summary>
+    /// <param name="pantallaCompleta"></param>
+    public void SetPantallaCompleta(bool pantallaCompleta)
+    {
+        Screen.fullScreen = pantallaCompleta;
+    }
+
+    /// <summary>
+    /// Método para controlar los gráficos del juego. Trabaja con el DropDown de MenuConfiguracionIngame (interfaz Unity). SE PUEDE USAR PARA EL MENÚ OUTGAME TAMBIÉN.
+    /// </summary>
+    /// <param name="indiceGraficos"></param>
+    public void SetNivelGraficos(int indiceGraficos)
+    {
+        QualitySettings.SetQualityLevel(indiceGraficos);
+    }
+
+    /// <summary>
+    /// Configura el tamaño de la resolución de pantalla. Trabaja con el DropDown de MenuConfiguracionIngame (interfaz Unity). SE PUEDE USAR PARA EL MENÚ OUTGAME TAMBIÉN.
+    /// </summary>
+    public void SetResolucion(int indiceResolucion)
+    {
+        Screen.SetResolution(resoluciones[indiceResolucion].width, resoluciones[indiceResolucion].height, Screen.fullScreen);
+    }
+
+    /// <summary>
+    /// Método para gestionar el volúmen de los sonidos. Trabaja con el slider de MenuConfiguracionIngame (interfaz UnitY). SE PUEDE USAR PARA EL MENÚ OUTGAME TAMBIÉN.
+    /// </summary>
+    /// <param name="vol"></param>
+    public void SetVolumen(float vol)
+    {
+        volumen = vol;
+    }
+
+    /// <summary>
     /// Recogemos el audio manager
     /// </summary>
     /// <param name="AM"></param>
@@ -98,12 +150,12 @@ public class GameManager : MonoBehaviour
 
     public void EjecutarSonido(AudioSource audioSource, string nombreSonido)
     {
-        audioManager.EjecutarSonido(audioSource, nombreSonido);
+        audioManager.EjecutarSonido(audioSource, nombreSonido, volumen);
     }
 
     public void EjecutarSonido(string nombreSonido, int eleccion)
     {
-        audioManager.EjecutarSonido(nombreSonido, eleccion);
+        audioManager.EjecutarSonido(nombreSonido, eleccion, volumen);
     }
 
     /// <summary>
@@ -177,11 +229,14 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void CargaMapaEnMundos()
     {
-        var mapInstanceJ1 = Instantiate(mapPrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-        mapInstanceJ1.transform.parent = mundoJ1.transform;
+        if (mapPrefab != null)
+        {
+            var mapInstanceJ1 = Instantiate(mapPrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+            mapInstanceJ1.transform.parent = mundoJ1.transform;
 
-        var mapInstanceJ2 = Instantiate(mapPrefab, new Vector3(0, -100, 0), Quaternion.identity) as GameObject;
-        mapInstanceJ2.transform.parent = mundoJ2.transform;
+            var mapInstanceJ2 = Instantiate(mapPrefab, new Vector3(0, -100, 0), Quaternion.identity) as GameObject;
+            mapInstanceJ2.transform.parent = mundoJ2.transform;
+        }        
     }
 
     /// <summary>
@@ -195,7 +250,82 @@ public class GameManager : MonoBehaviour
         transformJ1.gameObject.SetActive(true);
         transformJ2.gameObject.SetActive(true);
 
-        transformJ1.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(true);
-        transformJ2.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(true);
+        if(transformJ1.gameObject.GetComponent<ControladorJugador>()!=null)
+            transformJ1.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(true);
+        if (transformJ2.gameObject.GetComponent<ControladorJugador>() != null)
+            transformJ2.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(true);
+    }    
+
+    /// <summary>
+    /// Configura el juego para establecer una pausa y muestra la pantalla de menu inGame, se activa en caso de que algún jugador abre dicho menú.
+    /// </summary>
+    void PausaJuego()
+    {
+        enMenu = true;
+        Time.timeScale = 0;
+
+        if (transformJ1.gameObject.GetComponent<ControladorJugador>() != null)
+            InterruptorMundos(mundoJ1, transformJ1.gameObject.GetComponent<ControladorJugador>(), false);
+
+        if (transformJ2.gameObject.GetComponent<ControladorJugador>() != null)
+            InterruptorMundos(mundoJ2, transformJ2.gameObject.GetComponent<ControladorJugador>(), false);
+
+        UI.gameObject.SetActive(false);
+        menuIngame.SetActive(true);
+    }
+
+    /// <summary>
+    /// Restablece el juego de su pausa y cierra el menú.
+    /// </summary>
+    void QuitaPausaJuego()
+    {
+        enMenu = false;
+        Time.timeScale = 1;
+
+        if (transformJ1.gameObject.GetComponent<ControladorJugador>() != null)
+            InterruptorMundos(mundoJ1, transformJ1.gameObject.GetComponent<ControladorJugador>(), true);
+
+        if (transformJ2.gameObject.GetComponent<ControladorJugador>() != null)
+            InterruptorMundos(mundoJ2, transformJ2.gameObject.GetComponent<ControladorJugador>(), true);
+        
+        menuIngame.SetActive(false);
+        UI.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Método para controlar la visualización y activación de mundo/jugador. 
+    /// Hace de "interruptor" para cada mundo y su jugador.
+    /// </summary>
+    /// <param name="mundo">Mundo</param>
+    /// <param name="cont">Controles del jugador en dicho mundo</param>
+    /// <param name="est">Valor del interruptor</param>
+    void InterruptorMundos(GameObject mundo, ControladorJugador cont, bool est)
+    {
+        if (cont != null) cont.SetEstadoControlador(est);
+        mundo.SetActive(est);
+    }
+
+    /// <summary>
+    /// Método para automatizar el paso de las distintas resoluciones existentes al dropdown de resoluciones.
+    /// </summary>
+    void ConfiguraDropDownResoluciones()
+    {
+        resolucionesDropDown.ClearOptions();
+        List<string> opciones = new List<string>();
+
+        int resolucionActual = 0;
+        for(int x = 0; x < resoluciones.Length; x++)
+        {
+            string opcion = resoluciones[x].width + " x " + resoluciones[x].height;
+            opciones.Add(opcion);
+
+            if (resoluciones[x].width == Screen.currentResolution.width &&
+                resoluciones[x].height == Screen.currentResolution.height)
+                resolucionActual = x;
+        }
+
+        resolucionesDropDown.AddOptions(opciones);
+        resolucionesDropDown.value = resolucionActual;
+        resolucionesDropDown.RefreshShownValue();
     }
 }

@@ -29,10 +29,11 @@ public class AudioManager : MonoBehaviour {
     /// </summary>
     /// <param name="audioSource">el audioSource del objeto</param>
     /// <param name="nombreSonido">identificador del sonido a ejecutar</param>
-    public void EjecutarSonido(AudioSource audioSource,string nombreSonido)
+    public void EjecutarSonido(AudioSource audioSource,string nombreSonido, float volumen)
     {
+        audioSource.volume = volumen;
         audioSource.clip = BuscarSonido(nombreSonido);
-        audioSource.Play();
+        audioSource.Play();               
     }
   
     
@@ -42,8 +43,11 @@ public class AudioManager : MonoBehaviour {
     /// <param name="nombreSonido">identificador del sonido a ejecutar</param>
     /// <param name="eleccion">para elegir el audioSource en el que se va ejecutar el sonido
     /// (Mirar hijos del AudioManager)</param>
-    public void EjecutarSonido(string nombreSonido,int eleccion)
+    public void EjecutarSonido(string nombreSonido,int eleccion, float vol)
     {
+        powerUps.volume = vol;
+        gemas.volume = vol;
+        otros.volume = vol;
         if (eleccion == 1)
         {
             powerUps.clip = BuscarSonido(nombreSonido);
