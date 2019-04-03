@@ -27,14 +27,15 @@ public class VisionVigilante : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Llamamos al ralentizar
-         PerdidasControl pc = other.GetComponent<PerdidasControl>();
-         if (pc != null)
-         {
-             pc.ActivaModificaVelocidad(reduccionVelVigilante, 7);
-         }
-
         EstadoFantasma est = other.GetComponent<EstadoFantasma>();
+
+        // Llamamos al ralentizar
+        PerdidasControl pc = other.GetComponent<PerdidasControl>();
+        if (pc != null && est != null && !est.CogerEstadoFantasma()) // Si no esta en modo fantasma
+        {
+            pc.ActivaModificaVelocidad(reduccionVelVigilante, 7);
+        }
+        
         if (this.gameObject.GetComponentInParent<SeguirObjetivo>() != null && est != null)                                  //Si este enemigo dispone de la capacidad de seguir al jugador
         {
             SeguirObjetivo so = this.gameObject.GetComponentInParent<SeguirObjetivo>();                                     
