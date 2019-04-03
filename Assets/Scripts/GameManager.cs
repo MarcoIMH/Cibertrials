@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject mapPrefab, menuIngame;
     public KeyCode menuKey;
     public Dropdown resolucionesDropDown;
+    public Image pantallaDeCarga;
 
     Resolution[] resoluciones;
     UIManager UI;    
@@ -45,6 +46,8 @@ public class GameManager : MonoBehaviour
         menuKey = KeyCode.Escape;   //<----- CAMBIAR ASIGNACIÓN AL TERMINAR
         resoluciones = Screen.resolutions;
         ConfiguraDropDownResoluciones();
+
+        PantallaDeCarga(1.5f);
 
         Invoke("CargaMapaEnMundos", 0.05f);     //Preguntar a Guille sobre como podría hacer y ordenar el Script Execution Order para no necesitar estos invokes.
         Invoke("ColocaJugadores", 0.07f);       //De ser así se podrían quitar y hacer que la carga fuera "limpia" al iniciar la ejecución.
@@ -327,5 +330,23 @@ public class GameManager : MonoBehaviour
         resolucionesDropDown.AddOptions(opciones);
         resolucionesDropDown.value = resolucionActual;
         resolucionesDropDown.RefreshShownValue();
+    }
+
+    /// <summary>
+    /// Activa la pantalla de carga y la desactiva al rato
+    /// </summary>
+    /// <param name="tiempo">tiempo que tarda en desactivarse</param>
+    void PantallaDeCarga(float tiempo)
+    {
+        pantallaDeCarga.gameObject.SetActive(true);
+        Invoke("QuitarPantallaDeCarga", tiempo);
+    }
+
+    /// <summary>
+    /// Desactiva la pantalla de carga
+    /// </summary>
+    void QuitarPantallaDeCarga()
+    {
+        pantallaDeCarga.gameObject.SetActive(false);
     }
 }
