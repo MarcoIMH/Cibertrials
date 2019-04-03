@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4071528232654814}
   - component: {fileID: 114291744404172790}
   - component: {fileID: 212481133878260090}
+  - component: {fileID: 95655049204711994}
   m_Layer: 10
   m_Name: PlataformaColumpio
   m_TagString: Untagged
@@ -69,15 +70,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1387332704288554}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 537.4466, y: 46.043896, z: -0.0546875}
+  m_LocalRotation: {x: 0, y: 0, z: -0.20791169, w: 0.9781476}
+  m_LocalPosition: {x: -32.2, y: 3.5, z: -0.0546875}
   m_LocalScale: {x: 1.3747649, y: 1.3747649, z: 1.3747649}
   m_Children:
   - {fileID: 4389005574016262}
   - {fileID: 4096545637708036}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -24}
 --- !u!4 &4096545637708036
 Transform:
   m_ObjectHideFlags: 1
@@ -174,13 +175,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &95655049204711994
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1387332704288554}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 45411b94229e5d14e8ed0883e7917dcd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114291744404172790
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1387332704288554}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6da978b7f3bccee46bda42ccdcb1e845, type: 3}
   m_Name: 
