@@ -7620,6 +7620,8 @@ MonoBehaviour:
     sonido: {fileID: 8300000, guid: b1f83b00259c3da41a8be4daf80b12a4, type: 3}
   - nombre: PonerMuro
     sonido: {fileID: 8300000, guid: e6e6d39902a3800499144ec334ac0cef, type: 3}
+  - nombre: Moverse
+    sonido: {fileID: 8300000, guid: 18011e813fff7f0449b508670f6cba6b, type: 3}
 --- !u!1 &1730074555
 GameObject:
   m_ObjectHideFlags: 0

@@ -71,14 +71,26 @@ public class ControladorJugador : MonoBehaviour
             {
                 deltaX = Input.GetAxis(axisHorizontal);
                 movHorizontal = true;
+
+                //sonido de moverse
+                if (!audioSource.isPlaying && puedeSaltar)
+                {
+                    audioSource.loop = true;
+                    GameManager.instance.EjecutarSonido(audioSource, "Moverse");
+                }
             }
-            else movHorizontal = false;
+            else
+            {
+                audioSource.loop = false; //se pone el loop a false para que el sonido no se ejecute tras pararse
+                movHorizontal = false;
+            } 
 
             //salto
             if (Input.GetKey(teclaSaltar) && puedeSaltar)
             {
                 salto = true;
                 puedeSaltar = false;
+                audioSource.loop = false;
                 GameManager.instance.EjecutarSonido(audioSource, "Salto");
             }
         }
@@ -179,7 +191,8 @@ public class ControladorJugador : MonoBehaviour
     }
 
     /// <summary>
-    /// Método para resetear valores de movimiento
+    /// Método para resetear valores de movimiento y pone el loop del AS a false para
+    /// que no se ejecute el sonido de caminar tras morir
     /// </summary>
     public void ReseteaStats()
     {
@@ -187,6 +200,7 @@ public class ControladorJugador : MonoBehaviour
         //deltaY = 0;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = 0f;
+        audioSource.loop = false;
     }
 
     /// <summary>
