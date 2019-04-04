@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ControladorJugador : MonoBehaviour
 {
+    public KeyCode teclaRodar, teclaSaltar;
     public int alturaSalto, distanciaRecorrida;
     public float VelocidadRodar, velocidadX; //cantidad de velocidad reducida en % (de 0 a 1)                    
     public string axisHorizontal, axisVertical;
@@ -12,8 +13,7 @@ public class ControladorJugador : MonoBehaviour
     CircleCollider2D colliderRueda;
     Rigidbody2D rb;
     AudioSource audioSource;
-    KeyCode teclaRodar, teclaSaltar;
-
+    Animator anim;
     float deltaX, g, velocidadY, velocidadEstandar;       //velocidadEstandar = variable auxiliar donde guardamos la velocidad original
     bool salto, estadoControles = true, rodando, puedeSaltar,
          enTubería = false, enPared = false, movHorizontal = false;
@@ -29,6 +29,7 @@ public class ControladorJugador : MonoBehaviour
         colliderCorre = GetComponent<BoxCollider2D>();
         colliderRueda = GetComponent<CircleCollider2D>();
         audioSource = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
 
         velocidadEstandar = velocidadX;
 
@@ -66,6 +67,22 @@ public class ControladorJugador : MonoBehaviour
                     // AnimacionRodar (anim.rodar)
                 }
             }
+
+            
+            
+            //flip del personaje
+            if(Input.GetAxis(axisHorizontal) > 0)
+            {
+                transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+            }
+            else if(Input.GetAxis(axisHorizontal) < 0)
+            {
+                transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+            }
+
+            //animacion de moverse
+            bool parado = (Input.GetAxis(axisHorizontal) == 0);
+            anim.SetBool("Moviendose", !parado);
 
             //mov horizontal 
             if (Input.GetAxis(axisHorizontal) != 0 && !enPared)
@@ -111,9 +128,19 @@ public class ControladorJugador : MonoBehaviour
             rb.velocity = new Vector2(deltaX * velocidadX, rb.velocity.y);
     }
 
+    public KeyCode GetTeclaRodar()
+    {
+        return teclaRodar;
+    }
+
     public void SetTeclaRodar(KeyCode nuevaTecla)
     {
         teclaRodar = nuevaTecla;
+    }
+
+    public KeyCode GetTeclaSaltar()
+    {
+        return teclaSaltar;
     }
 
     public void SetTeclaSaltar(KeyCode nuevaTecla)

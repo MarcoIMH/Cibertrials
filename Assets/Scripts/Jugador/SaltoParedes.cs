@@ -4,27 +4,26 @@ using UnityEngine;
 
 public class SaltoParedes : MonoBehaviour
 {
-    public float fuerzaSalto, x, y, velocidadBajarsePared;                  //Fuerza con la que saltará.X,y: datos para el vector de dirección. Velocidad para salir de la pared
-    
+    public float fuerzaSalto, x, y, velocidadBajarsePared;                                    //Fuerza con la que saltará.X,y: datos para el vector de dirección. Velocidad para salir de la pared
+    public KeyCode teclaSaltoParedes, teclaIzqdaParedes, teclaDchaParedes;                                                 //Teclas de movimiento en salto en paredes
+
+    Muros pared;
     Rigidbody2D rb;
     Vector2 direccion;
-    Muros pared;
-    KeyCode teclaSaltoParedes, teclaIzqdaParedes, teclaDchaParedes;             //Teclas de movimiento en salto en paredes
-
-    float gravedadPorDefecto;                                                  //Variable para almacenar la gravedad que gestiona ControladorJugador
+    float gravedadPorDefecto;                                                                 //Variable para almacenar la gravedad que gestiona ControladorJugador
     bool puedeSaltarParedes = false;
 
     // Use this for initialization
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Invoke("SetGravedadPorDefecto", 0.2f);        //Invocamos a los 0.2 segundos ya que se tarda un poco en calcular la gravedad por defecto del jugador
+        Invoke("SetGravedadPorDefecto", 0.2f);                                                //Invocamos a los 0.2 segundos ya que se tarda un poco en calcular la gravedad por defecto del jugador
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(teclaSaltoParedes) && puedeSaltarParedes)        //Si salta y está autorizado el saltar paredes activamos el salto
+        if (Input.GetKeyDown(teclaSaltoParedes) && puedeSaltarParedes)                                    //Si salta y está autorizado el saltar paredes activamos el salto
         {
             puedeSaltarParedes = false;
             SaltoPared();
@@ -61,14 +60,29 @@ public class SaltoParedes : MonoBehaviour
         rb.AddForce(direccion * fuerzaSalto, ForceMode2D.Impulse);
     }
 
+    public KeyCode GetTeclaSaltoParedes()
+    {
+        return teclaSaltoParedes;
+    }
+
     public void SetTeclaSaltoParedes(KeyCode nuevaTecla)
     {
         teclaSaltoParedes = nuevaTecla;
     }
 
+    public KeyCode GetTeclaIzqdaParedes()
+    {
+        return teclaIzqdaParedes;
+    }
+
     public void SetTeclaIzqdaParedes(KeyCode nuevaTecla)
     {
         teclaIzqdaParedes = nuevaTecla;
+    }
+
+    public KeyCode GetTeclaDchaParedes()
+    {
+        return teclaDchaParedes;
     }
 
     public void SetTeclaDchaParedes(KeyCode nuevaTecla)
