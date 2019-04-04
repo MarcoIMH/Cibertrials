@@ -5,10 +5,11 @@ using UnityEngine;
 public class RomperParedes : MonoBehaviour {
 
     public int daño = 1;
-    public float distancia = 1f; // distancia a partir de la cual se puede empezar a picar el muro
-    public KeyCode teclaRomperParedes;      //letra con la que usamos el pico
+    public float distancia = 1f; // distancia a partir de la cual se puede empezar a picar el muro    
 
     AudioSource audioSource;
+    KeyCode teclaRomperParedes;      //letra con la que usamos el pico
+
     int capa;
     int auxDaño; // guarda el daño original
 
