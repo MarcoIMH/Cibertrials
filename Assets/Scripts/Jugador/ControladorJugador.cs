@@ -110,6 +110,26 @@ public class ControladorJugador : MonoBehaviour
             rb.velocity = new Vector2(deltaX * velocidadX, rb.velocity.y);
     }
 
+    public KeyCode GetTeclaRodar()
+    {
+        return teclaRodar;
+    }
+
+    public void SetTeclaRodar(KeyCode nuevaTecla)
+    {
+        teclaRodar = nuevaTecla;
+    }
+
+    public KeyCode GetTeclaSaltar()
+    {
+        return teclaSaltar;
+    }
+
+    public void SetTeclaSaltar(KeyCode nuevaTecla)
+    {
+        teclaSaltar = nuevaTecla;
+    }
+
     /// <summary>
     /// Setter para gestionar el estado funcional del controlador.
     /// </summary>

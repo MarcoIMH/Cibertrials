@@ -5,7 +5,7 @@ using UnityEngine;
 public class SaltoParedes : MonoBehaviour
 {
     public float fuerzaSalto, x, y, velocidadBajarsePared;                                    //Fuerza con la que saltará.X,y: datos para el vector de dirección. Velocidad para salir de la pared
-    public KeyCode salto, izquierda, derecha;                                                 //Teclas de movimiento en salto en paredes
+    public KeyCode teclaSaltoParedes, teclaIzqdaParedes, teclaDchaParedes;                                                 //Teclas de movimiento en salto en paredes
 
     Muros pared;
     Rigidbody2D rb;
@@ -23,16 +23,16 @@ public class SaltoParedes : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(salto) && puedeSaltarParedes)                                    //Si salta y está autorizado el saltar paredes activamos el salto
+        if (Input.GetKeyDown(teclaSaltoParedes) && puedeSaltarParedes)                                    //Si salta y está autorizado el saltar paredes activamos el salto
         {
             puedeSaltarParedes = false;
             SaltoPared();
         }
 
-        if (Input.GetKeyDown(derecha) && puedeSaltarParedes && pared == Muros.izquierda)      //Si el jugador se mueve a la derecha en la parez izquierda gestionamos la bajada
+        if (Input.GetKeyDown(teclaDchaParedes) && puedeSaltarParedes && pared == Muros.izquierda)      //Si el jugador se mueve a la derecha en la parez izquierda gestionamos la bajada
             rb.velocity = new Vector2(velocidadBajarsePared, 0);                              //Aplicamos una velocidad en X para separar al jugador de la pared
 
-        if (Input.GetKeyDown(izquierda) && puedeSaltarParedes && pared == Muros.derecha)      //Si el jugador se mueve a la izquierda en la parez derecha gestionamos la bajada
+        if (Input.GetKeyDown(teclaIzqdaParedes) && puedeSaltarParedes && pared == Muros.derecha)      //Si el jugador se mueve a la izquierda en la parez derecha gestionamos la bajada
             rb.velocity = new Vector2(-velocidadBajarsePared, 0);                             //Aplicamos una velocidad en X para separar al jugador de la pared
     }
 
@@ -58,6 +58,36 @@ public class SaltoParedes : MonoBehaviour
         if (pared == Muros.izquierda) direccion = new Vector2(x, y);                          //Si la pared es la izquierda, la dirección X del salto será positiva
         else direccion = new Vector2(-x, y);                                                  //Si la pared es la derecha, la dirección X del salto será negativa
         rb.AddForce(direccion * fuerzaSalto, ForceMode2D.Impulse);
+    }
+
+    public KeyCode GetTeclaSaltoParedes()
+    {
+        return teclaSaltoParedes;
+    }
+
+    public void SetTeclaSaltoParedes(KeyCode nuevaTecla)
+    {
+        teclaSaltoParedes = nuevaTecla;
+    }
+
+    public KeyCode GetTeclaIzqdaParedes()
+    {
+        return teclaIzqdaParedes;
+    }
+
+    public void SetTeclaIzqdaParedes(KeyCode nuevaTecla)
+    {
+        teclaIzqdaParedes = nuevaTecla;
+    }
+
+    public KeyCode GetTeclaDchaParedes()
+    {
+        return teclaDchaParedes;
+    }
+
+    public void SetTeclaDchaParedes(KeyCode nuevaTecla)
+    {
+        teclaDchaParedes = nuevaTecla;
     }
 
     /// <summary>

@@ -17,7 +17,8 @@ public class PoderesManager : MonoBehaviour {
     ControladorJugador controlesJugadorContrario;   //Controles del jugador contrario
     AudioSource audioSourceJC;         
     
-    Poderes[] poder = new Poderes[4]; //array de poderes
+    //Poderes[] poder = new Poderes[4]; //array de poderes
+    Poderes[] poder = { Poderes.inversionControles, Poderes.cubito , Poderes.muro, Poderes.neblina}; //array de poderes
     Poderes poderUsar;
 
     int gemas;
@@ -27,12 +28,6 @@ public class PoderesManager : MonoBehaviour {
         gemas = 0;
         poderUsar = Poderes.sinPoder;
         habilidadActiva = false;   
-
-        //asignamos los poderes
-        poder[0] = Poderes.inversionControles;
-        poder[1] = Poderes.cubito;
-        poder[2] = Poderes.muro;
-        poder[3] = Poderes.neblina;
 
         if (jugadorContrario.gameObject.GetComponent<AudioSource>() != null) audioSourceJC = jugadorContrario.gameObject.GetComponent<AudioSource>();
 
@@ -150,6 +145,16 @@ public class PoderesManager : MonoBehaviour {
 
         jugadorContrario.GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(6, false);
     }    
+
+    public KeyCode GetTeclaPoder()
+    {
+        return teclaPoder;
+    }
+
+    public void SetTeclaPoder(KeyCode nuevaTecla)
+    {
+        teclaPoder = nuevaTecla;
+    }
 
     /// <summary>
     /// asigna un poder al jugador

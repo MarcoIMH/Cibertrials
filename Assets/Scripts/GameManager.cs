@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public GameObject mapPrefab, menuIngame;
-    public KeyCode menuKey;
+    public KeyCode teclaMenu;
     public Dropdown resolucionesDropDown;
     public Image pantallaDeCarga;
 
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         //Ambos jugadores comienzan la partida con 0 rondas ganadas
         rondasJugador1 = rondasJugador2 = 0;
 
-        menuKey = KeyCode.Escape;   //<----- CAMBIAR ASIGNACIÓN AL TERMINAR
+        teclaMenu = KeyCode.Escape;   //<----- CAMBIAR ASIGNACIÓN AL TERMINAR
         resoluciones = Screen.resolutions;
         ConfiguraDropDownResoluciones();
 
@@ -56,14 +56,24 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(menuKey) && !enMenu)
+        if (Input.GetKeyDown(teclaMenu) && !enMenu)
         {
             PausaJuego();
         }
-        else if(Input.GetKeyDown(menuKey) && enMenu)
+        else if(Input.GetKeyDown(teclaMenu) && enMenu)
         {
             QuitaPausaJuego();
         }
+    }
+
+    public KeyCode GetTeclaMenu()
+    {
+        return teclaMenu;
+    }
+
+    public void SetTeclaMenu(KeyCode nuevaTecla)
+    {
+        teclaMenu = nuevaTecla;
     }
 
     /// <summary>

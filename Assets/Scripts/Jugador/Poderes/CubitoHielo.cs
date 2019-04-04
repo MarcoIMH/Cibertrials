@@ -40,7 +40,7 @@ public class CubitoHielo : MonoBehaviour {
 	void Update ()
     {
         //si se pulsa la tecla de picar el cubo recibe un golpe
-        if (Input.GetKeyDown(picar.DarTeclaRomper()))
+        if (Input.GetKeyDown(picar.GetTeclaRomperParedes()))
         {
             GameManager.instance.EjecutarSonido(audioSource,"Picar");
             GolpesRecibidos++;
