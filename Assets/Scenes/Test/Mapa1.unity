@@ -364,9 +364,9 @@ MonoBehaviour:
   x: 1
   y: 1.5
   velocidadBajarsePared: 5
-  salto: 273
-  izquierda: 276
-  derecha: 275
+  teclaSaltoParedes: 0
+  teclaIzqdaParedes: 0
+  teclaDchaParedes: 0
 --- !u!114 &39388671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,7 +578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   "da\xF1o": 1
   distancia: 1
-  tecla: 259
+  teclaRomperParedes: 0
 --- !u!114 &39388682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3893,7 +3893,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapPrefab: {fileID: 1406209461416940, guid: cb9a4f296d5ca06438c8030e6dbc6023, type: 2}
   menuIngame: {fileID: 530850112}
-  menuKey: 0
+  teclaMenu: 0
   resolucionesDropDown: {fileID: 46610007}
   pantallaDeCarga: {fileID: 1552655935}
 --- !u!4 &711785572
@@ -6638,9 +6638,9 @@ MonoBehaviour:
   x: 1
   y: 1.5
   velocidadBajarsePared: 5
-  salto: 119
-  izquierda: 97
-  derecha: 100
+  teclaSaltoParedes: 0
+  teclaIzqdaParedes: 0
+  teclaDchaParedes: 0
 --- !u!114 &1417738086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6877,7 +6877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   "da\xF1o": 1
   distancia: 1
-  tecla: 106
+  teclaRomperParedes: 0
 --- !u!114 &1417738098
 MonoBehaviour:
   m_ObjectHideFlags: 0
