@@ -6,7 +6,7 @@ public class ControladorJugador : MonoBehaviour
 {
     public KeyCode teclaRodar, teclaSaltar;
     public int alturaSalto, distanciaRecorrida;
-    public float VelocidadRodar, velocidadX; //cantidad de velocidad reducida en % (de 0 a 1)                    
+    public float VelocidadRodar, velocidadX; //cantidad de velocidad reducida en % (de 0 a 1)
     public string axisHorizontal, axisVertical;
 
     BoxCollider2D colliderCorre;
@@ -68,8 +68,8 @@ public class ControladorJugador : MonoBehaviour
                 }
             }
 
-            
-            
+
+
             //flip del personaje
             if(Input.GetAxis(axisHorizontal) > 0)
             {
@@ -84,7 +84,7 @@ public class ControladorJugador : MonoBehaviour
             bool parado = (Input.GetAxis(axisHorizontal) == 0);
             anim.SetBool("Moviendose", !parado);
 
-            //mov horizontal 
+            //mov horizontal
             if (Input.GetAxis(axisHorizontal) != 0 && !enPared)
             {
                 deltaX = Input.GetAxis(axisHorizontal);
@@ -101,7 +101,7 @@ public class ControladorJugador : MonoBehaviour
             {
                 audioSource.loop = false; //se pone el loop a false para que el sonido no se ejecute tras pararse
                 movHorizontal = false;
-            } 
+            }
 
             //salto
             if (Input.GetKey(teclaSaltar) && puedeSaltar)
@@ -123,24 +123,14 @@ public class ControladorJugador : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, velocidadY);
             salto = false;
         }
-        //mov horizontal  
+        //mov horizontal
         if (movHorizontal && !enPared)
             rb.velocity = new Vector2(deltaX * velocidadX, rb.velocity.y);
-    }
-
-    public KeyCode GetTeclaRodar()
-    {
-        return teclaRodar;
     }
 
     public void SetTeclaRodar(KeyCode nuevaTecla)
     {
         teclaRodar = nuevaTecla;
-    }
-
-    public KeyCode GetTeclaSaltar()
-    {
-        return teclaSaltar;
     }
 
     public void SetTeclaSaltar(KeyCode nuevaTecla)
@@ -201,7 +191,7 @@ public class ControladorJugador : MonoBehaviour
     /// <summary>
     /// Gestión de la velocidad del avatar
     /// </summary>
-    /// <param name="cambioVelocidad">multiplicador de velocidad</param>    
+    /// <param name="cambioVelocidad">multiplicador de velocidad</param>
     public void ModificaVelocidad(float cambioVelocidad)
     {
         velocidadX = cambioVelocidad * velocidadEstandar;

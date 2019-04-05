@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject mapPrefab, menuIngame;
-    public KeyCode teclaMenu;
+    public GameObject mapPrefab, menuIngame;    
     public Dropdown resolucionesDropDown;
     public Image pantallaDeCarga;
+
+    Dictionary<string, KeyCode> controlesJ1 = new Dictionary<string, KeyCode>();
+    Dictionary<string, KeyCode> controlesJ2 = new Dictionary<string, KeyCode>();
 
     Resolution[] resoluciones;
     UIManager UI;    
@@ -16,6 +18,7 @@ public class GameManager : MonoBehaviour
     GameObject mundoJ1, mundoJ2;
     Transform[] coordPoderesMapa;
     Transform transformJ1, transformJ2, puntoInicialJ1, puntoInicialJ2;
+    KeyCode teclaMenuJ1, teclaMenuJ2;
 
     //variables que indican el numero de rondas ganadas por cada jugador
     int rondasJugador1, rondasJugador2;
@@ -43,7 +46,7 @@ public class GameManager : MonoBehaviour
         //Ambos jugadores comienzan la partida con 0 rondas ganadas
         rondasJugador1 = rondasJugador2 = 0;
 
-        teclaMenu = KeyCode.Escape;   //<----- CAMBIAR ASIGNACIÓN AL TERMINAR
+        teclaMenuJ1 = KeyCode.Escape;   //<----- CAMBIAR ASIGNACIÓN AL TERMINAR
         resoluciones = Screen.resolutions;
         ConfiguraDropDownResoluciones();
 
@@ -56,24 +59,26 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(teclaMenu) && !enMenu)
+        if ((Input.GetKeyDown(teclaMenuJ1) && !enMenu) || (Input.GetKeyDown(teclaMenuJ2) && !enMenu))
         {
             PausaJuego();
         }
-        else if(Input.GetKeyDown(teclaMenu) && enMenu)
+        else if((Input.GetKeyDown(teclaMenuJ1) && enMenu) || (Input.GetKeyDown(teclaMenuJ2) && enMenu))
         {
             QuitaPausaJuego();
         }
     }
 
-    public KeyCode GetTeclaMenu()
+    public void SetTeclaMenu(KeyCode nuevaTecla, Player jugador)
     {
-        return teclaMenu;
+        if (jugador == Player.jugador1) teclaMenuJ1 = nuevaTecla;
+        else teclaMenuJ2 = nuevaTecla;
     }
 
-    public void SetTeclaMenu(KeyCode nuevaTecla)
+    public void SetControlesJugador(Dictionary<string, KeyCode> controlesJugador, Player jugador)
     {
-        teclaMenu = nuevaTecla;
+        if (jugador == Player.jugador1) controlesJ1 = controlesJugador;
+        else controlesJ2 = controlesJugador;
     }
 
     /// <summary>

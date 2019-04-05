@@ -6,8 +6,7 @@ using UnityEngine;
 public class PoderesManager : MonoBehaviour {
     
     public GameObject jugadorContrario, mundoContrario, muro, neblina, cuboHielo;         //GO para gestionar el jugador contrario. Prefabs de poderes.
-    public Player jugador;
-    public KeyCode teclaPoder;
+    public Player jugador;    
     public int gemasMax;
     public float segundosInversionControles, tiempoNeblina;
 
@@ -15,8 +14,9 @@ public class PoderesManager : MonoBehaviour {
     Transform[] coordsPoderesMapa;            //Vector para almacenar todas las coordenadas de poderes del mapa que se cargue en escena
     PerdidasControl pcJC;                           //Perdidas de control del jugador contrario
     ControladorJugador controlesJugadorContrario;   //Controles del jugador contrario
-    AudioSource audioSourceJC;         
-    
+    AudioSource audioSourceJC;
+    KeyCode teclaPoder;
+
     //Poderes[] poder = new Poderes[4]; //array de poderes
     Poderes[] poder = { Poderes.inversionControles, Poderes.cubito , Poderes.muro, Poderes.neblina}; //array de poderes
     Poderes poderUsar;
@@ -145,11 +145,6 @@ public class PoderesManager : MonoBehaviour {
 
         jugadorContrario.GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(6, false);
     }    
-
-    public KeyCode GetTeclaPoder()
-    {
-        return teclaPoder;
-    }
 
     public void SetTeclaPoder(KeyCode nuevaTecla)
     {
