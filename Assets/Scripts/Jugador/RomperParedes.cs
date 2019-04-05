@@ -9,6 +9,7 @@ public class RomperParedes : MonoBehaviour {
 
     AudioSource audioSource;
     KeyCode teclaRomperParedes;      //letra con la que usamos el pico
+    Animator anim;
 
     int capa;
     int auxDaño; // guarda el daño original
@@ -18,6 +19,7 @@ public class RomperParedes : MonoBehaviour {
         capa = LayerMask.GetMask("Muro");
         auxDaño = daño;
         audioSource = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
 	 }
 
 	 void Update ()
@@ -34,7 +36,15 @@ public class RomperParedes : MonoBehaviour {
                 pared.DañarPared(daño); //dañamos al muro
             }
         }
-  	 }
+
+        /*DESCOMENTAR PARA ANIMACIONES
+       //animacion de picar
+       if (Input.GetKeyDown(teclaRomperParedes))
+       {
+           anim.SetTrigger("Picar");
+       }
+       */
+     }
 
     /// <summary>
     /// aumentamos el daño del pico

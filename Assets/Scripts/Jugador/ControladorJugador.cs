@@ -62,16 +62,12 @@ public class ControladorJugador : MonoBehaviour
                     // AnimacionCorrer (anim.correr)
                 }
 
-                if (rodando)
-                {
-                    // AnimacionRodar (anim.rodar)
-                }
+                // AnimacionRodar (anim.rodar)
+                //anim.SetBool("Rodando", rodando); DESCOMENTAR PARA ANIMACIONES
             }
 
-
-
             //flip del personaje
-            if(Input.GetAxis(axisHorizontal) > 0)
+            if (Input.GetAxis(axisHorizontal) > 0)
             {
                 transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
             }
@@ -80,9 +76,11 @@ public class ControladorJugador : MonoBehaviour
                 transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
             }
 
+            /* DESCOMENTAR PARA ANIMACIONES
             //animacion de moverse
             bool parado = (Input.GetAxis(axisHorizontal) == 0);
-            //anim.SetBool("Moviendose", !parado);
+            anim.SetBool("Moviendose", !parado);
+            */
 
             //mov horizontal
             if (Input.GetAxis(axisHorizontal) != 0 && !enPared)
@@ -111,6 +109,9 @@ public class ControladorJugador : MonoBehaviour
                 audioSource.loop = false;
                 GameManager.instance.EjecutarSonido(audioSource, "Salto");
             }
+
+            //animacion de salto
+            //anim.SetBool("Saltando", salto);  DESCOMENTAR PARA ANIMACIONES
         }
     }
 

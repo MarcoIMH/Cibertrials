@@ -26,9 +26,11 @@ GameObject:
   - component: {fileID: 61843752102805936}
   - component: {fileID: 82236251551408532}
   - component: {fileID: 114521325214281900}
-  m_Layer: 0
+  - component: {fileID: 114953568582233438}
+  - component: {fileID: 114850438457082578}
+  m_Layer: 13
   m_Name: Jugador1(animaciones)
-  m_TagString: Untagged
+  m_TagString: jugador1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,7 +59,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1462456913666778}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.07, y: -0.06, z: 0}
+  m_LocalPosition: {x: 0.07, y: -0.09, z: 0}
   m_LocalScale: {x: 0.7, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4640496292167196}
@@ -70,7 +72,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1029601328892916}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -484, y: -32, z: 0}
+  m_LocalPosition: {x: -478.45, y: -32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4465466898657324}
@@ -109,9 +111,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.533746}
+  m_Offset: {x: 0.1, y: -1.1}
   serializedVersion: 2
-  m_Radius: 0.8068564
+  m_Radius: 0.55
 --- !u!61 &61843752102805936
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -286,14 +288,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8efa8ec8ad985354e9220d08e339baeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teclaRodar: 115
-  teclaSaltar: 119
   alturaSalto: 5
   distanciaRecorrida: 15
   VelocidadRodar: 0.8
   velocidadX: 20
   axisHorizontal: axisHorizontal
   axisVertical: axisVertical
+--- !u!114 &114850438457082578
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1029601328892916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f5983dcd43149d4283c62c1158ac93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipoJugador: 0
+  teclaSaltar: 119
+  teclaRodar: 115
+  teclaPoder: 104
+  teclaRomperParedes: 106
+  teclaIzqdaParedes: 97
+  teclaDchaParedes: 100
+  teclaMenu: 27
 --- !u!114 &114884067244154498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -305,6 +324,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e58511008ab6c48ba5786b2f3a3264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114953568582233438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1029601328892916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85dc88f22f4328449bb7e6816105a9c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "da\xF1o": 1
+  distancia: 1
 --- !u!212 &212364738441271556
 SpriteRenderer:
   m_ObjectHideFlags: 1
