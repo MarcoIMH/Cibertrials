@@ -23,14 +23,14 @@ public class RomperParedes : MonoBehaviour {
 	 }
 
 	 void Update ()
-     {
-        RaycastHit2D contacto = Physics2D.Raycast(transform.position, transform.right, distancia, capa);
+     {        
+        RaycastHit2D contacto = Physics2D.Raycast(transform.position, transform.right * transform.localScale.x, distancia, capa);
 
         if (contacto.collider != null) // si colisionamos con algo
         {
             Pared pared = contacto.collider.gameObject.GetComponent<Pared>();
 
-            if (pared != null && Input.GetKeyDown(teclaRomperParedes))//si ese algo es el componente Wall
+            if (pared != null && Input.GetKeyDown(teclaRomperParedes))//si ese algo es el componente Pared
             {
                 GameManager.instance.EjecutarSonido(audioSource, "Picar");
                 pared.DañarPared(daño); //dañamos al muro
