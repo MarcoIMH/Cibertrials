@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ControladorJugador : MonoBehaviour
-{
-    public KeyCode teclaRodar, teclaSaltar;
+{    
     public int alturaSalto, distanciaRecorrida;
     public float VelocidadRodar, velocidadX; //cantidad de velocidad reducida en % (de 0 a 1)
     public string axisHorizontal, axisVertical;
@@ -14,6 +13,7 @@ public class ControladorJugador : MonoBehaviour
     Rigidbody2D rb;
     AudioSource audioSource;
     Animator anim;
+    KeyCode teclaRodar, teclaSaltar;
     float deltaX, g, velocidadY, velocidadEstandar;       //velocidadEstandar = variable auxiliar donde guardamos la velocidad original
     bool salto, estadoControles = true, rodando, puedeSaltar,
          enTubería = false, enPared = false, movHorizontal = false;
@@ -82,7 +82,7 @@ public class ControladorJugador : MonoBehaviour
 
             //animacion de moverse
             bool parado = (Input.GetAxis(axisHorizontal) == 0);
-            anim.SetBool("Moviendose", !parado);
+            //anim.SetBool("Moviendose", !parado);
 
             //mov horizontal
             if (Input.GetAxis(axisHorizontal) != 0 && !enPared)
