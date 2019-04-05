@@ -5,7 +5,7 @@ using UnityEngine;
 public class ControlesManager : MonoBehaviour {
 
     public Player tipoJugador;
-    public KeyCode teclaSaltar, teclaRodar, teclaPoder, teclaRomperParedes, teclaSaltoParedes, teclaIzqdaParedes, teclaDchaParedes, teclaMenu;
+    public KeyCode teclaSaltar, teclaRodar, teclaPoder, teclaRomperParedes, teclaIzqdaParedes, teclaDchaParedes, teclaMenu;
 
     Dictionary<string, KeyCode> controles = new Dictionary<string, KeyCode>();
     bool cargaInicial = true;
@@ -27,7 +27,6 @@ public class ControlesManager : MonoBehaviour {
         controles.Add("Rodar", teclaRodar);
         controles.Add("Poder", teclaPoder);
         controles.Add("RomperParedes", teclaRomperParedes);
-        controles.Add("SaltoParedes", teclaSaltoParedes);
         controles.Add("IzqdaParedes", teclaIzqdaParedes);
         controles.Add("DchaParedes", teclaDchaParedes);
         controles.Add("Menu", teclaMenu);
@@ -42,7 +41,6 @@ public class ControlesManager : MonoBehaviour {
 
         SetControlRomperParedes(teclaRomperParedes);
 
-        SetControlSaltoParedes(teclaSaltoParedes);
         SetControlIzqdaParedes(teclaIzqdaParedes);
         SetControlDchaParedes(teclaDchaParedes);
 
@@ -57,6 +55,8 @@ public class ControlesManager : MonoBehaviour {
         if (GetComponent<ControladorJugador>() != null)
             GetComponent<ControladorJugador>().SetTeclaSaltar(nuevaTecla);
         if(!cargaInicial) controles["Saltar"] = nuevaTecla;
+
+        SetControlSaltoParedes(nuevaTecla);
     }
 
     void SetControlRodar(KeyCode nuevaTecla)
@@ -84,7 +84,6 @@ public class ControlesManager : MonoBehaviour {
     {
         if (GetComponent<SaltoParedes>() != null)
             GetComponent<SaltoParedes>().SetTeclaSaltoParedes(nuevaTecla);
-        if (!cargaInicial) controles["SaltoParedes"] = nuevaTecla;
     }
 
     void SetControlIzqdaParedes(KeyCode nuevaTecla)
@@ -120,7 +119,6 @@ public class ControlesManager : MonoBehaviour {
             case "Rodar": SetControlRodar(nuevaTecla); break;
             case "Poder": SetControlPoder(nuevaTecla); break;
             case "RomperParedes": SetControlRomperParedes(nuevaTecla); break;
-            case "SaltoParedes": SetControlSaltoParedes(nuevaTecla); break;
             case "IzqdaParedes": SetControlIzqdaParedes(nuevaTecla); break;
             case "DchaParedes": SetControlDchaParedes(nuevaTecla); break;
             case "Menu": SetControlMenu(nuevaTecla); break;

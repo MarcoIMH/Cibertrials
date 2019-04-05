@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject mapPrefab, menuIngame;    
     public Dropdown resolucionesDropDown;
     public Image pantallaDeCarga;
+    public MenuControles menuControles;
 
     Dictionary<string, KeyCode> controlesJ1 = new Dictionary<string, KeyCode>();
     Dictionary<string, KeyCode> controlesJ2 = new Dictionary<string, KeyCode>();
@@ -61,6 +62,9 @@ public class GameManager : MonoBehaviour
     {
         if ((Input.GetKeyDown(teclaMenuJ1) && !enMenu) || (Input.GetKeyDown(teclaMenuJ2) && !enMenu))
         {
+            if (Input.GetKeyDown(teclaMenuJ1)) menuControles.AbreMenuconfiguracion(controlesJ1, Player.jugador1);
+            else menuControles.AbreMenuconfiguracion(controlesJ2, Player.jugador2);
+            
             PausaJuego();
         }
         else if((Input.GetKeyDown(teclaMenuJ1) && enMenu) || (Input.GetKeyDown(teclaMenuJ2) && enMenu))

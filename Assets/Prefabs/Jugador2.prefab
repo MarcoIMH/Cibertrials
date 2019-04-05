@@ -547,7 +547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f5983dcd43149d4283c62c1158ac93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tipoJugador: 0
+  tipoJugador: 1
   teclaSaltar: 273
   teclaRodar: 274
   teclaPoder: 258
@@ -555,7 +555,7 @@ MonoBehaviour:
   teclaSaltoParedes: 273
   teclaIzqdaParedes: 276
   teclaDchaParedes: 275
-  teclaMenu: 300
+  teclaMenu: 261
 --- !u!114 &114208912942912708
 MonoBehaviour:
   m_ObjectHideFlags: 1
