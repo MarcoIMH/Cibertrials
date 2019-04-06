@@ -57,13 +57,11 @@ public class ControladorJugador : MonoBehaviour
                     rodando = false;
                     colliderCorre.enabled = true;
                     colliderRueda.enabled = false;
-                    velocidadX = velocidadEstandar;
-
-                    // AnimacionCorrer (anim.correr)
+                    velocidadX = velocidadEstandar;                    
                 }
 
-                // AnimacionRodar (anim.rodar)
-                //anim.SetBool("Rodando", rodando); DESCOMENTAR PARA ANIMACIONES
+                // AnimacionRodar 
+                anim.SetBool("Rodando", rodando);
             }
 
             //flip del personaje
@@ -75,13 +73,11 @@ public class ControladorJugador : MonoBehaviour
             {
                 transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
             }
-
-            /* DESCOMENTAR PARA ANIMACIONES
+           
             //animacion de moverse
             bool parado = (Input.GetAxis(axisHorizontal) == 0);
             anim.SetBool("Moviendose", !parado);
-            */
-
+            
             //mov horizontal
             if (Input.GetAxis(axisHorizontal) != 0 && !enPared)
             {
@@ -111,7 +107,7 @@ public class ControladorJugador : MonoBehaviour
             }
 
             //animacion de salto
-            //anim.SetBool("Saltando", salto);  DESCOMENTAR PARA ANIMACIONES
+            anim.SetBool("Saltando", salto); 
         }
     }
 
@@ -221,7 +217,9 @@ public class ControladorJugador : MonoBehaviour
 
     /// <summary>
     /// Método para resetear valores de movimiento y pone el loop del AS a false para
-    /// que no se ejecute el sonido de caminar tras morir
+    /// que no se ejecute el sonido de caminar tras morir.
+    /// Tambien hacemos que la animaciones de moverse y rodar paren y ejecutamos la de idle
+    /// para que tras ser estuneado o "morir" solo se ejecute la de idle
     /// </summary>
     public void ReseteaStats()
     {
@@ -230,6 +228,10 @@ public class ControladorJugador : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.angularVelocity = 0f;
         audioSource.loop = false;
+        anim.SetBool("Moviendose", false);
+        anim.Play("Parado");
+        rodando = false;
+        anim.SetBool("Rodando", rodando);
     }
 
     /// <summary>

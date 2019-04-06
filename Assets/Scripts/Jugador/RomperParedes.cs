@@ -36,14 +36,12 @@ public class RomperParedes : MonoBehaviour {
                 pared.DañarPared(daño); //dañamos al muro
             }
         }
-
-        /*DESCOMENTAR PARA ANIMACIONES
+        
        //animacion de picar
        if (Input.GetKeyDown(teclaRomperParedes))
        {
            anim.SetTrigger("Picar");
-       }
-       */
+       }       
      }
 
     /// <summary>

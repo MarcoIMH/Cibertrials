@@ -67,6 +67,7 @@ GameObject:
   - component: {fileID: 114678338870102720}
   - component: {fileID: 114206272265926642}
   - component: {fileID: 82934579120432516}
+  - component: {fileID: 95209456069103222}
   m_Layer: 13
   m_Name: Jugador2
   m_TagString: jugador2
@@ -321,7 +322,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1493218513661150}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.19, z: 0}
   m_LocalScale: {x: 0.7, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4167247736081942}
@@ -359,9 +360,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.533746}
+  m_Offset: {x: 0.1315613, y: -1.11685}
   serializedVersion: 2
-  m_Radius: 0.8068564
+  m_Radius: 0.5811596
 --- !u!61 &61040089411126532
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -399,18 +400,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.015342712, y: -0.044653416}
+  m_Offset: {x: -0.015342712, y: -0.12125778}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.6896552, y: 2.9655173}
+    oldSize: {x: 1.7655172, y: 3.5310345}
     newSize: {x: 4.28, y: 3.68}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5919952, y: 2.8762102}
+  m_Size: {x: 1.5919952, y: 3.029419}
   m_EdgeRadius: 0
 --- !u!82 &82934579120432516
 AudioSource:
@@ -431,7 +432,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.0350075
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -507,6 +508,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &95209456069103222
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1191914128121560}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 75f5195ef01b99549842a7ad54def1e2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!95 &95259124814158826
 Animator:
   serializedVersion: 3
@@ -552,7 +571,6 @@ MonoBehaviour:
   teclaRodar: 274
   teclaPoder: 258
   teclaRomperParedes: 259
-  teclaSaltoParedes: 273
   teclaIzqdaParedes: 276
   teclaDchaParedes: 275
   teclaMenu: 261
@@ -1100,8 +1118,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300002, guid: 1e6c5be3e75f4be44baffc5066345c44, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: c64194212b847d241b9bbbe54403b476, type: 3}
+  m_Color: {r: 0.08911657, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
