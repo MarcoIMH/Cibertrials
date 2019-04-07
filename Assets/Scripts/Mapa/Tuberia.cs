@@ -23,7 +23,6 @@ public class Tuberia : MonoBehaviour
     {
         if (caida == true)          //El tubo se desprende y comienza la caida libre rotando un poco
         {
-            transform.Rotate(0f, 0f, -3f * Time.deltaTime);
             transform.Translate(Vector2.down * Time.deltaTime * velCaida);
         }
     }
