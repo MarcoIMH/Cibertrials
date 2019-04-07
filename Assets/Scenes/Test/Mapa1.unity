@@ -262,6 +262,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1191914128121560, guid: 7d468191650ee5c4bbb0a8c6372203c1,
     type: 2}
   m_PrefabInternal: {fileID: 2132661069}
+--- !u!114 &39388671 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114206272265926642, guid: 7d468191650ee5c4bbb0a8c6372203c1,
+    type: 2}
+  m_PrefabInternal: {fileID: 2132661069}
+  m_Script: {fileID: 11500000, guid: 6f5983dcd43149d4283c62c1158ac93d, type: 3}
 --- !u!4 &39388680 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4167247736081942, guid: 7d468191650ee5c4bbb0a8c6372203c1,
@@ -601,7 +607,7 @@ GameObject:
   - component: {fileID: 287345301}
   - component: {fileID: 287345300}
   m_Layer: 0
-  m_Name: Saltar
+  m_Name: SeccionSaltar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3293,7 +3299,7 @@ GameObject:
   - component: {fileID: 792536766}
   - component: {fileID: 792536765}
   m_Layer: 0
-  m_Name: RomperParedes
+  m_Name: SeccionRomperParedes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3884,7 +3890,7 @@ GameObject:
   - component: {fileID: 856865584}
   - component: {fileID: 856865583}
   m_Layer: 0
-  m_Name: Button
+  m_Name: RomperParedes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3947,7 +3953,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 856865584}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1885855828}
+        m_MethodName: CambiaTecla
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 856865581}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &856865584
@@ -4134,7 +4151,7 @@ GameObject:
   - component: {fileID: 913660111}
   - component: {fileID: 913660110}
   m_Layer: 0
-  m_Name: Button
+  m_Name: IzqdaParedes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4197,7 +4214,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 913660111}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1885855828}
+        m_MethodName: CambiaTecla
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 913660108}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &913660111
@@ -5413,7 +5441,7 @@ GameObject:
   - component: {fileID: 1055632163}
   - component: {fileID: 1055632162}
   m_Layer: 0
-  m_Name: Button
+  m_Name: Rodar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5476,7 +5504,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1055632163}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1885855828}
+        m_MethodName: CambiaTecla
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1055632160}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1055632163
@@ -5593,7 +5632,7 @@ GameObject:
   - component: {fileID: 1129147970}
   - component: {fileID: 1129147969}
   m_Layer: 0
-  m_Name: Rodar
+  m_Name: SeccionRodar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5738,7 +5777,7 @@ GameObject:
   - component: {fileID: 1149980147}
   - component: {fileID: 1149980146}
   m_Layer: 0
-  m_Name: IzqdaParedes
+  m_Name: SeccionIzqdaParedes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7110,6 +7149,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1614130059403480, guid: a12bd5c66affba644a249902cce81f07,
     type: 2}
   m_PrefabInternal: {fileID: 1605015360}
+--- !u!114 &1417738087 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114368847956363634, guid: a12bd5c66affba644a249902cce81f07,
+    type: 2}
+  m_PrefabInternal: {fileID: 1605015360}
+  m_Script: {fileID: 11500000, guid: 6f5983dcd43149d4283c62c1158ac93d, type: 3}
 --- !u!4 &1417738096 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4072256535831604, guid: a12bd5c66affba644a249902cce81f07,
@@ -7340,7 +7385,7 @@ GameObject:
   - component: {fileID: 1465209294}
   - component: {fileID: 1465209293}
   m_Layer: 0
-  m_Name: Button
+  m_Name: Poder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7403,7 +7448,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1465209294}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1885855828}
+        m_MethodName: CambiaTecla
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1465209291}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1465209294
@@ -8368,7 +8424,7 @@ GameObject:
   - component: {fileID: 1714217924}
   - component: {fileID: 1714217923}
   m_Layer: 0
-  m_Name: Button
+  m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8431,7 +8487,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1714217924}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1885855828}
+        m_MethodName: CambiaTecla
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1714217921}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1714217924
@@ -8513,7 +8580,7 @@ GameObject:
   - component: {fileID: 1753261044}
   - component: {fileID: 1753261043}
   m_Layer: 0
-  m_Name: DchaParedes
+  m_Name: SeccionDchaParedes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8590,7 +8657,7 @@ GameObject:
   - component: {fileID: 1773369328}
   - component: {fileID: 1773369327}
   m_Layer: 0
-  m_Name: Button
+  m_Name: DchaParedes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8653,7 +8720,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1773369328}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1885855828}
+        m_MethodName: CambiaTecla
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1773369325}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1773369328
@@ -9021,8 +9099,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930a2e319e1007c44ae3abf861fd57a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlesManagerJ1: {fileID: 0}
-  controlesManagerJ2: {fileID: 0}
+  controlesManagerJ1: {fileID: 1417738087}
+  controlesManagerJ2: {fileID: 39388671}
   cabecera: {fileID: 968110625}
   saltar: {fileID: 1884879652}
   rodar: {fileID: 930528175}
@@ -9214,7 +9292,7 @@ GameObject:
   - component: {fileID: 1907905506}
   - component: {fileID: 1907905505}
   m_Layer: 0
-  m_Name: Poder
+  m_Name: SeccionPoder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9366,7 +9444,7 @@ GameObject:
   - component: {fileID: 1920048474}
   - component: {fileID: 1920048473}
   m_Layer: 0
-  m_Name: Button
+  m_Name: Saltar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9429,7 +9507,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1920048474}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1885855828}
+        m_MethodName: CambiaTecla
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1920048471}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1920048474
@@ -10037,7 +10126,7 @@ GameObject:
   - component: {fileID: 2003156820}
   - component: {fileID: 2003156819}
   m_Layer: 0
-  m_Name: Menu
+  m_Name: SeccionMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
