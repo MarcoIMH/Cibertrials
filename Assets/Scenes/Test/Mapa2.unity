@@ -1386,9 +1386,9 @@ MonoBehaviour:
   - nombre: PowerUp
     sonido: {fileID: 8300000, guid: 3c83d03e77960444eb9307dc277e54dc, type: 3}
   - nombre: Llave
-    sonido: {fileID: 8300000, guid: 03f0fb3e167600e4f9f547f0ebc0c07b, type: 3}
+    sonido: {fileID: 8300000, guid: 0c52f06aa9625b742bfd769adf0a3f2a, type: 3}
   - nombre: Puerta
-    sonido: {fileID: 8300000, guid: 03f0fb3e167600e4f9f547f0ebc0c07b, type: 3}
+    sonido: {fileID: 8300000, guid: ddbfe44ac72209e4f99ebc1e172be1d5, type: 3}
   - nombre: Morir
     sonido: {fileID: 8300000, guid: 42d7d24a1c4349d4aba841fc97161a0f, type: 3}
   - nombre: Ganar
@@ -2915,10 +2915,6 @@ Prefab:
     - target: {fileID: 4211789390174438, guid: e247009ba68a8ad468009a16ad96ba97, type: 2}
       propertyPath: m_RootOrder
       value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4278713418022596, guid: e247009ba68a8ad468009a16ad96ba97, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.47629896
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e247009ba68a8ad468009a16ad96ba97, type: 2}
