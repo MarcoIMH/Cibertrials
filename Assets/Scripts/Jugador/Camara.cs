@@ -18,7 +18,7 @@ public class Camara : MonoBehaviour
         if (transformJugador != null)//si el jugador esta en escena
         {
             //la camara sigue al jugador usando su posicion mas los offsets
-            transform.position = new Vector3(transformJugador.position.x + distanciaX, transformJugador.position.y + distanciaY, transformJugador.position.z);
+            transform.position = new Vector3(transformJugador.position.x + distanciaX, transformJugador.position.y + distanciaY, transformJugador.position.z-10);
         }
     }
 }
