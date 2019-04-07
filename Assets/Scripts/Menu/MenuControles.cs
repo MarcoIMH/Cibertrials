@@ -26,7 +26,7 @@ public class MenuControles : MonoBehaviour {
         this.controles = controles;
     }
 
-    void CargaMenuControles()
+    void ConfiguraTextos()
     {
         saltar.text = controles["Saltar"].ToString();
         rodar.text = controles["Rodar"].ToString();
@@ -37,10 +37,10 @@ public class MenuControles : MonoBehaviour {
         menu.text = controles["Menu"].ToString();
     }
 
-    public void AbreMenuconfiguracion(Dictionary<string, KeyCode> controles, Player tipoJugador)
+    public void CargaMenuControles(Dictionary<string, KeyCode> controles, Player tipoJugador)
     {
         SetDiccionarioJugador(controles);
-        CargaMenuControles();
+        ConfiguraTextos();
 
         if (tipoJugador == Player.jugador1) cabecera.text = "CONTROLES JUGADOR 1";
         else cabecera.text = "CONTROLES JUGADOR 2";

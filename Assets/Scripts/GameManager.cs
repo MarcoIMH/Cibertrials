@@ -4,26 +4,33 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
-{
-    public GameObject mapPrefab, menuIngame;    
-    public Dropdown resolucionesDropDown;
+{    
+    public GameObject mapPrefab, menuIngame;   
     public Image pantallaDeCarga;
     public MenuControles menuControles;
 
     Dictionary<string, KeyCode> controlesJ1 = new Dictionary<string, KeyCode>();
     Dictionary<string, KeyCode> controlesJ2 = new Dictionary<string, KeyCode>();
 
-    Resolution[] resoluciones;
+    struct Graficos
+    {
+        public bool pantallaCompleta;
+        public int indiceGraficos, indiceResolucion;
+        public Resolution resolucion;
+    }
+
+    Graficos configuracionGraficos;
+
+    Resolution resolucion;
     UIManager UI;    
     AudioManager audioManager;
     GameObject mundoJ1, mundoJ2;
     Transform[] coordPoderesMapa;
     Transform transformJ1, transformJ2, puntoInicialJ1, puntoInicialJ2;
     KeyCode teclaMenuJ1, teclaMenuJ2;
-
-    //variables que indican el numero de rondas ganadas por cada jugador
+    
     int rondasJugador1, rondasJugador2;
-    float volumen=1;
+    float volumen;
 
     string mapa="Mapa1";
 
@@ -45,13 +52,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //Ambos jugadores comienzan la partida con 0 rondas ganadas
-        rondasJugador1 = rondasJugador2 = 0;
-
-        teclaMenuJ1 = KeyCode.Escape;   //<----- CAMBIAR ASIGNACIÓN AL TERMINAR
-        resoluciones = Screen.resolutions;
-        ConfiguraDropDownResoluciones();
+        rondasJugador1 = rondasJugador2 = 0;       
 
         PantallaDeCarga(1.5f);
+
+        volumen = 1;
 
         Invoke("CargaMapaEnMundos", 0.05f);     //Preguntar a Guille sobre como podría hacer y ordenar el Script Execution Order para no necesitar estos invokes.
         Invoke("ColocaJugadores", 0.07f);       //De ser así se podrían quitar y hacer que la carga fuera "limpia" al iniciar la ejecución.
@@ -62,9 +67,9 @@ public class GameManager : MonoBehaviour
     {
         if ((Input.GetKeyDown(teclaMenuJ1) && !enMenu) || (Input.GetKeyDown(teclaMenuJ2) && !enMenu))
         {
-            if (Input.GetKeyDown(teclaMenuJ1)) menuControles.AbreMenuconfiguracion(controlesJ1, Player.jugador1);
-            else menuControles.AbreMenuconfiguracion(controlesJ2, Player.jugador2);
-            
+            if (Input.GetKeyDown(teclaMenuJ1)) menuControles.CargaMenuControles(controlesJ1, Player.jugador1);
+            else menuControles.CargaMenuControles(controlesJ2, Player.jugador2);
+
             PausaJuego();
         }
         else if((Input.GetKeyDown(teclaMenuJ1) && enMenu) || (Input.GetKeyDown(teclaMenuJ2) && enMenu))
@@ -116,7 +121,6 @@ public class GameManager : MonoBehaviour
         UI.ActualizarLlave(jugador, activado);
     }
 
-
     /// <summary>
     /// Recogemos UI
     /// </summary>
@@ -127,38 +131,20 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Método para controlar el juego en pantalla completa o no. Trabaja con el Toogle de MenuConfiguracionIngame (interfaz Unity). SE PUEDE USAR PARA EL MENÚ OUTGAME.
-    /// </summary>
-    /// <param name="pantallaCompleta"></param>
-    public void SetPantallaCompleta(bool pantallaCompleta)
-    {
-        Screen.fullScreen = pantallaCompleta;
-    }
-
-    /// <summary>
-    /// Método para controlar los gráficos del juego. Trabaja con el DropDown de MenuConfiguracionIngame (interfaz Unity). SE PUEDE USAR PARA EL MENÚ OUTGAME TAMBIÉN.
-    /// </summary>
-    /// <param name="indiceGraficos"></param>
-    public void SetNivelGraficos(int indiceGraficos)
-    {
-        QualitySettings.SetQualityLevel(indiceGraficos);
-    }
-
-    /// <summary>
-    /// Configura el tamaño de la resolución de pantalla. Trabaja con el DropDown de MenuConfiguracionIngame (interfaz Unity). SE PUEDE USAR PARA EL MENÚ OUTGAME TAMBIÉN.
-    /// </summary>
-    public void SetResolucion(int indiceResolucion)
-    {
-        Screen.SetResolution(resoluciones[indiceResolucion].width, resoluciones[indiceResolucion].height, Screen.fullScreen);
-    }
-
-    /// <summary>
-    /// Método para gestionar el volúmen de los sonidos. Trabaja con el slider de MenuConfiguracionIngame (interfaz UnitY). SE PUEDE USAR PARA EL MENÚ OUTGAME TAMBIÉN.
+    /// Método para almacenar el volúmen de los sonidos.  
     /// </summary>
     /// <param name="vol"></param>
     public void SetVolumen(float vol)
     {
         volumen = vol;
+    }
+
+    public void GuardaConfiguracionGraficos(bool pantallaCompleta, int indiceGraficos, int indiceResolucion, Resolution resolucionActual)
+    {
+        configuracionGraficos.pantallaCompleta = pantallaCompleta;
+        configuracionGraficos.indiceGraficos = indiceGraficos;
+        configuracionGraficos.indiceResolucion = indiceResolucion;
+        configuracionGraficos.resolucion = resolucionActual;
     }
 
     /// <summary>
@@ -299,7 +285,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Restablece el juego de su pausa y cierra el menú.
     /// </summary>
-    void QuitaPausaJuego()
+    public void QuitaPausaJuego()
     {
         enMenu = false;
         Time.timeScale = 1;
@@ -326,31 +312,7 @@ public class GameManager : MonoBehaviour
         if (cont != null) cont.SetEstadoControlador(est);
         mundo.SetActive(est);
     }
-
-    /// <summary>
-    /// Método para automatizar el paso de las distintas resoluciones existentes al dropdown de resoluciones.
-    /// </summary>
-    void ConfiguraDropDownResoluciones()
-    {
-        resolucionesDropDown.ClearOptions();
-        List<string> opciones = new List<string>();
-
-        int resolucionActual = 0;
-        for(int x = 0; x < resoluciones.Length; x++)
-        {
-            string opcion = resoluciones[x].width + " x " + resoluciones[x].height;
-            opciones.Add(opcion);
-
-            if (resoluciones[x].width == Screen.currentResolution.width &&
-                resoluciones[x].height == Screen.currentResolution.height)
-                resolucionActual = x;
-        }
-
-        resolucionesDropDown.AddOptions(opciones);
-        resolucionesDropDown.value = resolucionActual;
-        resolucionesDropDown.RefreshShownValue();
-    }
-
+    
     /// <summary>
     /// Activa la pantalla de carga y la desactiva al rato
     /// </summary>
