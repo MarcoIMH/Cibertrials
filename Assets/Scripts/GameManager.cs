@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     float volumen;
 
     string mapa="Mapa1";
+    int mapaActual = 1;
 
     bool hayGanador=false, enMenu=false;
 
@@ -47,7 +48,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //Ambos jugadores comienzan la partida con 0 rondas ganadas
-        rondasJugador1 = rondasJugador2 = 0;       
+        rondasJugador1 = 0;
+        rondasJugador2 = 0;
 
         PantallaDeCarga(1.5f);
 
@@ -93,6 +95,15 @@ public class GameManager : MonoBehaviour
             }
             else rondasJugador2++;
             hayGanador = true;
+        }
+        else if(hayGanador && mapaActual < 3)
+        {
+            mapaActual++;
+            pantallaDeCarga.gameObject.GetComponent<PantallaDeCarga>().MostrarResultados(rondasJugador1, rondasJugador2, mapaActual, 4f);
+            PantallaDeCarga(6f);
+
+            hayGanador = false;
+            //HACER LLAMADA A LA SIGUIENTE ESCENA AQUÍ
         }
     }
 
@@ -153,23 +164,6 @@ public class GameManager : MonoBehaviour
     public void EjecutarSonido(string nombreSonido, int eleccion)
     {
         audioManager.EjecutarSonido(nombreSonido, eleccion, volumen);
-    }
-
-    /// <summary>
-    /// Getter para informar del mapa que se está gestionando a los componentes que lo necesiten.
-    /// </summary>
-    /// <returns></returns>
-    public string GetNombreEscena()
-    {
-        return mapa;
-    }
-
-    /// <summary>
-    /// Setter para configurar el mapa que se va a gestionar. LLAMAR A ESTE MÉTODO CUANDO SE HAGA EL DE CARGAR ESCENA
-    /// </summary>
-    public void SetNombreEscena(string map)
-    {
-        mapa = map;
     }
 
     /// <summary>
