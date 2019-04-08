@@ -5,15 +5,13 @@ using UnityEngine;
 public class ControlesManager : MonoBehaviour {
 
     public Player tipoJugador;
-    public KeyCode teclaSaltar, teclaRodar, teclaPoder, teclaRomperParedes, teclaIzqdaParedes, teclaDchaParedes, teclaMenu;
 
     Dictionary<string, KeyCode> controles = new Dictionary<string, KeyCode>();
     bool cargaInicial = true;
 
     // Use this for initialization
     void Start () {
-        CreaDiccionarioControles();
-        AsignaControlesInicialesJugador();
+        Invoke("AsignaControlesInicialesJugador", 0.1f);
 	}
 	
 	// Update is called once per frame
@@ -21,32 +19,22 @@ public class ControlesManager : MonoBehaviour {
 		
 	}
 
-    void CreaDiccionarioControles()
-    {
-        controles.Add("Saltar", teclaSaltar);
-        controles.Add("Rodar", teclaRodar);
-        controles.Add("Poder", teclaPoder);
-        controles.Add("RomperParedes", teclaRomperParedes);
-        controles.Add("IzqdaParedes", teclaIzqdaParedes);
-        controles.Add("DchaParedes", teclaDchaParedes);
-        controles.Add("Menu", teclaMenu);
-    }
-
     void AsignaControlesInicialesJugador()
     {
-        SetControlSaltar(teclaSaltar);
-        SetControlRodar(teclaRodar);
+        controles = Controles.instance.GetControlesJugador(tipoJugador);
 
-        SetControlPoder(teclaPoder);
+        SetControlSaltar(controles["Saltar"]);
+        SetControlRodar(controles["Rodar"]);
 
-        SetControlRomperParedes(teclaRomperParedes);
+        SetControlPoder(controles["Poder"]);
 
-        SetControlIzqdaParedes(teclaIzqdaParedes);
-        SetControlDchaParedes(teclaDchaParedes);
+        SetControlRomperParedes(controles["RomperParedes"]);
 
-        SetControlMenu(teclaMenu);
+        SetControlIzqdaParedes(controles["IzqdaParedes"]);
+        SetControlDchaParedes(controles["DchaParedes"]);
 
-        InformaGameManager();
+        SetControlMenu(controles["Menu"]);
+
         cargaInicial = false;
     }
 
@@ -54,6 +42,7 @@ public class ControlesManager : MonoBehaviour {
     {
         if (GetComponent<ControladorJugador>() != null)
             GetComponent<ControladorJugador>().SetTeclaSaltar(nuevaTecla);
+
         if(!cargaInicial) controles["Saltar"] = nuevaTecla;
 
         SetControlSaltoParedes(nuevaTecla);
@@ -63,6 +52,7 @@ public class ControlesManager : MonoBehaviour {
     {
         if (GetComponent<ControladorJugador>() != null)
             GetComponent<ControladorJugador>().SetTeclaRodar(nuevaTecla);
+
         if (!cargaInicial) controles["Rodar"] = nuevaTecla;
     }
 
@@ -70,6 +60,7 @@ public class ControlesManager : MonoBehaviour {
     {
         if (GetComponent<PoderesManager>() != null)
             GetComponent<PoderesManager>().SetTeclaPoder(nuevaTecla);
+
         if (!cargaInicial) controles["Poder"] = nuevaTecla;
     }
 
@@ -77,6 +68,7 @@ public class ControlesManager : MonoBehaviour {
     {
         if (GetComponent<RomperParedes>() != null)
             GetComponent<RomperParedes>().SetTeclaRomperParedes(nuevaTecla);
+
         if (!cargaInicial) controles["RomperParedes"] = nuevaTecla;
     }
 
@@ -90,6 +82,7 @@ public class ControlesManager : MonoBehaviour {
     {
         if (GetComponent<SaltoParedes>() != null)
             GetComponent<SaltoParedes>().SetTeclaIzqdaParedes(nuevaTecla);
+
         if (!cargaInicial) controles["IzqdaParedes"] = nuevaTecla;
     }
 
@@ -97,18 +90,20 @@ public class ControlesManager : MonoBehaviour {
     {
         if (GetComponent<SaltoParedes>() != null)
             GetComponent<SaltoParedes>().SetTeclaDchaParedes(nuevaTecla);
+
         if (!cargaInicial) controles["DchaParedes"] = nuevaTecla;
     }
 
     void SetControlMenu(KeyCode nuevaTecla)
     {
         GameManager.instance.SetTeclaMenu(nuevaTecla, tipoJugador);
+
         if (!cargaInicial) controles["Menu"] = nuevaTecla;
     }
 
-    void InformaGameManager()
+    void InformaControles()
     {
-        GameManager.instance.SetControlesJugador(controles, tipoJugador);
+        Controles.instance.SetControlesJugador(controles, tipoJugador);
     }
 
     public void CambiaControlJugador(string nombreControl, KeyCode nuevaTecla)
@@ -123,6 +118,6 @@ public class ControlesManager : MonoBehaviour {
             case "DchaParedes": SetControlDchaParedes(nuevaTecla); break;
             case "Menu": SetControlMenu(nuevaTecla); break;
         }
-        InformaGameManager();
+        InformaControles();
     }
 }

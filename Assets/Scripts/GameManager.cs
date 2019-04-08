@@ -9,19 +9,14 @@ public class GameManager : MonoBehaviour
     public Image pantallaDeCarga;
     public MenuControles menuControles;
 
-    Dictionary<string, KeyCode> controlesJ1 = new Dictionary<string, KeyCode>();
-    Dictionary<string, KeyCode> controlesJ2 = new Dictionary<string, KeyCode>();
-
     struct Graficos
     {
         public bool pantallaCompleta;
         public int indiceGraficos, indiceResolucion;
         public Resolution resolucion;
     }
-
     Graficos configuracionGraficos;
-
-    Resolution resolucion;
+    
     UIManager UI;    
     AudioManager audioManager;
     GameObject mundoJ1, mundoJ2;
@@ -67,8 +62,8 @@ public class GameManager : MonoBehaviour
     {
         if ((Input.GetKeyDown(teclaMenuJ1) && !enMenu) || (Input.GetKeyDown(teclaMenuJ2) && !enMenu))
         {
-            if (Input.GetKeyDown(teclaMenuJ1)) menuControles.CargaMenuControles(controlesJ1, Player.jugador1);
-            else menuControles.CargaMenuControles(controlesJ2, Player.jugador2);
+            if (Input.GetKeyDown(teclaMenuJ1)) menuControles.CargaMenuControles(Player.jugador1);
+            else menuControles.CargaMenuControles(Player.jugador2);
 
             PausaJuego();
         }
@@ -82,12 +77,6 @@ public class GameManager : MonoBehaviour
     {
         if (jugador == Player.jugador1) teclaMenuJ1 = nuevaTecla;
         else teclaMenuJ2 = nuevaTecla;
-    }
-
-    public void SetControlesJugador(Dictionary<string, KeyCode> controlesJugador, Player jugador)
-    {
-        if (jugador == Player.jugador1) controlesJ1 = controlesJugador;
-        else controlesJ2 = controlesJugador;
     }
 
     /// <summary>

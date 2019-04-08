@@ -6,33 +6,32 @@ using UnityEngine.UI;
 public class MenuControles : MonoBehaviour {
 
     public ControlesManager controlesManagerJ1, controlesManagerJ2;
-
     public Text cabecera, saltar, rodar, poder, romperParedes, izqdaParedes, dchaParedes, menu;
+    public Player jugadorQueAbreMenu;
 
     GameObject boton;
-
     Dictionary<string, KeyCode> controles = new Dictionary<string, KeyCode>();
 
-    Player jugadorQueAbreMenu;
-
-    string nombreTecla;
-
     KeyCode nuevaTecla;
-
-    bool cambiaTecla=false;
+    string nombreTecla;    
+    bool cambiaTecla=false, enMenuPrincipal;
 
     // Use this for initialization
     void Start () {
-
+        enMenuPrincipal = Controles.instance.GetEnMenuPrincipal();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (cambiaTecla)
+        if (cambiaTecla && !enMenuPrincipal)
         {
             if (jugadorQueAbreMenu == Player.jugador1 && controlesManagerJ1 != null) controlesManagerJ1.CambiaControlJugador(nombreTecla, nuevaTecla);
             else if(controlesManagerJ2 != null) controlesManagerJ2.CambiaControlJugador(nombreTecla, nuevaTecla);
 
+            cambiaTecla = false;
+        }else if(cambiaTecla && enMenuPrincipal)
+        {
+            Controles.instance.SetControlesJugador(controles, jugadorQueAbreMenu);    
             cambiaTecla = false;
         }
 	}
@@ -81,8 +80,9 @@ public class MenuControles : MonoBehaviour {
         }
     }
 
-    public void CargaMenuControles(Dictionary<string, KeyCode> controles, Player tipoJugador)
+    public void CargaMenuControles(Player tipoJugador)
     {
+        controles = Controles.instance.GetControlesJugador(tipoJugador);
         SetDiccionarioJugador(controles);
         ConfiguraTextos();
 
@@ -90,5 +90,15 @@ public class MenuControles : MonoBehaviour {
         else cabecera.text = "CONTROLES JUGADOR 2";
 
         jugadorQueAbreMenu = tipoJugador;
+    }
+
+    public void CargaMenuOutGame()
+    {
+        controles = Controles.instance.GetControlesJugador(jugadorQueAbreMenu);
+        SetDiccionarioJugador(controles);
+        ConfiguraTextos();
+
+        if (jugadorQueAbreMenu == Player.jugador1) cabecera.text = "CONTROLES JUGADOR 1";
+        else cabecera.text = "CONTROLES JUGADOR 2";
     }
 }

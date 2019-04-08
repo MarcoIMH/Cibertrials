@@ -114,7 +114,10 @@ public class MenuGraficosSonido : MonoBehaviour {
     /// </summary>
     public void GuardaConfiguracionGraficosSonidos()
     {
-        GameManager.instance.GuardaConfiguracionGraficos(pantallaCompleta, indiceGraficos, indiceResolucion, resolucionActual);
-        GameManager.instance.SetVolumen(volumen);
+        if (!Controles.instance.GetEnMenuPrincipal())
+        {
+            GameManager.instance.GuardaConfiguracionGraficos(pantallaCompleta, indiceGraficos, indiceResolucion, resolucionActual);
+            GameManager.instance.SetVolumen(volumen);
+        }        
     }
 }
