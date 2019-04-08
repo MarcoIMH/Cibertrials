@@ -26,7 +26,7 @@ public class PantallaDeCarga : MonoBehaviour {
     string ConsejoDinamico()
     {
         int indice = Random.Range(0, 4);
-        string[] consejos = new string[3];
+        string[] consejos = new string[4];
         consejos[0] = "Consejo: No podrás salir hasta que consigas la llave...";
         consejos[1] = "Consejo: Usa tus poderes sabiamente, pero úsalos!";
         consejos[2] = "Consejo: Cuidado, hay pelotas traicioneras y mocos con mala leche..";
