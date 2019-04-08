@@ -194,6 +194,11 @@ public class ControladorJugador : MonoBehaviour
         velocidadX = cambioVelocidad * velocidadEstandar;
     }
 
+    public void ModificaVelocidadEstandar(float cambioVelocidad)
+    {
+        velocidadEstandar *= cambioVelocidad;
+    }
+
     /// <summary>
     /// Aumenta la velocidadX durante un tiempo e invoca a RestauraVelocidad tras el tiempo "duracion".
     /// </summary>

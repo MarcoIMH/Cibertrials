@@ -140,6 +140,7 @@ public class PoderesManager : MonoBehaviour {
     /// </summary>
     public void DesactivaInvierteControles()
     {
+        controlesJugadorContrario.ModificaVelocidadEstandar(-1);
         controlesJugadorContrario.ModificaVelocidad(-1);
         controlesJugadorContrario.SwapTeclas();
 
