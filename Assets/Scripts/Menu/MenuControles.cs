@@ -43,13 +43,15 @@ public class MenuControles : MonoBehaviour {
         {
             Event teclaPulsada = Event.current;
             if (teclaPulsada.isKey)
-            {
+            {                
                 controles[boton.name] = teclaPulsada.keyCode;
                 boton.GetComponentInChildren<Text>().text = teclaPulsada.keyCode.ToString();
                 nombreTecla = boton.name;
                 nuevaTecla = teclaPulsada.keyCode;
+
+                boton.GetComponent<Image>().color = boton.GetComponent<Button>().colors.normalColor;
                 boton = null;
-                cambiaTecla = true;                
+                cambiaTecla = true;
             }
         }
     }
@@ -72,7 +74,11 @@ public class MenuControles : MonoBehaviour {
     
     public void CambiaTecla(GameObject botonPulsado)
     {
-        boton = botonPulsado;
+        if (botonPulsado!= null)
+        {
+            botonPulsado.GetComponent<Image>().color = Color.cyan;
+            boton = botonPulsado;
+        }
     }
 
     public void CargaMenuControles(Dictionary<string, KeyCode> controles, Player tipoJugador)
