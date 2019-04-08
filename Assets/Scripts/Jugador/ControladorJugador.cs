@@ -223,7 +223,7 @@ public class ControladorJugador : MonoBehaviour
     /// <summary>
     /// Método para resetear valores de movimiento y pone el loop del AS a false para
     /// que no se ejecute el sonido de caminar tras morir.
-    /// Tambien hacemos que la animaciones de moverse y rodar paren y ejecutamos la de idle
+    /// Tambien hacemos que la animaciones de moverse,rodar y saltar paren y ejecutamos la de idle
     /// para que tras ser estuneado o "morir" solo se ejecute la de idle
     /// </summary>
     public void ReseteaStats()
@@ -233,6 +233,8 @@ public class ControladorJugador : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.angularVelocity = 0f;
         audioSource.loop = false;
+        salto = false;
+        anim.SetBool("Saltando", salto);
         anim.SetBool("Moviendose", false);
         anim.Play("Parado");
         rodando = false;
