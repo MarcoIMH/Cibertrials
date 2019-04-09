@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {    
-    public GameObject mapPrefab, menuIngame;   
+    public GameObject mapPrefab, mapPrefab2, mapPrefab3, menuIngame;   
     public Image pantallaDeCarga;
     public MenuControles menuControles;
 
@@ -16,7 +16,9 @@ public class GameManager : MonoBehaviour
         public Resolution resolucion;
     }
     Graficos configuracionGraficos;
-    
+
+    GameObject mapaJ1, mapaJ2;
+
     UIManager UI;    
     AudioManager audioManager;
     GameObject mundoJ1, mundoJ2;
@@ -26,11 +28,10 @@ public class GameManager : MonoBehaviour
     
     int rondasJugador1, rondasJugador2;
     float volumenSonidos, volumenMusica;
+    
+    int indiceMapaActual = 1;
 
-    string mapa="Mapa1";
-    int mapaActual = 1;
-
-    bool hayGanador=false, enMenu=false;
+    bool j1EnMeta=false, j2EnMeta = false, enMenu=false;
 
     //Asegurarse de que solo hay una instancia
     public static GameManager instance = null;
@@ -56,7 +57,7 @@ public class GameManager : MonoBehaviour
         volumenSonidos = 1;
 
         Invoke("CargaMapaEnMundos", 0.05f);     //Preguntar a Guille sobre como podría hacer y ordenar el Script Execution Order para no necesitar estos invokes.
-        Invoke("ColocaJugadores", 0.07f);       //De ser así se podrían quitar y hacer que la carga fuera "limpia" al iniciar la ejecución.
+        Invoke("ColocaJugadores", 0.5f);       //De ser así se podrían quitar y hacer que la carga fuera "limpia" al iniciar la ejecución.
     }
 
     // Update is called once per frame
@@ -84,26 +85,31 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// este método se llama cuando uno de los jugadores alcanza la llegada (arrival)
     /// </summary>
-    /// <param name="ganador"></param>
-    public void FinalizarRonda(Player ganador)
-    {
-        if (!hayGanador)
+    /// <param name="jugadorEnMeta"></param>
+    public void FinalizarRonda(Player jugadorEnMeta)
+    {    
+        if (!j1EnMeta && jugadorEnMeta == Player.jugador1)
         {
-            if (ganador == Player.jugador1)
-            {
-                rondasJugador1++;
-            }
-            else rondasJugador2++;
-            hayGanador = true;
+            rondasJugador1++;
+            j1EnMeta = true;
         }
-        else if(hayGanador && mapaActual < 3)
+        else
         {
-            mapaActual++;
-            pantallaDeCarga.gameObject.GetComponent<PantallaDeCarga>().MostrarResultados(rondasJugador1, rondasJugador2, mapaActual, 4f);
-            PantallaDeCarga(6f);
+            rondasJugador2++;
+            j2EnMeta = true;
+        }
 
-            hayGanador = false;
-            //HACER LLAMADA A LA SIGUIENTE ESCENA AQUÍ
+        if (j1EnMeta && j2EnMeta && indiceMapaActual < 3)
+        {
+            indiceMapaActual++;            
+            pantallaDeCarga.gameObject.GetComponent<PantallaDeCarga>().MostrarResultados(rondasJugador1, rondasJugador2, indiceMapaActual, 8f);
+            PantallaDeCarga(8f);
+            CargaMapaEnMundos();
+            Invoke("ColocaJugadores", 1f);
+            j1EnMeta = false;
+            j2EnMeta = false;
+
+            if (indiceMapaActual == 3) indiceMapaActual = 0;
         }
     }
 
@@ -229,18 +235,53 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void CargaMapaEnMundos()
     {
-        if (mapPrefab != null)
+        if (indiceMapaActual != 1)
         {
-            var mapInstanceJ1 = Instantiate(mapPrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-            mapInstanceJ1.transform.parent = mundoJ1.transform;
+            Destroy(mapaJ1.gameObject);
+            Destroy(mapaJ2.gameObject);
+        }
 
-            var mapInstanceJ2 = Instantiate(mapPrefab, new Vector3(0, -100, 0), Quaternion.identity) as GameObject;
-            mapInstanceJ2.transform.parent = mundoJ2.transform;
-        }        
+        switch (indiceMapaActual)
+        {
+            case 1:
+                if (mapPrefab != null)
+                {
+                    var mapa1 = Instantiate(mapPrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+                    mapa1.transform.parent = mundoJ1.transform;
+                    mapaJ1 = mapa1;
+
+                    var mapa2 = Instantiate(mapPrefab, new Vector3(0, -100, 0), Quaternion.identity) as GameObject;
+                    mapa2.transform.parent = mundoJ2.transform;
+                    mapaJ2 = mapa2;
+                }break;
+            case 2:
+                if (mapPrefab2 != null)
+                {
+                    var mapa1 = Instantiate(mapPrefab2, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+                    mapa1.transform.parent = mundoJ1.transform;
+                    mapaJ1 = mapa1;
+
+                    var mapa2 = Instantiate(mapPrefab2, new Vector3(0, -100, 0), Quaternion.identity) as GameObject;
+                    mapa2.transform.parent = mundoJ2.transform;
+                    mapaJ2 = mapa2;
+                }
+                break;
+            case 3:
+                if (mapPrefab3 != null){
+                    var mapa1 = Instantiate(mapPrefab3, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+                    mapa1.transform.parent = mundoJ1.transform;
+                    mapaJ1 = mapa1;
+
+                    var mapa2 = Instantiate(mapPrefab3, new Vector3(0, -100, 0), Quaternion.identity) as GameObject;
+                    mapa2.transform.parent = mundoJ2.transform;
+                    mapaJ2 = mapa2;
+                }
+                break;
+        }   
     }
 
     /// <summary>
-    /// Coloca los jugadores en sus puntos iniciales correspondientes en cada mapa y los hace visible para los jugadores y activa sus controles.
+    /// Coloca los jugadores en sus puntos iniciales correspondientes en cada mapa, los hace visible para los jugadores y activa sus controles.
     /// </summary>
     void ColocaJugadores()
     {

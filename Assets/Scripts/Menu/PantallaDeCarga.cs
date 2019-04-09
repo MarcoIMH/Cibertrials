@@ -30,7 +30,7 @@ public class PantallaDeCarga : MonoBehaviour {
         consejos[0] = "Consejo: No podrás salir hasta que consigas la llave...";
         consejos[1] = "Consejo: Usa tus poderes sabiamente, pero úsalos!";
         consejos[2] = "Consejo: Cuidado, hay pelotas traicioneras y mocos con mala leche..";
-        consejos[3] = "Consejo: Corre, corre,corre! Gana el que llega antes a la meta!!";
+        consejos[3] = "Consejo: Corre, corre,corre! Gana el que antes llega a la meta!!";
         return consejos[indice];
     }
 
