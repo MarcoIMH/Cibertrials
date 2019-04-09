@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public Image pantallaDeCarga;
     public MenuControles menuControles;
 
+    public PantallaGanador pantallaGanador;
+
     struct Graficos
     {
         public bool pantallaCompleta;
@@ -49,16 +51,8 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //Ambos jugadores comienzan la partida con 0 rondas ganadas
-        rondasJugador1 = 0;
-        rondasJugador2 = 0;
-
-        PantallaDeCarga(1.5f);
-
         volumenSonidos = 1;
-
-        Invoke("CargaMapaEnMundos", 0.05f);     //Preguntar a Guille sobre como podría hacer y ordenar el Script Execution Order para no necesitar estos invokes.
-        Invoke("ColocaJugadores", 0.5f);       //De ser así se podrían quitar y hacer que la carga fuera "limpia" al iniciar la ejecución.
+        volumenMusica = 1;
     }
 
     // Update is called once per frame
@@ -77,6 +71,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetImagePantallaCarga(Image img)
+    {
+        pantallaDeCarga = img;
+    }
+
+    public void InicializaTorneo()
+    {
+        //Ambos jugadores comienzan la partida con 0 rondas ganadas
+        rondasJugador1 = 0;
+        rondasJugador2 = 0;
+
+        PantallaDeCarga(1.5f);
+
+        
+
+        Invoke("CargaMapaEnMundos", 0.05f);     //Preguntar a Guille sobre como podría hacer y ordenar el Script Execution Order para no necesitar estos invokes.
+        Invoke("ColocaJugadores", 0.5f);       //De ser así se podrían quitar y hacer que la carga fuera "limpia" al iniciar la ejecución.
+    }
+
     public void SetTeclaMenu(KeyCode nuevaTecla, Player jugador)
     {
         if (jugador == Player.jugador1) teclaMenuJ1 = nuevaTecla;
@@ -91,7 +104,7 @@ public class GameManager : MonoBehaviour
     {    
         if (!j1EnMeta && jugadorEnMeta == Player.jugador1)
         {
-            if(!j2EnMeta)rondasJugador1++;
+            if(!j2EnMeta) rondasJugador1++;
             j1EnMeta = true;
         }
         else
@@ -108,16 +121,28 @@ public class GameManager : MonoBehaviour
             CargaMapaEnMundos();
             Invoke("ColocaJugadores", 1f);
             j1EnMeta = false;
-            j2EnMeta = false;           
+            j2EnMeta = false;   
         }
 
         if (j1EnMeta && j2EnMeta && indiceMapaActual == 3)
         {
+            pantallaGanador.gameObject.SetActive(true);
+            if(rondasJugador1 == 3) pantallaGanador.SetGanador(Player.jugador1);
+            else pantallaGanador.SetGanador(Player.jugador2);
+
+            rondasJugador1 = 0;
+            rondasJugador2 = 0;
+
             indiceMapaActual = 1;
             j1EnMeta = false;
             j2EnMeta = false;
-            SceneManager.LoadScene("Menu");
+            Invoke("CambiaEscena", 8f);
         }
+    }
+
+    void CambiaEscena()
+    {
+        SceneManager.LoadScene("Menu");
     }
 
     public void ActualizaGemas(int gema, Player jugador, Poderes poder)
@@ -369,5 +394,6 @@ public class GameManager : MonoBehaviour
     void QuitarPantallaDeCarga()
     {
         pantallaDeCarga.gameObject.SetActive(false);
+        pantallaGanador.gameObject.SetActive(false);
     }
 }

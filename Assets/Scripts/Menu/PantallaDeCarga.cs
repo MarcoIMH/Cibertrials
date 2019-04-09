@@ -16,6 +16,7 @@ public class PantallaDeCarga : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         textoConsejo.text = ConsejoDinamico();
+        GameManager.instance.SetImagePantallaCarga(this.gameObject.GetComponent<Image>());
 	}
 	
 	// Update is called once per frame
