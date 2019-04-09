@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {    
@@ -90,12 +91,12 @@ public class GameManager : MonoBehaviour
     {    
         if (!j1EnMeta && jugadorEnMeta == Player.jugador1)
         {
-            rondasJugador1++;
+            if(!j2EnMeta)rondasJugador1++;
             j1EnMeta = true;
         }
         else
         {
-            rondasJugador2++;
+            if (!j1EnMeta) rondasJugador2++;
             j2EnMeta = true;
         }
 
@@ -107,9 +108,15 @@ public class GameManager : MonoBehaviour
             CargaMapaEnMundos();
             Invoke("ColocaJugadores", 1f);
             j1EnMeta = false;
-            j2EnMeta = false;
+            j2EnMeta = false;           
+        }
 
-            if (indiceMapaActual == 3) indiceMapaActual = 0;
+        if (j1EnMeta && j2EnMeta && indiceMapaActual == 3)
+        {
+            indiceMapaActual = 1;
+            j1EnMeta = false;
+            j2EnMeta = false;
+            SceneManager.LoadScene("Menu");
         }
     }
 
