@@ -25,6 +25,8 @@ public class Piedra : MonoBehaviour {
     public void IniciaMov()
     {
         mov = new Vector2(0, -vCaida);
+
+        if(GetComponentInParent<Transform>().gameObject != null)
         Destroy(GetComponentInParent<Transform>().gameObject, tDestruccion);
     }
 }

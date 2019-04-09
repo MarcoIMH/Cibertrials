@@ -196,8 +196,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1934093205486242}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.2, z: 0}
-  m_LocalScale: {x: 0.32319, y: 0.32319, z: 0.32319}
+  m_LocalPosition: {x: 0.14, y: 2.1, z: 0}
+  m_LocalScale: {x: -0.595, y: 0.595, z: 0.595}
   m_Children: []
   m_Father: {fileID: 4167247736081942}
   m_RootOrder: 5
@@ -375,7 +375,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01158613, y: -1.4819837}
+  m_Offset: {x: 0.05288345, y: -1.426376}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -386,7 +386,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.985994, y: 0.1601181}
+  m_Size: {x: 1.11084, y: 0.1373862}
   m_EdgeRadius: 0
 --- !u!61 &61194663479711100
 BoxCollider2D:
@@ -424,7 +424,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -567,13 +567,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipoJugador: 1
-  teclaSaltar: 273
-  teclaRodar: 274
-  teclaPoder: 258
-  teclaRomperParedes: 259
-  teclaIzqdaParedes: 276
-  teclaDchaParedes: 275
-  teclaMenu: 261
 --- !u!114 &114208912942912708
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1072,7 +1065,7 @@ SpriteRenderer:
   m_SortingLayerID: -942110179
   m_SortingLayer: 2
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: ddf3184edbd496f4ba6b2f78110b0899, type: 3}
+  m_Sprite: {fileID: 21300002, guid: f69427efaaa448f4097814505f78269a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0

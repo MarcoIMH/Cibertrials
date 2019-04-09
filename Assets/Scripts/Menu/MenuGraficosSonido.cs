@@ -7,13 +7,15 @@ public class MenuGraficosSonido : MonoBehaviour {
 
     public Dropdown resolucionesDropDown, calidadGraficaDropDown;
 
+    public AudioSource musica;
+
     Resolution[] resoluciones;
 
     bool pantallaCompleta;
     int indiceGraficos, indiceResolucion;
     Resolution resolucionActual;
 
-    float volumen;
+    float volumenSonidos;
 
     // Use this for initialization
     void Start () {
@@ -104,10 +106,19 @@ public class MenuGraficosSonido : MonoBehaviour {
     /// Método para gestionar el volúmen de los sonidos. Trabaja con el slider de MenuConfiguracionIngame (interfaz UnitY). 
     /// </summary>
     /// <param name="vol"></param>
-    public void SetVolumen(float vol)
+    public void SetVolumenSonidos(float vol)
     {
-        volumen = vol;
-    }    
+        volumenSonidos = vol;
+    }
+
+    /// <summary>
+    /// Método para gestionar el volúmen de los sonidos. Trabaja con el slider de MenuConfiguracionIngame (interfaz UnitY). 
+    /// </summary>
+    /// <param name="vol"></param>
+    public void SetVolumenMusica(float vol)
+    {
+        musica.volume = vol;
+    }
 
     /// <summary>
     /// Tras cerrar el menú de gráficos almacenamos en GameManager la nueva configuración de gráficos y sonido para no perderla tras un posible cambio de escena.
@@ -117,7 +128,8 @@ public class MenuGraficosSonido : MonoBehaviour {
         if (!Controles.instance.GetEnMenuPrincipal())
         {
             GameManager.instance.GuardaConfiguracionGraficos(pantallaCompleta, indiceGraficos, indiceResolucion, resolucionActual);
-            GameManager.instance.SetVolumen(volumen);
+            GameManager.instance.SetVolumenSonidos(volumenSonidos);
+            //GameManager.instance.SetVolumenMusica(musica.volume);
         }        
     }
 }

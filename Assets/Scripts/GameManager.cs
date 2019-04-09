@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     KeyCode teclaMenuJ1, teclaMenuJ2;
     
     int rondasJugador1, rondasJugador2;
-    float volumen;
+    float volumenSonidos, volumenMusica;
 
     string mapa="Mapa1";
     int mapaActual = 1;
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
 
         PantallaDeCarga(1.5f);
 
-        volumen = 1;
+        volumenSonidos = 1;
 
         Invoke("CargaMapaEnMundos", 0.05f);     //Preguntar a Guille sobre como podría hacer y ordenar el Script Execution Order para no necesitar estos invokes.
         Invoke("ColocaJugadores", 0.07f);       //De ser así se podrían quitar y hacer que la carga fuera "limpia" al iniciar la ejecución.
@@ -134,9 +134,18 @@ public class GameManager : MonoBehaviour
     /// Método para almacenar el volúmen de los sonidos.  
     /// </summary>
     /// <param name="vol"></param>
-    public void SetVolumen(float vol)
+    public void SetVolumenSonidos(float vol)
     {
-        volumen = vol;
+        volumenSonidos = vol;
+    }
+
+    /// <summary>
+    /// Método para almacenar el volúmen de la musica.  
+    /// </summary>
+    /// <param name="vol"></param>
+    public void SetVolumenMusica(float vol)
+    {
+        volumenSonidos = vol;
     }
 
     public void GuardaConfiguracionGraficos(bool pantallaCompleta, int indiceGraficos, int indiceResolucion, Resolution resolucionActual)
@@ -158,12 +167,12 @@ public class GameManager : MonoBehaviour
 
     public void EjecutarSonido(AudioSource audioSource, string nombreSonido)
     {
-        audioManager.EjecutarSonido(audioSource, nombreSonido, volumen);
+        audioManager.EjecutarSonido(audioSource, nombreSonido, volumenSonidos);
     }
 
     public void EjecutarSonido(string nombreSonido, int eleccion)
     {
-        audioManager.EjecutarSonido(nombreSonido, eleccion, volumen);
+        audioManager.EjecutarSonido(nombreSonido, eleccion, volumenSonidos);
     }
 
     /// <summary>

@@ -127,6 +127,7 @@ public class PoderesManager : MonoBehaviour {
 
         //hace dichos cambios
         controlesJugadorContrario.ModificaVelocidad(-1);
+        controlesJugadorContrario.ModificaVelocidadEstandar(-1);
         controlesJugadorContrario.SwapTeclas();
         //los revierte pasados "segundos" segundos
         Invoke("DesactivaInvierteControles", segundosInversionControles);
@@ -140,8 +141,8 @@ public class PoderesManager : MonoBehaviour {
     /// </summary>
     public void DesactivaInvierteControles()
     {
-        controlesJugadorContrario.ModificaVelocidadEstandar(-1);
         controlesJugadorContrario.ModificaVelocidad(-1);
+        controlesJugadorContrario.ModificaVelocidadEstandar(-1);
         controlesJugadorContrario.SwapTeclas();
 
         jugadorContrario.GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(6, false);
