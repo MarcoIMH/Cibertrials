@@ -633,7 +633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jugadorContrario: {fileID: 0}
   mundoContrario: {fileID: 0}
-  muro: {fileID: 1826254793097620, guid: 5a1d2d6cd4e061c42887eb25d87aeae1, type: 2}
+  muro: {fileID: 1911966008199246, guid: c79cbcc33e03229489755034d835f6f4, type: 2}
   neblina: {fileID: 1949629961110612, guid: f7bc3671cc848f147a3917be0ec2695a, type: 2}
   cuboHielo: {fileID: 1032453531818462, guid: 53f3f365e4151884c85690dd1e39c0fb, type: 2}
   jugador: 1
