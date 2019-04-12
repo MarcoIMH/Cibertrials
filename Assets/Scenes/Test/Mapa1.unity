@@ -6988,7 +6988,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transformJugador: {fileID: 39388680}
   distanciaX: 3
-  distanciaY: 1.75
+  distanciaY: 0.5
 --- !u!20 &1327436013
 Camera:
   m_ObjectHideFlags: 0
@@ -7013,7 +7013,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -10228,7 +10228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transformJugador: {fileID: 1417738096}
   distanciaX: 3
-  distanciaY: 1.75
+  distanciaY: 0.5
 --- !u!81 &1955653764
 AudioListener:
   m_ObjectHideFlags: 0
@@ -10260,7 +10260,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 8
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
