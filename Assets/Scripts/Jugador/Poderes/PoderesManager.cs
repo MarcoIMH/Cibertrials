@@ -38,7 +38,7 @@ public class PoderesManager : MonoBehaviour {
             controlesJugadorContrario = jugadorContrario.gameObject.GetComponent<ControladorJugador>();
         }
        
-        Invoke("ConfiguraCoordenadasPoderes", 1f);                              //Invocamos la carga de coordenadas del mapa un segundo después  como seguridad 
+       // Invoke("ConfiguraCoordenadasPoderes", 2f);                              //Invocamos la carga de coordenadas del mapa un segundo después  como seguridad 
     }                                                                           //para que de tiempo a todo a situarse en su lugar
 
 
@@ -164,9 +164,10 @@ public class PoderesManager : MonoBehaviour {
     /// <summary>
     /// Método para configurar las coordenadas de los poderes/mapa, solicita al GameManager el nombre de la escena y llama al método para cargar coordenadas de ese mapa
     /// </summary>
-    void ConfiguraCoordenadasPoderes()
+    public void ConfiguraCoordenadasPoderes(Transform [] coords)
     {
-        coordsPoderesMapa = GameManager.instance.GetCoordenadasPoderes();    
+        //coordsPoderesMapa = GameManager.instance.GetCoordenadasPoderes();
+        coordsPoderesMapa = coords;
     }
 
     /// <summary>

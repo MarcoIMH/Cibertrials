@@ -220,6 +220,10 @@ public class GameManager : MonoBehaviour
     public void SetCoordenadasPoderes(Transform[] coords)
     {
         coordPoderesMapa = coords;
+        if(transformJ1.gameObject.GetComponent<PoderesManager>()!=null)
+            transformJ1.gameObject.GetComponent<PoderesManager>().ConfiguraCoordenadasPoderes(coords);
+        if (transformJ2.gameObject.GetComponent<PoderesManager>() != null)
+            transformJ2.gameObject.GetComponent<PoderesManager>().ConfiguraCoordenadasPoderes(coords);
     }
 
     /// <summary>
