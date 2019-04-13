@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     Transform transformJ1, transformJ2, puntoInicialJ1, puntoInicialJ2;
     KeyCode teclaMenuJ1, teclaMenuJ2;
     
-    int rondasJugador1, rondasJugador2;
+    int victoriasJ1, victoriasJ2;
     float volumenSonidos, volumenMusica;
     
     int indiceMapaActual = 1;
@@ -78,13 +78,7 @@ public class GameManager : MonoBehaviour
 
     public void InicializaTorneo()
     {
-        //Ambos jugadores comienzan la partida con 0 rondas ganadas
-        rondasJugador1 = 0;
-        rondasJugador2 = 0;
-
-        PantallaDeCarga(1.5f);
-
-        
+        PantallaDeCarga(1.5f);        
 
         Invoke("CargaMapaEnMundos", 0.05f);     //Preguntar a Guille sobre como podría hacer y ordenar el Script Execution Order para no necesitar estos invokes.
         Invoke("ColocaJugadores", 0.5f);       //De ser así se podrían quitar y hacer que la carga fuera "limpia" al iniciar la ejecución.
@@ -101,8 +95,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name="jugadorEnMeta"></param>
     public void FinalizarRonda(Player jugadorEnMeta)
-    {    
-        if (!j1EnMeta && jugadorEnMeta == Player.jugador1)
+    {
+        /*if (!j1EnMeta && jugadorEnMeta == Player.jugador1)
         {
             if(!j2EnMeta) rondasJugador1++;
             j1EnMeta = true;
@@ -122,9 +116,7 @@ public class GameManager : MonoBehaviour
             Invoke("ColocaJugadores", 1f);
             j1EnMeta = false;
             j2EnMeta = false;   
-        }
-
-        if (j1EnMeta && j2EnMeta && indiceMapaActual == 3)
+        }else if (j1EnMeta && j2EnMeta && indiceMapaActual == 3)
         {
             pantallaGanador.gameObject.SetActive(true);
             if(rondasJugador1 == 3) pantallaGanador.SetGanador(Player.jugador1);
@@ -136,6 +128,30 @@ public class GameManager : MonoBehaviour
             indiceMapaActual = 1;
             j1EnMeta = false;
             j2EnMeta = false;
+            Invoke("CambiaEscena", 8f);
+        }*/
+
+        if (jugadorEnMeta == Player.jugador1) victoriasJ1++;
+        else victoriasJ2++;
+
+        if (indiceMapaActual < 3)
+        {
+            indiceMapaActual++;
+            pantallaDeCarga.gameObject.GetComponent<PantallaDeCarga>().MostrarResultados(victoriasJ1, victoriasJ2, indiceMapaActual, 8f);
+            PantallaDeCarga(8f);
+            CargaMapaEnMundos();
+            Invoke("ColocaJugadores", 1f);
+        }
+        else
+        {
+            pantallaGanador.gameObject.SetActive(true);
+            if (victoriasJ1 == 3) pantallaGanador.SetGanador(Player.jugador1);
+            else pantallaGanador.SetGanador(Player.jugador2);
+
+            victoriasJ1 = 0;
+            victoriasJ2 = 0;
+
+            indiceMapaActual = 1;
             Invoke("CambiaEscena", 8f);
         }
     }
