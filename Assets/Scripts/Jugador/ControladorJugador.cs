@@ -7,6 +7,7 @@ public class ControladorJugador : MonoBehaviour
     public int alturaSalto, distanciaRecorrida;
     public float VelocidadRodar, velocidadX; //cantidad de velocidad reducida en % (de 0 a 1)
     public string axisHorizontal, axisVertical;
+    public float minDrag = 0, maxDrag = 8; //variables para controlar el LinearDrag del rigidbody
 
     BoxCollider2D colliderCorre;
     CircleCollider2D colliderRueda;
@@ -83,6 +84,7 @@ public class ControladorJugador : MonoBehaviour
             {
                 deltaX = Input.GetAxis(axisHorizontal);
                 movHorizontal = true;
+                rb.drag = minDrag; //si se mueve el LinearDrag lo ponemos al minimo
 
                 //sonido de moverse
                 if (!audioSource.isPlaying && puedeSaltar)
@@ -95,16 +97,21 @@ public class ControladorJugador : MonoBehaviour
             {
                 audioSource.loop = false; //se pone el loop a false para que el sonido no se ejecute tras pararse
                 movHorizontal = false;
+                rb.drag = maxDrag; //cuando se para el LinearDrag lo ponemos al maximo para que no se deslice
             }
 
             //salto
             if (Input.GetKey(teclaSaltar) && puedeSaltar)
             {
+                rb.drag = minDrag; // al saltar poemos el LinearDrag al minimo
                 salto = true;
                 puedeSaltar = false;
                 audioSource.loop = false;
                 GameManager.instance.EjecutarSonido(audioSource, "Salto");
             }
+
+            //si esta parado y salta ponemos el LinearDrag al minimo
+            if (!puedeSaltar && !movHorizontal) rb.drag = minDrag;
 
             //animacion de salto
             anim.SetBool("Saltando", salto); 

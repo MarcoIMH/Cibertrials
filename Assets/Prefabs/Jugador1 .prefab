@@ -356,7 +356,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1614130059403480}
   m_Enabled: 0
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: aa2df12428db98e47bba1e0cf3da3a9d, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -371,7 +371,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1614130059403480}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: aa2df12428db98e47bba1e0cf3da3a9d, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -696,6 +696,8 @@ MonoBehaviour:
   velocidadX: 20
   axisHorizontal: axisHorizontal
   axisVertical: axisVertical
+  minDrag: 0
+  maxDrag: 8
 --- !u!114 &114933546827670748
 MonoBehaviour:
   m_ObjectHideFlags: 1
