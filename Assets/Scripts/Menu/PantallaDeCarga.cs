@@ -16,7 +16,6 @@ public class PantallaDeCarga : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         textoConsejo.text = ConsejoDinamico();
-        GameManager.instance.SetImagePantallaCarga(this.gameObject.GetComponent<Image>());
 	}
 	
 	// Update is called once per frame
@@ -36,13 +35,16 @@ public class PantallaDeCarga : MonoBehaviour {
     }
 
     void CambiaPieDeCarga()
-    {     
+    {
         textoConsejo.enabled = true;
         imagenCargando.SetActive(true);
+
         imagenCargando.GetComponent<Image>().sprite = piePantallaCarga[mapa - 1];
+        textoConsejo.text = ConsejoDinamico();        
 
         jugador1.SetActive(false);
         jugador2.SetActive(false);
+        
     }
 
     public void MostrarResultados(int rondasJ1, int rondasJ2, int mapa, float tiempoMostrarResultados)

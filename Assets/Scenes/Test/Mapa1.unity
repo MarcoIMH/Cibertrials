@@ -1505,8 +1505,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 711785571}
-        m_MethodName: QuitaPausaJuego
+      - m_Target: {fileID: 978335554}
+        m_MethodName: CierraMenuIngame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3245,10 +3245,6 @@ MonoBehaviour:
   mapPrefab: {fileID: 1406209461416940, guid: cb9a4f296d5ca06438c8030e6dbc6023, type: 2}
   mapPrefab2: {fileID: 1306805511620724, guid: e247009ba68a8ad468009a16ad96ba97, type: 2}
   mapPrefab3: {fileID: 1670456217976214, guid: ae1c33223ec714a48b3fbee4e0ba2566, type: 2}
-  menuIngame: {fileID: 113624445}
-  pantallaDeCarga: {fileID: 1552655935}
-  menuControles: {fileID: 1885855828}
-  pantallaGanador: {fileID: 103262942}
 --- !u!4 &711785572
 Transform:
   m_ObjectHideFlags: 0
@@ -5071,6 +5067,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a39543dba6c0745a1b74b89388cbb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuIngame: {fileID: 113624445}
+  pantallaDeCarga: {fileID: 1552655933}
+  pantallaGanador: {fileID: 103262940}
+  menuControles: {fileID: 1885855828}
   gemaJugador:
   - {fileID: 1439908408}
   - {fileID: 469137759}

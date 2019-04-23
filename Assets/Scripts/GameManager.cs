@@ -5,12 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
-{    
-    public GameObject mapPrefab, mapPrefab2, mapPrefab3, menuIngame;   
-    public Image pantallaDeCarga;
-    public MenuControles menuControles;
-
-    public PantallaGanador pantallaGanador;
+{
+    public GameObject mapPrefab, mapPrefab2, mapPrefab3;   
 
     struct Graficos
     {
@@ -22,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     GameObject mapaJ1, mapaJ2;
 
-    UIManager UI;    
+    UIManager ui;    
     AudioManager audioManager;
     GameObject mundoJ1, mundoJ2;
     Transform[] coordPoderesMapa;
@@ -60,25 +56,25 @@ public class GameManager : MonoBehaviour
     {
         if ((Input.GetKeyDown(teclaMenuJ1) && !enMenu) || (Input.GetKeyDown(teclaMenuJ2) && !enMenu))
         {
-            if (Input.GetKeyDown(teclaMenuJ1)) menuControles.CargaMenuControles(Player.jugador1);
-            else menuControles.CargaMenuControles(Player.jugador2);
+            if (Input.GetKeyDown(teclaMenuJ1)) ui.AbreMenuIngame(Player.jugador1);
+            else ui.AbreMenuIngame(Player.jugador2);
 
             PausaJuego();
         }
         else if((Input.GetKeyDown(teclaMenuJ1) && enMenu) || (Input.GetKeyDown(teclaMenuJ2) && enMenu))
         {
+            ui.CierraMenuIngame();
             QuitaPausaJuego();
         }
     }
 
-    public void SetImagePantallaCarga(Image img)
-    {
-        pantallaDeCarga = img;
-    }
-
     public void InicializaTorneo()
     {
-        PantallaDeCarga(1.5f);        
+        victoriasJ1 = 0;
+        victoriasJ2 = 0;
+        indiceMapaActual = 1;
+
+        PantallaDeCarga(3f);        
 
         Invoke("CargaMapaEnMundos", 0.05f);     //Preguntar a Guille sobre como podría hacer y ordenar el Script Execution Order para no necesitar estos invokes.
         Invoke("ColocaJugadores", 0.5f);       //De ser así se podrían quitar y hacer que la carga fuera "limpia" al iniciar la ejecución.
@@ -134,24 +130,25 @@ public class GameManager : MonoBehaviour
         if (jugadorEnMeta == Player.jugador1) victoriasJ1++;
         else victoriasJ2++;
 
+        if (transformJ1.gameObject.GetComponent<ControladorJugador>() != null)
+            transformJ1.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(false);
+        if (transformJ2.gameObject.GetComponent<ControladorJugador>() != null)
+            transformJ2.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(false);
+
         if (indiceMapaActual < 3)
         {
             indiceMapaActual++;
-            pantallaDeCarga.gameObject.GetComponent<PantallaDeCarga>().MostrarResultados(victoriasJ1, victoriasJ2, indiceMapaActual, 8f);
-            PantallaDeCarga(8f);
-            CargaMapaEnMundos();
-            Invoke("ColocaJugadores", 1f);
+            
+            //ui.AbrePantallaDeCarga(8f);
+            //ui.CargaResultados(victoriasJ1, victoriasJ2, indiceMapaActual, 8f);
+            //Invoke("CargaMapaEnMundos", 1f);
+            CargaMapaEnMundos();            
         }
         else
         {
-            pantallaGanador.gameObject.SetActive(true);
-            if (victoriasJ1 == 3) pantallaGanador.SetGanador(Player.jugador1);
-            else pantallaGanador.SetGanador(Player.jugador2);
+            if (victoriasJ1 == 3) ui.AbrePantallaGanador(Player.jugador1);
+            else ui.AbrePantallaGanador(Player.jugador2);
 
-            victoriasJ1 = 0;
-            victoriasJ2 = 0;
-
-            indiceMapaActual = 1;
             Invoke("CambiaEscena", 8f);
         }
     }
@@ -163,7 +160,7 @@ public class GameManager : MonoBehaviour
 
     public void ActualizaGemas(int gema, Player jugador, Poderes poder)
     {
-        UI.ActualizaGema(gema, jugador, poder);
+        ui.ActualizaGema(gema, jugador, poder);
     }
     /// <summary>
     /// Llama al metodo ActualizarLlave del UIManager
@@ -172,7 +169,7 @@ public class GameManager : MonoBehaviour
     /// <param name="activado"></param>
     public void ActualizarLlave(Player jugador, bool activado)
     {
-        UI.ActualizarLlave(jugador, activado);
+        ui.ActualizarLlave(jugador, activado);
     }
 
     /// <summary>
@@ -181,7 +178,7 @@ public class GameManager : MonoBehaviour
     /// <param name="UIM"></param>
     public void SetUI(UIManager UIM)
     {
-        UI = UIM;
+        ui = UIM;
     }
 
     /// <summary>
@@ -285,13 +282,16 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Método para instanciar mapa "reseteado", colocarlo, y asignarlo a su mundo correspondiente.
     /// </summary>
-    void CargaMapaEnMundos()
+    public void CargaMapaEnMundos()
     {
+        Debug.Log("Antes de borrar mapa");
         if (indiceMapaActual != 1)
         {
             Destroy(mapaJ1.gameObject);
             Destroy(mapaJ2.gameObject);
         }
+
+        Debug.Log("Despues de borrar mapa");
 
         switch (indiceMapaActual)
         {
@@ -329,7 +329,9 @@ public class GameManager : MonoBehaviour
                     mapaJ2 = mapa2;
                 }
                 break;
-        }   
+        }
+        Debug.Log("Despues de cargar el nuevo mapa");
+        Invoke("ColocaJugadores", 0.6f);
     }
 
     /// <summary>
@@ -357,14 +359,7 @@ public class GameManager : MonoBehaviour
         enMenu = true;
         Time.timeScale = 0;
 
-        if (transformJ1.gameObject.GetComponent<ControladorJugador>() != null)
-            InterruptorMundos(mundoJ1, transformJ1.gameObject.GetComponent<ControladorJugador>(), false);
-
-        if (transformJ2.gameObject.GetComponent<ControladorJugador>() != null)
-            InterruptorMundos(mundoJ2, transformJ2.gameObject.GetComponent<ControladorJugador>(), false);
-
-        UI.gameObject.SetActive(false);
-        menuIngame.SetActive(true);
+        InterruptorMundos(false);
     }
 
     /// <summary>
@@ -375,14 +370,7 @@ public class GameManager : MonoBehaviour
         enMenu = false;
         Time.timeScale = 1;
 
-        if (transformJ1.gameObject.GetComponent<ControladorJugador>() != null)
-            InterruptorMundos(mundoJ1, transformJ1.gameObject.GetComponent<ControladorJugador>(), true);
-
-        if (transformJ2.gameObject.GetComponent<ControladorJugador>() != null)
-            InterruptorMundos(mundoJ2, transformJ2.gameObject.GetComponent<ControladorJugador>(), true);
-        
-        menuIngame.SetActive(false);
-        UI.gameObject.SetActive(true);
+        InterruptorMundos(true);
     }
 
     /// <summary>
@@ -392,10 +380,15 @@ public class GameManager : MonoBehaviour
     /// <param name="mundo">Mundo</param>
     /// <param name="cont">Controles del jugador en dicho mundo</param>
     /// <param name="est">Valor del interruptor</param>
-    void InterruptorMundos(GameObject mundo, ControladorJugador cont, bool est)
+    void InterruptorMundos(bool est)
     {
-        if (cont != null) cont.SetEstadoControlador(est);
-        mundo.SetActive(est);
+        if (transformJ1.gameObject.GetComponent<ControladorJugador>() != null)
+            transformJ1.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(est);
+        if (transformJ2.gameObject.GetComponent<ControladorJugador>() != null)
+            transformJ2.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(est);
+
+        mundoJ1.SetActive(est);
+        mundoJ2.SetActive(est);
     }
     
     /// <summary>
@@ -404,16 +397,6 @@ public class GameManager : MonoBehaviour
     /// <param name="tiempo">tiempo que tarda en desactivarse</param>
     void PantallaDeCarga(float tiempo)
     {
-        pantallaDeCarga.gameObject.SetActive(true);
-        Invoke("QuitarPantallaDeCarga", tiempo);
-    }
-
-    /// <summary>
-    /// Desactiva la pantalla de carga
-    /// </summary>
-    void QuitarPantallaDeCarga()
-    {
-        pantallaDeCarga.gameObject.SetActive(false);
-        pantallaGanador.gameObject.SetActive(false);
+        ui.AbrePantallaDeCarga(tiempo);
     }
 }

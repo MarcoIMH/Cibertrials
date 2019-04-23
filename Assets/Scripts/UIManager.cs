@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public GameObject menuIngame, pantallaDeCarga, pantallaGanador;
+    public MenuControles menuControles;
 
     public Image[] gemaJugador; //0..v.lentgh/2-1 -->Jug1, v.Lentgh/2...v.Lentgh-1 -->Jug2
-    public Image[] poderesJug; 
+    public Image[] poderesJug;
     public Image[] imagenLlaves; //0 -> jugador 1 , 1 -> jugador 2
     int gemasMax, poderesMax;
 
@@ -17,6 +19,7 @@ public class UIManager : MonoBehaviour
         gemasMax = gemaJugador.Length / 2;
         poderesMax = poderesJug.Length / 2;
     }
+
     public void ActualizaGema(int gema, Player jugador, Poderes poder)
     {
         //Gemas
@@ -72,7 +75,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-   
+
     /// <summary>
     /// Metodo que sirve para activar o desactivar la imagen de la llave de la UI
     /// </summary>
@@ -89,5 +92,41 @@ public class UIManager : MonoBehaviour
             imagenLlaves[1].gameObject.SetActive(activado);
         }
     }
-    
+
+    public void AbreMenuIngame(Player jugador)
+    {
+        if(jugador == Player.jugador1) menuControles.CargaMenuControles(Player.jugador1);
+        else menuControles.CargaMenuControles(Player.jugador2);
+
+        this.gameObject.SetActive(false);
+        menuIngame.SetActive(true);
+    }
+
+    public void CierraMenuIngame()
+    {
+        menuIngame.SetActive(false);
+        this.gameObject.SetActive(true);
+        GameManager.instance.QuitaPausaJuego();
+    }
+
+    public void AbrePantallaDeCarga(float tiempo)
+    {
+        pantallaDeCarga.SetActive(true);
+        Invoke("CierraPantallaDeCarga", tiempo);
+    }
+
+    public void CierraPantallaDeCarga()
+    {
+        pantallaDeCarga.SetActive(false);
+    }
+
+    public void CargaResultados(int rondasJ1, int rondasJ2, int mapa, float tiempoMostrarResultados)
+    {
+        pantallaDeCarga.GetComponent<PantallaDeCarga>().MostrarResultados(rondasJ1, rondasJ2, mapa, tiempoMostrarResultados);
+    }
+
+    public void AbrePantallaGanador(Player jugador)
+    {
+        pantallaGanador.GetComponent<PantallaGanador>().SetGanador(jugador);
+    }
 }
