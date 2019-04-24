@@ -134,6 +134,15 @@ public class GameManager : MonoBehaviour
         if (transformJ2.gameObject.GetComponent<ControladorJugador>() != null)
             transformJ2.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(false);
 
+        if (transformJ1.gameObject.GetComponentInChildren<CubitoHielo>() != null)
+            Destroy(transformJ1.gameObject.GetComponentInChildren<CubitoHielo>().gameObject);
+        if (transformJ2.gameObject.GetComponentInChildren<CubitoHielo>() != null)
+            Destroy(transformJ2.gameObject.GetComponentInChildren<CubitoHielo>().gameObject);
+        if (transformJ1.gameObject.GetComponent<FeedbackVisual>() != null)
+            transformJ1.gameObject.GetComponent<FeedbackVisual>().DesactivaTodos();
+        if (transformJ2.gameObject.GetComponent<FeedbackVisual>() != null)
+            transformJ2.gameObject.GetComponent<FeedbackVisual>().DesactivaTodos();
+
         transformJ1.gameObject.SetActive(false);
         transformJ2.gameObject.SetActive(false);
 

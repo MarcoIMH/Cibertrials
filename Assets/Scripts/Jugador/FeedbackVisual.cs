@@ -46,5 +46,15 @@ public class FeedbackVisual : MonoBehaviour {
                 break;
         }
     }
-
+    public void DesactivaTodos()
+    {
+        stun.SetActive(false);
+        ralentizar.SetActive(false);
+        powerupPico.SetActive(false);
+        powerupFantasma.SetActive(false);
+        resucitar.SetActive(false);
+        powerUpVel.SetActive(false);
+        inversion.SetActive(false);
+        despacio.SetActive(false);
+    }
 }
