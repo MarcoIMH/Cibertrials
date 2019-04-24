@@ -12,12 +12,28 @@ public class UIManager : MonoBehaviour
     public Image[] poderesJug;
     public Image[] imagenLlaves; //0 -> jugador 1 , 1 -> jugador 2
     int gemasMax, poderesMax;
+    float tiempo=0;
+    bool activarTiempo = false;
 
     void Start()
     {
         GameManager.instance.SetUI(this);
         gemasMax = gemaJugador.Length / 2;
         poderesMax = poderesJug.Length / 2;
+    }
+
+    private void Update()
+    {
+        if (activarTiempo)
+        {
+            tiempo -= Time.deltaTime;
+            if (tiempo < 0)
+            {
+                activarTiempo = false;
+                GameManager.instance.ColocaJugadores();
+                CierraPantallaDeCarga();
+            }
+        }
     }
 
     public void ActualizaGema(int gema, Player jugador, Poderes poder)
@@ -112,7 +128,8 @@ public class UIManager : MonoBehaviour
     public void AbrePantallaDeCarga(float tiempo)
     {
         pantallaDeCarga.SetActive(true);
-        Invoke("CierraPantallaDeCarga", tiempo);
+        this.tiempo = tiempo;
+        activarTiempo = true;
     }
 
     public void CierraPantallaDeCarga()
@@ -122,11 +139,13 @@ public class UIManager : MonoBehaviour
 
     public void CargaResultados(int rondasJ1, int rondasJ2, int mapa, float tiempoMostrarResultados)
     {
+        AbrePantallaDeCarga(tiempoMostrarResultados);
         pantallaDeCarga.GetComponent<PantallaDeCarga>().MostrarResultados(rondasJ1, rondasJ2, mapa, tiempoMostrarResultados);
     }
 
     public void AbrePantallaGanador(Player jugador)
     {
         pantallaGanador.GetComponent<PantallaGanador>().SetGanador(jugador);
+        pantallaGanador.SetActive(true);
     }
 }

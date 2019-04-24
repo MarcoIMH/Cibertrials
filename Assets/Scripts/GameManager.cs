@@ -74,10 +74,10 @@ public class GameManager : MonoBehaviour
         victoriasJ2 = 0;
         indiceMapaActual = 1;
 
-        PantallaDeCarga(3f);        
+        PantallaDeCarga(3f);
 
-        Invoke("CargaMapaEnMundos", 0.05f);     //Preguntar a Guille sobre como podría hacer y ordenar el Script Execution Order para no necesitar estos invokes.
-        Invoke("ColocaJugadores", 0.5f);       //De ser así se podrían quitar y hacer que la carga fuera "limpia" al iniciar la ejecución.
+        CargaMapaEnMundos();
+        //Invoke("CargaMapaEnMundos", 0.05f);     //Preguntar a Guille sobre como podría hacer y ordenar el Script Execution Order para no necesitar estos invokes.
     }
 
     public void SetTeclaMenu(KeyCode nuevaTecla, Player jugador)
@@ -109,7 +109,6 @@ public class GameManager : MonoBehaviour
             pantallaDeCarga.gameObject.GetComponent<PantallaDeCarga>().MostrarResultados(rondasJugador1, rondasJugador2, indiceMapaActual, 8f);
             PantallaDeCarga(8f);
             CargaMapaEnMundos();
-            Invoke("ColocaJugadores", 1f);
             j1EnMeta = false;
             j2EnMeta = false;   
         }else if (j1EnMeta && j2EnMeta && indiceMapaActual == 3)
@@ -135,21 +134,22 @@ public class GameManager : MonoBehaviour
         if (transformJ2.gameObject.GetComponent<ControladorJugador>() != null)
             transformJ2.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(false);
 
+        transformJ1.gameObject.SetActive(false);
+        transformJ2.gameObject.SetActive(false);
+
         if (indiceMapaActual < 3)
         {
             indiceMapaActual++;
-            
-            //ui.AbrePantallaDeCarga(8f);
-            //ui.CargaResultados(victoriasJ1, victoriasJ2, indiceMapaActual, 8f);
-            //Invoke("CargaMapaEnMundos", 1f);
-            CargaMapaEnMundos();            
+
+            ui.CargaResultados(victoriasJ1, victoriasJ2, indiceMapaActual, 4f);
+            CargaMapaEnMundos();
         }
         else
         {
             if (victoriasJ1 == 3) ui.AbrePantallaGanador(Player.jugador1);
             else ui.AbrePantallaGanador(Player.jugador2);
 
-            Invoke("CambiaEscena", 8f);
+            Invoke("CambiaEscena", 6f);
         }
     }
 
@@ -331,13 +331,13 @@ public class GameManager : MonoBehaviour
                 break;
         }
         Debug.Log("Despues de cargar el nuevo mapa");
-        Invoke("ColocaJugadores", 0.6f);
+        //Invoke("ColocaJugadores", 0.3f);
     }
 
     /// <summary>
     /// Coloca los jugadores en sus puntos iniciales correspondientes en cada mapa, los hace visible para los jugadores y activa sus controles.
     /// </summary>
-    void ColocaJugadores()
+    public void ColocaJugadores()
     {
         transformJ1.position = puntoInicialJ1.position;
         transformJ2.position = puntoInicialJ2.position;
@@ -348,7 +348,7 @@ public class GameManager : MonoBehaviour
         if(transformJ1.gameObject.GetComponent<ControladorJugador>()!=null)
             transformJ1.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(true);
         if (transformJ2.gameObject.GetComponent<ControladorJugador>() != null)
-            transformJ2.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(true);
+            transformJ2.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(true);        
     }    
 
     /// <summary>
