@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CambiarPanel : MonoBehaviour {
 
-    public GameObject panelMenu,panelConfig,panelCreditos;
+    public GameObject panelMenu,panelConfig,panelCreditos, panelGraficosSonido, panelControles;
 
     Animator panel;
     string nombrePanel;
@@ -26,7 +26,11 @@ public class CambiarPanel : MonoBehaviour {
     /// </summary>
     public void Desvanecerse()
     {
-        panel.SetTrigger("fadeOut");
+        //if (panel.gameObject.activeSelf)
+        {
+            panel.SetTrigger("fadeOut");
+        }
+        
     }
 
     /// <summary>
@@ -46,6 +50,12 @@ public class CambiarPanel : MonoBehaviour {
                 break;
             case "creditos":
                 panelCreditos.gameObject.SetActive(true);
+                break;
+            case "controles":
+                panelControles.gameObject.SetActive(true);
+                break;
+            case "graficosysonido":
+                panelGraficosSonido.gameObject.SetActive(true);
                 break;
         }
         this.gameObject.SetActive(false);
