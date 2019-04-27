@@ -74,7 +74,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1493218513661150
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,7 +209,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1191914128121560}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -484, y: -33.334763, z: 0}
+  m_LocalPosition: {x: -6.8, y: 43.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4992953541188120}
@@ -640,7 +640,7 @@ MonoBehaviour:
   cuboHielo: {fileID: 1032453531818462, guid: 53f3f365e4151884c85690dd1e39c0fb, type: 2}
   jugador: 1
   gemasMax: 5
-  segundosInversionControles: 3
+  segundosInversionControles: 4.5
   tiempoNeblina: 5
 --- !u!114 &114678338870102720
 MonoBehaviour:

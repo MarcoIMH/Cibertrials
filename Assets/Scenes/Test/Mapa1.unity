@@ -8414,10 +8414,6 @@ Prefab:
       propertyPath: mundoContrario
       value: 
       objectReference: {fileID: 1489211682}
-    - target: {fileID: 1614130059403480, guid: a12bd5c66affba644a249902cce81f07, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a12bd5c66affba644a249902cce81f07, type: 2}
   m_IsPrefabAsset: 0
@@ -11128,10 +11124,6 @@ Prefab:
       propertyPath: mundoContrario
       value: 
       objectReference: {fileID: 173491843}
-    - target: {fileID: 1191914128121560, guid: 7d468191650ee5c4bbb0a8c6372203c1, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d468191650ee5c4bbb0a8c6372203c1, type: 2}
   m_IsPrefabAsset: 0

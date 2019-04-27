@@ -172,7 +172,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1876013453852560
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,7 +562,7 @@ MonoBehaviour:
   cuboHielo: {fileID: 1032453531818462, guid: 53f3f365e4151884c85690dd1e39c0fb, type: 2}
   jugador: 0
   gemasMax: 5
-  segundosInversionControles: 3
+  segundosInversionControles: 4.5
   tiempoNeblina: 5
 --- !u!114 &114201168142828144
 MonoBehaviour:

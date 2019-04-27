@@ -7,7 +7,7 @@ public class Piedra : MonoBehaviour {
     public float vCaida;
     public float tDestruccion;
 
-    bool cae;
+    bool destruido=false;
     Vector2 mov;
 
 	// Use this for initialization
@@ -26,7 +26,7 @@ public class Piedra : MonoBehaviour {
     {
         mov = new Vector2(0, -vCaida);
 
-        if(GetComponentInParent<Transform>().gameObject != null)
-        Destroy(GetComponentInParent<Transform>().gameObject, tDestruccion);
+        if(!destruido) Destroy(GetComponentInParent<Transform>().gameObject, tDestruccion);
+        destruido = true;
     }
 }
