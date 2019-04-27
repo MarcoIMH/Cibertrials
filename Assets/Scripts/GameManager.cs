@@ -354,7 +354,12 @@ public class GameManager : MonoBehaviour
         transformJ1.gameObject.SetActive(true);
         transformJ2.gameObject.SetActive(true);
 
-        if(transformJ1.gameObject.GetComponent<ControladorJugador>()!=null)
+        if (transformJ1.gameObject.GetComponent<AbrirPuertas>() != null)
+            transformJ1.gameObject.GetComponent<AbrirPuertas>().QuitarLlave();
+        if (transformJ2.gameObject.GetComponent<AbrirPuertas>() != null)
+            transformJ2.gameObject.GetComponent<AbrirPuertas>().QuitarLlave();
+
+        if (transformJ1.gameObject.GetComponent<ControladorJugador>()!=null)
             transformJ1.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(true);
         if (transformJ2.gameObject.GetComponent<ControladorJugador>() != null)
             transformJ2.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(true);        
