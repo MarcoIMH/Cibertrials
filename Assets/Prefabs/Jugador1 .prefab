@@ -343,7 +343,7 @@ Rigidbody2D:
   m_LinearDrag: 8
   m_AngularDrag: 0.05
   m_GravityScale: 8.321371
-  m_Material: {fileID: 6200000, guid: 0b4e56019f67e7c45a9453fa9ce9b61e, type: 2}
+  m_Material: {fileID: 6200000, guid: aa2df12428db98e47bba1e0cf3da3a9d, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -356,7 +356,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1614130059403480}
   m_Enabled: 0
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: aa2df12428db98e47bba1e0cf3da3a9d, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -371,7 +371,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1614130059403480}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: aa2df12428db98e47bba1e0cf3da3a9d, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -697,7 +697,15 @@ MonoBehaviour:
   axisHorizontal: axisHorizontal
   axisVertical: axisVertical
   minDrag: 0
-  maxDrag: 8
+  maxDrag: 20
+  salto: 0
+  estadoControles: 1
+  rodando: 0
+  puedeSaltar: 0
+  "enTuber\xEDa": 0
+  enPared: 0
+  movHorizontal: 0
+  enSuelo: 0
 --- !u!114 &114933546827670748
 MonoBehaviour:
   m_ObjectHideFlags: 1

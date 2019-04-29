@@ -17,7 +17,7 @@ public class ControladorJugador : MonoBehaviour
     KeyCode teclaRodar, teclaSaltar;
     float deltaX, g, velocidadY, velocidadEstandar;       //velocidadEstandar = variable auxiliar donde guardamos la velocidad original
     bool salto, estadoControles = true, rodando, puedeSaltar,
-         enTubería = false, enPared = false, movHorizontal = false;
+         enTubería = false, enPared = false, movHorizontal = false,enSuelo;
 
     // Use this for initialization
     void Start()
@@ -66,23 +66,23 @@ public class ControladorJugador : MonoBehaviour
             }
 
             //flip del personaje
-            if (Input.GetAxis(axisHorizontal) > 0)
+            if (Input.GetAxisRaw(axisHorizontal) > 0)
             {
                 transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
             }
-            else if(Input.GetAxis(axisHorizontal) < 0)
+            else if(Input.GetAxisRaw(axisHorizontal) < 0)
             {
                 transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
             }
            
             //animacion de moverse
-            bool parado = (Input.GetAxis(axisHorizontal) == 0);
+            bool parado = (Input.GetAxisRaw(axisHorizontal) == 0);
             anim.SetBool("Moviendose", !parado);
             
             //mov horizontal
             if (Input.GetAxis(axisHorizontal) != 0 && !enPared)
             {
-                deltaX = Input.GetAxis(axisHorizontal);
+                deltaX = Input.GetAxisRaw(axisHorizontal);
                 movHorizontal = true;
                 rb.drag = minDrag; //si se mueve el LinearDrag lo ponemos al minimo
 
@@ -106,12 +106,13 @@ public class ControladorJugador : MonoBehaviour
                 rb.drag = minDrag; // al saltar poemos el LinearDrag al minimo
                 salto = true;
                 puedeSaltar = false;
+                enSuelo = false;
                 audioSource.loop = false;
                 GameManager.instance.EjecutarSonido(audioSource, "Salto");
             }
 
             //si esta parado y salta ponemos el LinearDrag al minimo
-            if (!puedeSaltar && !movHorizontal) rb.drag = minDrag;
+            if ((!puedeSaltar && !movHorizontal) || !enSuelo) rb.drag = minDrag;
 
             //animacion de salto
             anim.SetBool("Saltando", salto); 
@@ -156,6 +157,15 @@ public class ControladorJugador : MonoBehaviour
     public void ActivaPuedeSaltar()
     {
         puedeSaltar = true;
+        enSuelo = true;
+    }
+
+    /// <summary>
+    /// Metodo que se llama desde checksalto cuando el jugador deja de tocar el suelo
+    /// </summary>
+    public void DesactivaEnSuelo()
+    {
+        enSuelo = false;
     }
 
     /// <summary>

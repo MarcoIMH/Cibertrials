@@ -14,4 +14,15 @@ public class CheckSalto : MonoBehaviour
             controladorJugador.EstaEnPared(false); //Invocación de seguridad para desactivar el salto en paredes de ControladorJugador.
         }
     }
+    
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        ControladorJugador controladorJugador = GetComponentInParent<ControladorJugador>();
+
+        if (controladorJugador != null)
+        {
+            controladorJugador.DesactivaEnSuelo();
+            controladorJugador.EstaEnPared(false); //Invocación de seguridad para desactivar el salto en paredes de ControladorJugador.
+        }
+    }
 }
