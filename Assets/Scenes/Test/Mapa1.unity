@@ -8374,11 +8374,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4072256535831604, guid: a12bd5c66affba644a249902cce81f07, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -486.28
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4072256535831604, guid: a12bd5c66affba644a249902cce81f07, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -32
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4072256535831604, guid: a12bd5c66affba644a249902cce81f07, type: 2}
       propertyPath: m_LocalPosition.z
@@ -8386,15 +8386,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4072256535831604, guid: a12bd5c66affba644a249902cce81f07, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4072256535831604, guid: a12bd5c66affba644a249902cce81f07, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4072256535831604, guid: a12bd5c66affba644a249902cce81f07, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4072256535831604, guid: a12bd5c66affba644a249902cce81f07, type: 2}
       propertyPath: m_LocalRotation.w
@@ -8414,6 +8414,10 @@ Prefab:
       propertyPath: mundoContrario
       value: 
       objectReference: {fileID: 1489211682}
+    - target: {fileID: 1614130059403480, guid: a12bd5c66affba644a249902cce81f07, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a12bd5c66affba644a249902cce81f07, type: 2}
   m_IsPrefabAsset: 0
