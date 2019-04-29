@@ -354,10 +354,17 @@ public class GameManager : MonoBehaviour
         transformJ1.gameObject.SetActive(true);
         transformJ2.gameObject.SetActive(true);
 
+        //Si el jugador tiene una llave se le quita
         if (transformJ1.gameObject.GetComponent<AbrirPuertas>() != null)
             transformJ1.gameObject.GetComponent<AbrirPuertas>().QuitarLlave();
         if (transformJ2.gameObject.GetComponent<AbrirPuertas>() != null)
             transformJ2.gameObject.GetComponent<AbrirPuertas>().QuitarLlave();
+
+        //Si el jugador tiene el cubo de hielo se le quita
+        if (transformJ1.gameObject.GetComponentInChildren<CubitoHielo>() != null)
+            Destroy(transformJ1.gameObject.GetComponentInChildren<CubitoHielo>().gameObject);
+        if (transformJ2.gameObject.GetComponentInChildren<CubitoHielo>() != null)
+            Destroy(transformJ2.gameObject.GetComponentInChildren<CubitoHielo>().gameObject);
 
         if (transformJ1.gameObject.GetComponent<ControladorJugador>()!=null)
             transformJ1.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(true);

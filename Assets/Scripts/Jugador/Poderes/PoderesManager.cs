@@ -27,7 +27,7 @@ public class PoderesManager : MonoBehaviour {
    	void Start () {
         gemas = 0;
         poderUsar = Poderes.sinPoder;
-        habilidadActiva = false;   
+        habilidadActiva = false;
 
         if (jugadorContrario.gameObject.GetComponent<AudioSource>() != null) audioSourceJC = jugadorContrario.gameObject.GetComponent<AudioSource>();
 
@@ -102,9 +102,11 @@ public class PoderesManager : MonoBehaviour {
     public void AplicarCuboDeHielo()
     {
         GameManager.instance.EjecutarSonido(audioSourceJC, "CuboHielo");
-
+        pcJC.SetEstado(PerdidaControles.enCubo);
+        if (jugadorContrario.GetComponent<EstadoFantasma>() != null) jugadorContrario.GetComponent<EstadoFantasma>().ActivaEstadoFantasmaHielo();
         //pone el estado de los controles a false
         pcJC.DesactivaControles(-1, -1);
+        if (pcJC.gameObject.GetComponent<FeedbackVisual>() != null) pcJC.gameObject.GetComponent<FeedbackVisual>().DesactivaTodos();
         //instancia el cubo de hielo entrando su script en ejecucion 
         GameObject newCuboHielo = Instantiate<GameObject>(cuboHielo, jugadorContrario.transform);
     }
@@ -115,7 +117,10 @@ public class PoderesManager : MonoBehaviour {
     /// </summary>
     public void DesactivarCuboDeHielo()
     {
-        GetComponent<PerdidasControl>().ActivaControles();
+        if(GetComponent<PerdidasControl>() != null)
+            GetComponent<PerdidasControl>().SetEstado(PerdidaControles.sinCc);
+        if (GetComponent<EstadoFantasma>() != null) GetComponent<EstadoFantasma>().DesactivaEstadoFantasma();
+        GetComponent<PerdidasControl>().ActivaControles();   
     }
 
     /// <summary>

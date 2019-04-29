@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PerdidasControl : MonoBehaviour {
 
+    PerdidaControles estadoActual;
     //segundos que dura la modificacion de velocidad
     public float segundosModificaVelocidad;
 
@@ -22,7 +23,8 @@ public class PerdidasControl : MonoBehaviour {
     /// </summary>
     public void ActivaControles()
     {
-        controles.SetEstadoControlador(true);
+        if(estadoActual != PerdidaControles.enCubo)
+            controles.SetEstadoControlador(true);    
         GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(casoFeedBack, false);
     }
 
@@ -74,5 +76,15 @@ public class PerdidasControl : MonoBehaviour {
     {
         controles.RestauraVelocidad();
         GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(1, false);
+    }
+
+    public void SetEstado(PerdidaControles estado)
+    {
+        estadoActual = estado;
+    }
+
+    public PerdidaControles GetEstadoActual()
+    {
+        return estadoActual;
     }
 }

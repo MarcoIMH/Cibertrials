@@ -5,9 +5,19 @@ using UnityEngine;
 public class EstadoFantasma : MonoBehaviour {
 
     bool estadoFantasma;
+
     private void Start()
     {
         
+    }
+
+    /// <summary>
+    /// metodo que se llama cuando se activa el cubo de hielo
+    /// </summary>
+    /// <param name="segundos"></param>
+    public void ActivaEstadoFantasmaHielo()
+    {
+        estadoFantasma = true;
     }
 
     /// <summary>
@@ -23,7 +33,7 @@ public class EstadoFantasma : MonoBehaviour {
         GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(3, true);
     }
 
-    void DesactivaEstadoFantasma()
+    public void DesactivaEstadoFantasma()
     {
         estadoFantasma = false;
         GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(3, false);
