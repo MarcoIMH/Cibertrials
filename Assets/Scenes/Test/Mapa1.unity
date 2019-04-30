@@ -8418,6 +8418,12 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114145204695300302, guid: a12bd5c66affba644a249902cce81f07,
+        type: 2}
+      propertyPath: cuboHielo
+      value: 
+      objectReference: {fileID: 1986545082390706, guid: dd43b7a84cf562648a586361182928a9,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a12bd5c66affba644a249902cce81f07, type: 2}
   m_IsPrefabAsset: 0
@@ -11128,6 +11134,12 @@ Prefab:
       propertyPath: mundoContrario
       value: 
       objectReference: {fileID: 173491843}
+    - target: {fileID: 114652746104739486, guid: 7d468191650ee5c4bbb0a8c6372203c1,
+        type: 2}
+      propertyPath: cuboHielo
+      value: 
+      objectReference: {fileID: 1986545082390706, guid: dd43b7a84cf562648a586361182928a9,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d468191650ee5c4bbb0a8c6372203c1, type: 2}
   m_IsPrefabAsset: 0
