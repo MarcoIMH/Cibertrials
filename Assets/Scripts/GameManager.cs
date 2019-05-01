@@ -138,6 +138,7 @@ public class GameManager : MonoBehaviour
             Destroy(transformJ1.gameObject.GetComponentInChildren<CubitoHielo>().gameObject);
         if (transformJ2.gameObject.GetComponentInChildren<CubitoHielo>() != null)
             Destroy(transformJ2.gameObject.GetComponentInChildren<CubitoHielo>().gameObject);
+
         if (transformJ1.gameObject.GetComponent<FeedbackVisual>() != null)
             transformJ1.gameObject.GetComponent<FeedbackVisual>().DesactivaTodos();
         if (transformJ2.gameObject.GetComponent<FeedbackVisual>() != null)
@@ -360,16 +361,30 @@ public class GameManager : MonoBehaviour
         if (transformJ2.gameObject.GetComponent<AbrirPuertas>() != null)
             transformJ2.gameObject.GetComponent<AbrirPuertas>().QuitarLlave();
 
+        
+        if (transformJ1.gameObject.GetComponent<EstadoFantasma>() != null)
+            transformJ1.gameObject.GetComponent<EstadoFantasma>().DesactivaEstadoFantasma();
+        if (transformJ2.gameObject.GetComponent<EstadoFantasma>() != null)
+            transformJ2.gameObject.GetComponent<EstadoFantasma>().DesactivaEstadoFantasma();
+
+
         //Si el jugador tiene el cubo de hielo se le quita
         if (transformJ1.gameObject.GetComponentInChildren<CubitoHielo>() != null)
             Destroy(transformJ1.gameObject.GetComponentInChildren<CubitoHielo>().gameObject);
         if (transformJ2.gameObject.GetComponentInChildren<CubitoHielo>() != null)
             Destroy(transformJ2.gameObject.GetComponentInChildren<CubitoHielo>().gameObject);
 
-        if (transformJ1.gameObject.GetComponent<ControladorJugador>()!=null)
+        
+        if (transformJ1.gameObject.GetComponent<PerdidasControl>()!=null)
+            transformJ1.gameObject.GetComponent<PerdidasControl>().SetEstado(PerdidaControles.sinCc);
+        if (transformJ2.gameObject.GetComponent<PerdidasControl>() != null)
+            transformJ2.gameObject.GetComponent<PerdidasControl>().SetEstado(PerdidaControles.sinCc);
+
+
+        if (transformJ1.gameObject.GetComponent<ControladorJugador>() != null)
             transformJ1.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(true);
         if (transformJ2.gameObject.GetComponent<ControladorJugador>() != null)
-            transformJ2.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(true);        
+            transformJ2.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(true);
     }    
 
     /// <summary>

@@ -23,7 +23,7 @@ public class PerdidasControl : MonoBehaviour {
     /// </summary>
     public void ActivaControles()
     {
-        if(estadoActual != PerdidaControles.enCubo)
+        if (estadoActual != PerdidaControles.enCubo)
             controles.SetEstadoControlador(true);    
         GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(casoFeedBack, false);
     }
