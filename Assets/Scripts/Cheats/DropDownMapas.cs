@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuCheats : MonoBehaviour {
+public class DropDownMapas : MonoBehaviour {
 
     public Dropdown dropDownCheats;
     public Button botonCargarMapa;

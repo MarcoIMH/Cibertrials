@@ -23,7 +23,7 @@ public class Respawn : MonoBehaviour {
     public void RespawnJugador(Transform other)
     {
         Vector3 posicion = new Vector3(spawn.position.x, spawn.position.y + other.transform.localScale.y*2, 0);
-        other.position = posicion;
+        other.position = posicion;   
     }
 
     /// <summary>

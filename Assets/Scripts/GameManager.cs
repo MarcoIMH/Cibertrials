@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
 
         Controles.instance.SetEnMenuPrincipal(false);
 
-        if(!Cheats.instance.GetEstadoCheats())
+        if(!CheatsManager.instance.GetEstadoCheats())
         {
             PantallaDeCarga(3f);
             CargaMapaEnMundos();
@@ -358,7 +358,7 @@ public class GameManager : MonoBehaviour
         }
         Debug.Log("Despues de cargar el nuevo mapa");
 
-        if(Cheats.instance.GetEstadoCheats())
+        if(CheatsManager.instance.GetEstadoCheats())
             Invoke("ColocaJugadores", 0.3f);
     }
 

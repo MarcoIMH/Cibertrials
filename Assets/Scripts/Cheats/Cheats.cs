@@ -1,28 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Cheats : MonoBehaviour {
-    bool estadoCheats;
 
-    public Text cheatText;
+    public GameObject jugador;
+    public Player tipoJugador;
 
-    //Asegurarse de que solo hay una instancia
-    public static Cheats instance = null;
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else Destroy(this.gameObject);
-    }
-
-    // Use this for initialization
-    void Start () {
-        estadoCheats = false;
+	// Use this for initialization
+	void Start () {
+		
 	}
 	
 	// Update is called once per frame
@@ -30,46 +17,9 @@ public class Cheats : MonoBehaviour {
 		
 	}
 
-    public void RecogeTextoInputFieldCheats()
+    public void Invencibilidad()
     {
-        
-        string codigo = cheatText.text;
-        Debug.Log("Codigo introducido: "+codigo);
-
-        AnalizaCodigoIntroducido(codigo);
+        jugador.GetComponent<EstadoFantasma>().ActivaEstadoFantasma(-1);
     }
 
-    void AnalizaCodigoIntroducido(string codigo)
-    {
-        if (codigo == "*-=G@DM0D3_0N:UCM_StYLe=-*")
-        {
-            Debug.Log("Congratz! YOU ARE THE F. MASTER NOW! ENJOY THE POWER OF THE CIBERTRIAL'S GODS! ");
-            SetCheats(true);
-        }
-        else if (codigo == "*-=G@DM0D3_0FF:UCM_StYLe=-*")
-        {
-            Debug.Log("Loosing Cibertrial's Powers! MAY THE FORCE BE WITH YOU");
-            SetCheats(false);
-        }
-        else
-        {
-            Debug.Log("Are you keeding me? Nothing to do... :D ");
-            cheatText.text = "Nothing to do..";
-        } 
-    }
-
-    void SetCheats(bool estado)
-    {
-        estadoCheats = estado;
-    }
-
-    public void DestroyCheats()
-    {
-        Destroy(this.gameObject);
-    }
-
-    public bool GetEstadoCheats()
-    {
-        return estadoCheats;
-    }
 }

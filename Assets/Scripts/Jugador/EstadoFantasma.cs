@@ -27,8 +27,8 @@ public class EstadoFantasma : MonoBehaviour {
     public void ActivaEstadoFantasma(float segundos)
     {
         estadoFantasma = true;
-        // a los 'segundos' se desactiva la variable
-        Invoke("DesactivaEstadoFantasma", segundos);
+        // a los 'segundos' se desactiva la variable, usar -1 para no desactivarse automáticamente.
+        if(segundos != -1) Invoke("DesactivaEstadoFantasma", segundos);
 
         GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(3, true);
     }
