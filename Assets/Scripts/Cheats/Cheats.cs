@@ -35,20 +35,32 @@ public class Cheats : MonoBehaviour {
         
         string codigo = cheatText.text;
         Debug.Log("Codigo introducido: "+codigo);
-        
-        if (AnalizaCodigoIntroducido(codigo)) Debug.Log("Congratz! YOU ARE THE F. MASTER NOW! ENJOY THE POWER OF THE CIBERTRIAL'S GODS! "); //ActivarCheats();
-        else cheatText.text = "Nothing to do..";
+
+        AnalizaCodigoIntroducido(codigo);
     }
 
-    bool AnalizaCodigoIntroducido(string codigo)
+    void AnalizaCodigoIntroducido(string codigo)
     {
-        if (codigo == "*-=G@DM0D3_0N:UCM_StYLe=-*") return true;
-        return false;
+        if (codigo == "*-=G@DM0D3_0N:UCM_StYLe=-*")
+        {
+            Debug.Log("Congratz! YOU ARE THE F. MASTER NOW! ENJOY THE POWER OF THE CIBERTRIAL'S GODS! ");
+            SetCheats(true);
+        }
+        else if (codigo == "*-=G@DM0D3_0FF:UCM_StYLe=-*")
+        {
+            Debug.Log("Loosing Cibertrial's Powers! MAY THE FORCE BE WITH YOU");
+            SetCheats(false);
+        }
+        else
+        {
+            Debug.Log("Are you keeding me? Nothing to do... :D ");
+            cheatText.text = "Nothing to do..";
+        } 
     }
 
-    void ActivarCheats()
+    void SetCheats(bool estado)
     {
-        estadoCheats = true;
+        estadoCheats = estado;
     }
 
     public void DestroyCheats()

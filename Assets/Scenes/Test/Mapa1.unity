@@ -6582,6 +6582,7 @@ MonoBehaviour:
   menuIngame: {fileID: 113624445}
   pantallaDeCarga: {fileID: 1552655933}
   pantallaGanador: {fileID: 103262940}
+  pantallaCheats: {fileID: 1820547656}
   menuControles: {fileID: 1885855828}
   gemaJugador:
   - {fileID: 1439908408}

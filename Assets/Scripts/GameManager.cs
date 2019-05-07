@@ -74,12 +74,18 @@ public class GameManager : MonoBehaviour
         victoriasJ2 = 0;
         indiceMapaActual = 1;
 
-        Controles.instance.SetEnMenuPrincipal();
+        Controles.instance.SetEnMenuPrincipal(false);
 
-        PantallaDeCarga(3f);
-
-        CargaMapaEnMundos();
-        //Invoke("CargaMapaEnMundos", 0.05f);     //Preguntar a Guille sobre como podría hacer y ordenar el Script Execution Order para no necesitar estos invokes.
+        if(!Cheats.instance.GetEstadoCheats())
+        {
+            PantallaDeCarga(3f);
+            CargaMapaEnMundos();
+        }
+        else
+        {
+            ui.CierraPantallaDeCarga();
+            ui.AbrePantallaCheats();
+        }
     }
 
     public void SetTeclaMenu(KeyCode nuevaTecla, Player jugador)
@@ -167,14 +173,13 @@ public class GameManager : MonoBehaviour
             if (victoriasJ1 == 3) ui.AbrePantallaGanador(Player.jugador1);
             else ui.AbrePantallaGanador(Player.jugador2);
 
-            Controles.instance.SetEnMenuPrincipal();
-
             Invoke("CambiaEscena", 6f);
         }
     }
 
     void CambiaEscena()
     {
+        Controles.instance.SetEnMenuPrincipal(true);
         SceneManager.LoadScene("Menu");
     }
 
@@ -182,6 +187,7 @@ public class GameManager : MonoBehaviour
     {
         ui.ActualizaGema(gema, jugador, poder);
     }
+
     /// <summary>
     /// Llama al metodo ActualizarLlave del UIManager
     /// </summary>
@@ -417,6 +423,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         InterruptorMundos(true);
+    }
+
+    public void SetIndiceMapa(int indice)
+    {
+        indiceMapaActual = indice;
     }
 
     /// <summary>

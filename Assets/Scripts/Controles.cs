@@ -76,8 +76,8 @@ public class Controles : MonoBehaviour {
         return enMenuPrincipal;
     }
 
-    public void SetEnMenuPrincipal()
+    public void SetEnMenuPrincipal(bool est)
     {
-        enMenuPrincipal = !enMenuPrincipal;
+        enMenuPrincipal = est;
     }
 }

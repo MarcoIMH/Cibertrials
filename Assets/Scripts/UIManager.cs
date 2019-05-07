@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject menuIngame, pantallaDeCarga, pantallaGanador;
+    public GameObject menuIngame, pantallaDeCarga, pantallaGanador, pantallaCheats;
     public MenuControles menuControles;
 
     public Image[] gemaJugador; //0..v.lentgh/2-1 -->Jug1, v.Lentgh/2...v.Lentgh-1 -->Jug2
@@ -147,5 +147,10 @@ public class UIManager : MonoBehaviour
     {
         pantallaGanador.GetComponent<PantallaGanador>().SetGanador(jugador);
         pantallaGanador.SetActive(true);
+    }
+
+    public void AbrePantallaCheats()
+    {
+        pantallaCheats.SetActive(true);
     }
 }
