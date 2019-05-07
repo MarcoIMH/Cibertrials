@@ -82,6 +82,8 @@ public class MenuControles : MonoBehaviour {
 
     public void CargaMenuControles(Player tipoJugador)
     {
+        enMenuPrincipal = Controles.instance.GetEnMenuPrincipal();
+
         controles = Controles.instance.GetControlesJugador(tipoJugador);
         SetDiccionarioJugador(controles);
         ConfiguraTextos();
@@ -94,6 +96,8 @@ public class MenuControles : MonoBehaviour {
 
     public void CargaMenuOutGame()
     {
+        enMenuPrincipal = Controles.instance.GetEnMenuPrincipal();
+
         controles = Controles.instance.GetControlesJugador(jugadorQueAbreMenu);
         SetDiccionarioJugador(controles);
         ConfiguraTextos();

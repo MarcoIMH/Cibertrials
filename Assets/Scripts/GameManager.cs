@@ -74,6 +74,8 @@ public class GameManager : MonoBehaviour
         victoriasJ2 = 0;
         indiceMapaActual = 1;
 
+        Controles.instance.SetEnMenuPrincipal();
+
         PantallaDeCarga(3f);
 
         CargaMapaEnMundos();
@@ -164,6 +166,8 @@ public class GameManager : MonoBehaviour
         {
             if (victoriasJ1 == 3) ui.AbrePantallaGanador(Player.jugador1);
             else ui.AbrePantallaGanador(Player.jugador2);
+
+            Controles.instance.SetEnMenuPrincipal();
 
             Invoke("CambiaEscena", 6f);
         }
