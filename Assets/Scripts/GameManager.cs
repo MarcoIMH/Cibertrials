@@ -357,7 +357,9 @@ public class GameManager : MonoBehaviour
                 break;
         }
         Debug.Log("Despues de cargar el nuevo mapa");
-        //Invoke("ColocaJugadores", 0.3f);
+
+        if(Cheats.instance.GetEstadoCheats())
+            Invoke("ColocaJugadores", 0.3f);
     }
 
     /// <summary>

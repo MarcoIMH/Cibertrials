@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class MenuCheats : MonoBehaviour {
 
     public Dropdown dropDownCheats;
+    public Button botonCargarMapa;
+
+    bool mapaSeleccionado = false;
 
 	// Use this for initialization
 	void Start () {
@@ -26,14 +29,20 @@ public class MenuCheats : MonoBehaviour {
             for (int x = 1; x <= 3; x++) opciones.Add("Mapa " + x);
 
             dropDownCheats.AddOptions(opciones);
-
             dropDownCheats.value = 0;
             dropDownCheats.RefreshShownValue();
         }        
     }
 
+    public void SetIndiceMapa(int indice)
+    {
+        botonCargarMapa.enabled = true;        
+        GameManager.instance.SetIndiceMapa(indice + 1);        
+    }
+
     public void CargarMapa()
     {
-
+        botonCargarMapa.enabled = false;
+        GameManager.instance.CargaMapaEnMundos();
     }
 }
