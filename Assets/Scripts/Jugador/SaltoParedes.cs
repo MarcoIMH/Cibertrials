@@ -54,7 +54,7 @@ public class SaltoParedes : MonoBehaviour
     /// <summary>
     /// Método para realizar el salto en paredes del jugador.
     /// </summary>
-    public void SaltoPared()
+    void SaltoPared()
     {
         if (pared == Muros.izquierda) direccion = new Vector2(x, y);                          //Si la pared es la izquierda, la dirección X del salto será positiva
         else direccion = new Vector2(-x, y);                                                  //Si la pared es la derecha, la dirección X del salto será negativa

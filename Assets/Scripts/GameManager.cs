@@ -134,6 +134,12 @@ public class GameManager : MonoBehaviour
         if (transformJ2.gameObject.GetComponent<ControladorJugador>() != null)
             transformJ2.gameObject.GetComponent<ControladorJugador>().SetEstadoControlador(false);
 
+        if (transformJ1.gameObject.GetComponent<SaltoParedes>() != null)
+            transformJ1.gameObject.GetComponent<SaltoParedes>().SetSalto(false, Muros.derecha);
+
+        if (transformJ2.gameObject.GetComponent<SaltoParedes>() != null)
+            transformJ2.gameObject.GetComponent<SaltoParedes>().SetSalto(false, Muros.derecha);
+
         if (transformJ1.gameObject.GetComponentInChildren<CubitoHielo>() != null)
             Destroy(transformJ1.gameObject.GetComponentInChildren<CubitoHielo>().gameObject);
         if (transformJ2.gameObject.GetComponentInChildren<CubitoHielo>() != null)
