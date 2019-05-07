@@ -19,7 +19,7 @@ public class PoderesManager : MonoBehaviour {
 
     //Poderes[] poder = new Poderes[4]; //array de poderes
     Poderes[] poder = { Poderes.inversionControles, Poderes.cubito , Poderes.muro, Poderes.neblina}; //array de poderes
-    Poderes poderUsar;
+    Poderes poderUsar, poderUsado;
 
     int gemas;
     bool habilidadActiva;
@@ -27,6 +27,7 @@ public class PoderesManager : MonoBehaviour {
    	void Start () {
         gemas = 0;
         poderUsar = Poderes.sinPoder;
+        poderUsado = Poderes.sinPoder;
         habilidadActiva = false;
 
         if (jugadorContrario.gameObject.GetComponent<AudioSource>() != null) audioSourceJC = jugadorContrario.gameObject.GetComponent<AudioSource>();
@@ -36,10 +37,8 @@ public class PoderesManager : MonoBehaviour {
         if (jugadorContrario.gameObject.GetComponent<ControladorJugador>() != null)
         {
             controlesJugadorContrario = jugadorContrario.gameObject.GetComponent<ControladorJugador>();
-        }
-       
-       // Invoke("ConfiguraCoordenadasPoderes", 2f);                              //Invocamos la carga de coordenadas del mapa un segundo después  como seguridad 
-    }                                                                           //para que de tiempo a todo a situarse en su lugar
+        }       
+    }                                                                        
 
 
     // Update is called once per frame
@@ -72,6 +71,7 @@ public class PoderesManager : MonoBehaviour {
     public void ReseteaGemas()
     {
         gemas = 0;
+        poderUsado = poderUsar;
         poderUsar = Poderes.sinPoder;
         GameManager.instance.ActualizaGemas(gemas, jugador, poderUsar);
     }
@@ -163,7 +163,10 @@ public class PoderesManager : MonoBehaviour {
     /// </summary>
     void BuscaHabilidad()
     {
-        poderUsar = poder[Random.Range(0,4)];                                                                                         
+        poderUsar = poder[Random.Range(0,4)];
+        if ((poderUsar == Poderes.neblina && poderUsado == Poderes.neblina) ||
+            (poderUsar == Poderes.muro && poderUsado == Poderes.muro))
+                BuscaHabilidad();
     }
 
     /// <summary>
