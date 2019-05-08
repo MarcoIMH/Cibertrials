@@ -21,10 +21,10 @@ public class ZonaMuerte : MonoBehaviour {
     {
         PerdidasControl pc = other.GetComponent<PerdidasControl>();
         Respawn respawn = other.GetComponent<Respawn>();
-        if (respawn != null && pc!=null)
+        if (respawn != null && pc!=null && !CheatsManager.instance.GetEstadoCheats())
         {
             GameManager.instance.EjecutarSonido(audioSource,"Morir");
-            if(pc.GetEstadoActual() != PerdidaControles.enCubo && !CheatsManager.instance.GetEstadoCheats())
+            if(pc.GetEstadoActual() != PerdidaControles.enCubo)
                 pc.DesactivaControles(segundosRespawn, 4); //si muere el jugador no puede volver a moverse hasta pasados "segundosRespawn" segundos
             respawn.RespawnJugador(other.transform);  
         }

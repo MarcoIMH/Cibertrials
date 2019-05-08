@@ -44,11 +44,14 @@ public class SaltoParedes : MonoBehaviour
     /// <param name="lado">Configura el lado de la pared en la que ha saltado el jugador</param>
     public void SetSalto(bool puede, Muros lado)
     {
-        if (puede) rb.gravityScale = 0.1f;                                                    //Si se autoriza el salto es que está apoyado en la pared, configuramos gravedad a 0.1 para efecto de resbalar
-        else rb.gravityScale = gravedadPorDefecto;                                            //En caso de negar la autorización devolvemos la gravedad a su estado
+        if (!GetComponent<ControladorJugador>().GetVolar())
+        {
+            if (puede) rb.gravityScale = 0.1f;                                                    //Si se autoriza el salto es que está apoyado en la pared, configuramos gravedad a 0.1 para efecto de resbalar
+            else rb.gravityScale = gravedadPorDefecto;                                            //En caso de negar la autorización devolvemos la gravedad a su estado
 
-        pared = lado;                                                                         //Guardamos el lado en el que está para saber en qué dirección empujar en caso de activar salto
-        puedeSaltarParedes = puede;                                                           //Autorizamos o no el salto en paredes en función de los parámetros de entrada
+            pared = lado;                                                                         //Guardamos el lado en el que está para saber en qué dirección empujar en caso de activar salto
+            puedeSaltarParedes = puede;
+        }                                                              //Autorizamos o no el salto en paredes en función de los parámetros de entrada
     }
 
     /// <summary>

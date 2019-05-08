@@ -15,9 +15,9 @@ public class ControladorJugador : MonoBehaviour
     AudioSource audioSource;
     Animator anim;
     KeyCode teclaRodar, teclaSaltar;
-    float deltaX, g, velocidadY, velocidadEstandar;       //velocidadEstandar = variable auxiliar donde guardamos la velocidad original
+    float deltaX, deltaY, g, velocidadY, velocidadEstandar;       //velocidadEstandar = variable auxiliar donde guardamos la velocidad original
     bool salto, estadoControles = true, rodando, puedeSaltar,
-         enTubería = false, enPared = false, movHorizontal = false,enSuelo;
+         enTubería = false, enPared = false, movHorizontal = false,enSuelo, volar = false;
 
     // Use this for initialization
     void Start()
@@ -101,7 +101,7 @@ public class ControladorJugador : MonoBehaviour
             }
 
             //salto
-            if (Input.GetKey(teclaSaltar) && puedeSaltar)
+            if (Input.GetKey(teclaSaltar) && puedeSaltar && !volar)
             {
                 rb.drag = minDrag; // al saltar poemos el LinearDrag al minimo
                 salto = true;
@@ -110,6 +110,19 @@ public class ControladorJugador : MonoBehaviour
                 audioSource.loop = false;
                 GameManager.instance.EjecutarSonido(audioSource, "Salto");
             }
+
+            if (Input.GetKey(teclaSaltar) && volar == true)
+            {                
+                deltaY = 0.3f;
+            }
+            else if (Input.GetKey(teclaRodar) && volar == true)
+            {
+                deltaY = -0.3f;
+            }
+            else
+            {
+                deltaY = 0;
+            } 
 
             //si esta parado y salta ponemos el LinearDrag al minimo
             if ((!puedeSaltar && !movHorizontal) || !enSuelo) rb.drag = minDrag;
@@ -123,14 +136,34 @@ public class ControladorJugador : MonoBehaviour
     private void FixedUpdate()
     {
         //salto
-        if (salto)
+        if (salto && !volar)
         {
             rb.velocity = new Vector2(rb.velocity.x, velocidadY);
             salto = false;
         }
+
+        if (volar && CheatsManager.instance.GetEstadoCheats())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, velocidadY*deltaY);
+        }/*
+        else if(!volar && CheatsManager.instance.GetEstadoCheats())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+        }*/
+
         //mov horizontal
         if (movHorizontal && !enPared)
             rb.velocity = new Vector2(deltaX * velocidadX, rb.velocity.y);
+    }
+
+    public void SetVolar(bool est)
+    {
+        volar = est;
+    }
+
+    public bool GetVolar()
+    {
+        return volar;
     }
 
     public void SetTeclaRodar(KeyCode nuevaTecla)
