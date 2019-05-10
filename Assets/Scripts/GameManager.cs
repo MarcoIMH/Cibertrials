@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (victoriasJ1 == 3) ui.AbrePantallaGanador(Player.jugador1);
+            if (victoriasJ1 == 3 || victoriasJ2 == 1 && victoriasJ1 ==2) ui.AbrePantallaGanador(Player.jugador1);
             else ui.AbrePantallaGanador(Player.jugador2);
 
             Invoke("CambiaEscena", 6f);
