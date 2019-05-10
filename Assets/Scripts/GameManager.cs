@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     
     int indiceMapaActual = 1;
 
-    bool j1EnMeta=false, j2EnMeta = false, enMenu=false;
+    bool j1EnMeta = false, j2EnMeta = false, enMenu = false, primeraCarga = true;
 
     //Asegurarse de que solo hay una instancia
     public static GameManager instance = null;
@@ -311,10 +311,10 @@ public class GameManager : MonoBehaviour
     public void CargaMapaEnMundos()
     {
         Debug.Log("Antes de borrar mapa");
-        if (indiceMapaActual != 1)
+        if (!primeraCarga)
         {
             Destroy(mapaJ1.gameObject);
-            Destroy(mapaJ2.gameObject);
+            Destroy(mapaJ2.gameObject);            
         }
 
         Debug.Log("Despues de borrar mapa");
@@ -360,6 +360,8 @@ public class GameManager : MonoBehaviour
 
         if(CheatsManager.instance.GetEstadoCheats())
             Invoke("ColocaJugadores", 0.3f);
+
+        primeraCarga = false;
     }
 
     /// <summary>
