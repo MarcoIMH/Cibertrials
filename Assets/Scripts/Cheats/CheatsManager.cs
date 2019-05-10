@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CheatsManager : MonoBehaviour {
-    bool estadoCheats;
+    bool estadoCheats, estadoInvencibilidad=false;
 
     public Text cheatText;
 
@@ -71,5 +71,15 @@ public class CheatsManager : MonoBehaviour {
     public bool GetEstadoCheats()
     {
         return estadoCheats;
+    }
+
+    public void SetEstadoInvencibilidad(bool est)
+    {
+        estadoInvencibilidad = est;
+    }
+
+    public bool GetEstadoInvencibilidad()
+    {
+        return estadoInvencibilidad;
     }
 }

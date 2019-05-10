@@ -21,7 +21,7 @@ public class ZonaMuerte : MonoBehaviour {
     {
         PerdidasControl pc = other.GetComponent<PerdidasControl>();
         Respawn respawn = other.GetComponent<Respawn>();
-        if (respawn != null && pc!=null && !CheatsManager.instance.GetEstadoCheats())
+        if (respawn != null && pc!=null && !CheatsManager.instance.GetEstadoInvencibilidad())
         {
             GameManager.instance.EjecutarSonido(audioSource,"Morir");
             if(pc.GetEstadoActual() != PerdidaControles.enCubo)

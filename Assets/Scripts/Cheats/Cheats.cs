@@ -25,6 +25,7 @@ public class Cheats : MonoBehaviour {
     public void Invencibilidad()
     {
         invencibilidad = !invencibilidad;
+        CheatsManager.instance.SetEstadoInvencibilidad(invencibilidad);
         if(invencibilidad) jugador.GetComponent<EstadoFantasma>().ActivaEstadoFantasma(-1);
         else jugador.GetComponent<EstadoFantasma>().ActivaEstadoFantasma(0.01f);
     }
