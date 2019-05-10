@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MenuGraficosSonido : MonoBehaviour {
 
     public Dropdown resolucionesDropDown, calidadGraficaDropDown;
-
+    public Toggle togglePantallaCompleta;
     public AudioSource musica;
 
     Resolution[] resoluciones;
@@ -21,6 +21,7 @@ public class MenuGraficosSonido : MonoBehaviour {
     void Start () {
         resoluciones = Screen.resolutions;
         ConfiguraDropDownResoluciones();
+        pantallaCompleta = Screen.fullScreen;
     }
 	
 	// Update is called once per frame
@@ -70,6 +71,13 @@ public class MenuGraficosSonido : MonoBehaviour {
             calidadGraficaDropDown.value = indiceGraficos;        
             calidadGraficaDropDown.RefreshShownValue();
         }
+    }
+
+    public void ConfiguraTooglePantallaCompleta()
+    {
+        //if (Screen.fullScreen) togglePantallaCompleta.isOn = true;
+        if (pantallaCompleta) togglePantallaCompleta.isOn = true;
+        else togglePantallaCompleta.isOn = false;
     }
 
     /// <summary>

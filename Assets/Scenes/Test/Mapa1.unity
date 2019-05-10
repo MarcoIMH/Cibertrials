@@ -8393,7 +8393,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 704906038}
-        m_MethodName: set_enabled
+        m_MethodName: SetPantallaCompleta
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
