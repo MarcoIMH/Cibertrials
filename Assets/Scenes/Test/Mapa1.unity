@@ -5652,7 +5652,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 704906038}
-        m_MethodName: SetVolumen
+        m_MethodName: SetVolumenSonidos
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
