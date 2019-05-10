@@ -29,6 +29,10 @@ public class Cheats : MonoBehaviour {
         else jugador.GetComponent<EstadoFantasma>().ActivaEstadoFantasma(0.01f);
     }
 
+    public bool Getinvencibilidad()
+    {
+        return invencibilidad;
+    }
 
     public void Volar()
     {

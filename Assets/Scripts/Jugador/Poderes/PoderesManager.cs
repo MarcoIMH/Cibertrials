@@ -202,12 +202,16 @@ public class PoderesManager : MonoBehaviour {
     void ActivaNeblina()
     {
         int bandera = 0;    //Bandera para recorrer el array de coordenadas de poderes en mapa
+        float ancho;
         CalculaPosicionPoder(ref bandera);
+
         //Calculamos el ancho que tendrá la Neblina, dependerá de la distancia entre dos coordenadas sucesivas
-        float ancho = coordsPoderesMapa[bandera + 1].position.x - coordsPoderesMapa[bandera].position.x;
+        if (bandera+1 != coordsPoderesMapa.Length)        
+             ancho = coordsPoderesMapa[bandera + 1].position.x - coordsPoderesMapa[bandera].position.x;
+        else ancho = coordsPoderesMapa[bandera].position.x - coordsPoderesMapa[bandera-1].position.x;
+
         //Instanciamos la neblina en la siguiente coordenada al jugador contrario    
         GameObject niebla;
-
         GameManager.instance.EjecutarSonido(audioSourceJC, "Neblina");
 
         if (jugador == Player.jugador1)
@@ -236,6 +240,9 @@ public class PoderesManager : MonoBehaviour {
     /// <param name="bandera"></param>
     void CalculaPosicionPoder(ref int bandera)
     {
+        for(int x = 0; x < coordsPoderesMapa.Length; x++)
+            Debug.Log("Respawn " + x + ": " + coordsPoderesMapa[x].position.x + "," + coordsPoderesMapa[x].position.y);
+
         Transform transformJC;
         if (jugadorContrario.GetComponent<Transform>() != null)
         {
