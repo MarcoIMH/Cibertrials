@@ -41,7 +41,8 @@ public class CheatsManager : MonoBehaviour {
 
     void AnalizaCodigoIntroducido(string codigo)
     {
-        if (codigo == "*-=G@DM0D3_0N:UCM_StYLe=-*")
+        //if (codigo == "*-=G@DM0D3_0N:UCM_StYLe=-*")
+        if (codigo == "12345")
         {
             Debug.Log("Congratz! YOU ARE THE F. MASTER NOW! ENJOY THE POWER OF THE CIBERTRIAL'S GODS! ");
             SetCheats(true);
