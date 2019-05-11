@@ -221,8 +221,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1614130059403480}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -486.28, y: -32, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4504703602978698}
@@ -557,9 +557,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jugadorContrario: {fileID: 0}
   mundoContrario: {fileID: 0}
-  muro: {fileID: 1911966008199246, guid: c79cbcc33e03229489755034d835f6f4, type: 2}
+  muro: {fileID: 1885629734972780, guid: 2ecbd686a37537340a7efdccf1d62608, type: 2}
   neblina: {fileID: 1949629961110612, guid: f7bc3671cc848f147a3917be0ec2695a, type: 2}
-  cuboHielo: {fileID: 1032453531818462, guid: 53f3f365e4151884c85690dd1e39c0fb, type: 2}
+  cuboHielo: {fileID: 1986545082390706, guid: dd43b7a84cf562648a586361182928a9, type: 2}
   jugador: 0
   gemasMax: 5
   segundosInversionControles: 4.5
@@ -698,14 +698,6 @@ MonoBehaviour:
   axisVertical: axisVertical
   minDrag: 0
   maxDrag: 20
-  salto: 0
-  estadoControles: 1
-  rodando: 0
-  puedeSaltar: 0
-  "enTuber\xEDa": 0
-  enPared: 0
-  movHorizontal: 0
-  enSuelo: 0
 --- !u!114 &114933546827670748
 MonoBehaviour:
   m_ObjectHideFlags: 1
