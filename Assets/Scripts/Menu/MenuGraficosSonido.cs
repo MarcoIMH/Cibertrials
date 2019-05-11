@@ -7,7 +7,7 @@ public class MenuGraficosSonido : MonoBehaviour {
 
     public Dropdown resolucionesDropDown, calidadGraficaDropDown;
     public Toggle togglePantallaCompleta;
-    public AudioSource musica;
+    public Slider sliderSonido, sliderMusica;
 
     Resolution[] resoluciones;
 
@@ -15,7 +15,7 @@ public class MenuGraficosSonido : MonoBehaviour {
     int indiceGraficos, indiceResolucion;
     Resolution resolucionActual;
 
-    float volumenSonidos;
+    float volumenSonidos=1, volumenMusica=0.09f;
 
     // Use this for initialization
     void Start () {
@@ -75,9 +75,17 @@ public class MenuGraficosSonido : MonoBehaviour {
 
     public void ConfiguraTooglePantallaCompleta()
     {
-        //if (Screen.fullScreen) togglePantallaCompleta.isOn = true;
         if (pantallaCompleta) togglePantallaCompleta.isOn = true;
         else togglePantallaCompleta.isOn = false;
+    }
+
+    public void ConfiguraSlidersSonidoMusica()
+    {
+        if(GameManager.instance != null)
+        {
+            sliderMusica.value = GameManager.instance.GetVolumenMusica();
+            sliderSonido.value = GameManager.instance.GetVolumenSonidos();
+        }        
     }
 
     /// <summary>
@@ -125,7 +133,7 @@ public class MenuGraficosSonido : MonoBehaviour {
     /// <param name="vol"></param>
     public void SetVolumenMusica(float vol)
     {
-        musica.volume = vol;
+        volumenMusica = vol;
     }
 
     /// <summary>
@@ -137,7 +145,7 @@ public class MenuGraficosSonido : MonoBehaviour {
         {
             GameManager.instance.GuardaConfiguracionGraficos(pantallaCompleta, indiceGraficos, indiceResolucion, resolucionActual);
             GameManager.instance.SetVolumenSonidos(volumenSonidos);
-            //GameManager.instance.SetVolumenMusica(musica.volume);
+            GameManager.instance.SetVolumenMusica(volumenMusica);
         }        
     }
 }

@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     UIManager ui;    
     AudioManager audioManager;
+    AudioSource musicaManagerJ1,musicaManagerJ2;
     GameObject mundoJ1, mundoJ2;
     Transform[] coordPoderesMapa;
     Transform transformJ1, transformJ2, puntoInicialJ1, puntoInicialJ2;
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
     
     int indiceMapaActual = 1;
 
-    bool j1EnMeta = false, j2EnMeta = false, enMenu = false, primeraCarga = true;
+    bool j1EnMeta = false, j2EnMeta = false, enMenu = false, primeraCarga = true, primerAudioSource=true;
 
     //Asegurarse de que solo hay una instancia
     public static GameManager instance = null;
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         volumenSonidos = 1;
-        volumenMusica = 1;
+        volumenMusica = 0.09f;
     }
 
     // Update is called once per frame
@@ -216,13 +217,42 @@ public class GameManager : MonoBehaviour
         volumenSonidos = vol;
     }
 
+    public float GetVolumenSonidos()
+    {
+        return volumenSonidos;
+    }
+
     /// <summary>
     /// Método para almacenar el volúmen de la musica.  
     /// </summary>
     /// <param name="vol"></param>
     public void SetVolumenMusica(float vol)
     {
-        volumenSonidos = vol;
+        volumenMusica = vol;
+        ConfiguraVolumenMusica();
+    }
+
+    public float GetVolumenMusica()
+    {
+        return volumenMusica;
+    }
+
+    public void SetAudioSourceMusica(AudioSource musicaManager)
+    {
+        if (primerAudioSource)
+        {
+            musicaManagerJ1 = musicaManager;
+            primerAudioSource = false;
+        }else musicaManagerJ2 = musicaManager;
+    }
+
+    void ConfiguraVolumenMusica()
+    {
+        if (musicaManagerJ1 != null && musicaManagerJ2 != null)
+        {
+            musicaManagerJ1.volume = volumenMusica;
+            musicaManagerJ2.volume = volumenMusica;
+        }
     }
 
     public void GuardaConfiguracionGraficos(bool pantallaCompleta, int indiceGraficos, int indiceResolucion, Resolution resolucionActual)
