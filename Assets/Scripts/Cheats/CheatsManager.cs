@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CheatsManager : MonoBehaviour {
     bool estadoCheats, estadoInvencibilidad=false;
 
-    public Text cheatText;
+    Text cheatText;
 
     //Asegurarse de que solo hay una instancia
     public static CheatsManager instance = null;
@@ -30,6 +30,11 @@ public class CheatsManager : MonoBehaviour {
 		
 	}
 
+    public void SetGameObjectText(Text text)
+    {
+        cheatText = text;
+    }
+
     public void RecogeTextoInputFieldCheats()
     {
         
@@ -47,10 +52,16 @@ public class CheatsManager : MonoBehaviour {
             Debug.Log("Congratz! YOU ARE THE F. MASTER NOW! ENJOY THE POWER OF THE CIBERTRIAL'S GODS! ");
             SetCheats(true);
         }
-        else if (codigo == "*-=G@DM0D3_0FF:UCM_StYLe=-*")
+       //else if (codigo == "*-=G@DM0D3_0FF:UCM_StYLe=-*")
+        else if (codigo == "54321")
         {
-            Debug.Log("Loosing Cibertrial's Powers! MAY THE FORCE BE WITH YOU");
+            Debug.Log("Loosing Cibertrial's Powers! MAY THE FORCE BE WITH YOU!");
             SetCheats(false);
+        }
+        else if(codigo == "12345destroy")
+        {
+            Debug.Log("Destroying Cibertrial's Powers! SORRY FOR YOU!");
+            DestroyCheats();
         }
         else
         {

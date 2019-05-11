@@ -7412,6 +7412,7 @@ GameObject:
   - component: {fileID: 460578419}
   - component: {fileID: 460578418}
   - component: {fileID: 460578417}
+  - component: {fileID: 460578420}
   m_Layer: 5
   m_Name: CheatsInputField
   m_TagString: Untagged
@@ -7537,6 +7538,17 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 460578415}
   m_CullTransparentMesh: 0
+--- !u!114 &460578420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 460578415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375fd756d98ce6641b12b3d997035c36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &462059148
 GameObject:
   m_ObjectHideFlags: 0
@@ -8712,8 +8724,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 994509742}
-        m_MethodName: RecogeTextoInputFieldCheats
+      - m_Target: {fileID: 460578420}
+        m_MethodName: RecogerTextoInputField
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10797,7 +10809,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8dc436b5f2c2224e9f212e7f1bd1583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cheatText: {fileID: 1813296841}
 --- !u!4 &994509743
 Transform:
   m_ObjectHideFlags: 0
@@ -16124,6 +16135,7 @@ GameObject:
   - component: {fileID: 1813296840}
   - component: {fileID: 1813296842}
   - component: {fileID: 1813296841}
+  - component: {fileID: 1813296843}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -16189,6 +16201,17 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1813296839}
   m_CullTransparentMesh: 0
+--- !u!114 &1813296843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1813296839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a66dc20360d97b47812a20d5914e199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1869942368
 GameObject:
   m_ObjectHideFlags: 0
