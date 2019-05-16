@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class CogerGemas : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+    /// <summary>
+    /// Detecta la colision con el jugador, suma una gema al contador y destruye la gema
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter2D(Collider2D other)
     {
         PoderesManager pm = other.GetComponent<PoderesManager>();

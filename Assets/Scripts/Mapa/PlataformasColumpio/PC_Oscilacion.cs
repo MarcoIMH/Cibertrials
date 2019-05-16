@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PC_Oscilacion : MonoBehaviour {
-    public float velRotacion;       //Como de rápido oscila el punto de pivote
-    public float maxAngulo;         //Mitad del angulo total que describe
-    // Use this for initialization
+
     Vector3 vectorRotacion;
+
+    public float velRotacion;       //Como de rápido oscila el punto de pivote
+    public float maxAngulo;         //Mitad del angulo total que describe    
 
     void Start ()
     {
@@ -15,8 +16,7 @@ public class PC_Oscilacion : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(vectorRotacion * Time.deltaTime);      //En cada frame vamos rotando el objeto
-    
+        transform.Rotate(vectorRotacion * Time.deltaTime);      //En cada frame vamos rotando el objeto    
 
         if (transform.rotation.z >= maxAngulo || transform.rotation.z <= -maxAngulo)        //si alcanza los valores maximos del ángulo
         {

@@ -11,12 +11,6 @@ public class Meta : MonoBehaviour {
     {
         audioSource = GetComponent<AudioSource>();
     }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
 
     /// <summary>
     /// Este metodo llama al final de la ronda en el GAme Manager cuando el jugador toca la meta
@@ -41,5 +35,4 @@ public class Meta : MonoBehaviour {
         if(other.GetComponent<PerdidasControl>() != null)
             other.GetComponent<PerdidasControl>().DesactivaControles(-1, -1);
     }
-
 }

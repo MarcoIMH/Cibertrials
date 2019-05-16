@@ -46,6 +46,20 @@ public class MovimientoEnemigos : MonoBehaviour {
     }
 
     /// <summary>
+    /// Configura si debe lanzarse o no el movimiento del enemigo. También se usa para reiniciar el movimiento de este en caso de que tenga la capacidad de seguir a un jugador
+    /// </summary>
+    /// <param name="confirmacion"></param>
+    public void SetMueveEnemigo(bool confirmacion)
+    {
+        mueveEnemigo = confirmacion;
+        if (confirmacion)
+        {
+            indice = 1;
+            CompruebaFlip(indice--);
+        }
+    }
+
+    /// <summary>
     /// Método que se utiliza para indicar cuando tiene que terminar la pausa, en caso de que la haya
     /// </summary>
     void TerminarPausa()
@@ -81,18 +95,4 @@ public class MovimientoEnemigos : MonoBehaviour {
     {
         transform.position = Vector3.MoveTowards(transform.position + transform.up * Mathf.Sin(Time.time * frecuencia) * amplitud, posicion.position, velocidad * Time.deltaTime);
     }    
-
-    /// <summary>
-    /// Configura si debe lanzarse o no el movimiento del enemigo. También se usa para reiniciar el movimiento de este en caso de que tenga la capacidad de seguir a un jugador
-    /// </summary>
-    /// <param name="confirmacion"></param>
-    public void SetMueveEnemigo(bool confirmacion)
-    {
-        mueveEnemigo = confirmacion;
-        if (confirmacion)
-        {
-            indice = 1;
-            CompruebaFlip(indice--);
-        }        
-    }
 }

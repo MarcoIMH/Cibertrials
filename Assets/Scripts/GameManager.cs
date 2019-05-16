@@ -6,7 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject mapPrefab, mapPrefab2, mapPrefab3;   
+    public GameObject mapPrefab, mapPrefab2, mapPrefab3;
+
+    GameObject mapaJ1, mapaJ2;
+
+    UIManager ui;
+    AudioManager audioManager;
+    AudioSource musicaManagerJ1, musicaManagerJ2;
+    GameObject mundoJ1, mundoJ2;
+    Transform[] coordPoderesMapa;
+    Transform transformJ1, transformJ2, puntoInicialJ1, puntoInicialJ2;
+    KeyCode teclaMenuJ1, teclaMenuJ2;
 
     struct Graficos
     {
@@ -15,21 +25,9 @@ public class GameManager : MonoBehaviour
         public Resolution resolucion;
     }
     Graficos configuracionGraficos;
-
-    GameObject mapaJ1, mapaJ2;
-
-    UIManager ui;    
-    AudioManager audioManager;
-    AudioSource musicaManagerJ1,musicaManagerJ2;
-    GameObject mundoJ1, mundoJ2;
-    Transform[] coordPoderesMapa;
-    Transform transformJ1, transformJ2, puntoInicialJ1, puntoInicialJ2;
-    KeyCode teclaMenuJ1, teclaMenuJ2;
     
-    int victoriasJ1, victoriasJ2;
-    float volumenSonidos, volumenMusica;
-    
-    int indiceMapaActual = 1;
+    int victoriasJ1, victoriasJ2, indiceMapaActual = 1;
+    float volumenSonidos, volumenMusica;   
 
     bool j1EnMeta = false, j2EnMeta = false, enMenu = false, primeraCarga = true, primerAudioSource=true;
 
@@ -69,6 +67,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Inicializa el torneo
+    /// </summary>
     public void InicializaTorneo()
     {
         victoriasJ1 = 0;
@@ -89,6 +90,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Cambia el Keycode que da acceso al menu
+    /// </summary>
+    /// <param name="nuevaTecla"></param>
+    /// <param name="jugador"></param>
     public void SetTeclaMenu(KeyCode nuevaTecla, Player jugador)
     {
         if (jugador == Player.jugador1) teclaMenuJ1 = nuevaTecla;
@@ -101,40 +107,6 @@ public class GameManager : MonoBehaviour
     /// <param name="jugadorEnMeta"></param>
     public void FinalizarRonda(Player jugadorEnMeta)
     {
-        /*if (!j1EnMeta && jugadorEnMeta == Player.jugador1)
-        {
-            if(!j2EnMeta) rondasJugador1++;
-            j1EnMeta = true;
-        }
-        else
-        {
-            if (!j1EnMeta) rondasJugador2++;
-            j2EnMeta = true;
-        }
-
-        if (j1EnMeta && j2EnMeta && indiceMapaActual < 3)
-        {
-            indiceMapaActual++;            
-            pantallaDeCarga.gameObject.GetComponent<PantallaDeCarga>().MostrarResultados(rondasJugador1, rondasJugador2, indiceMapaActual, 8f);
-            PantallaDeCarga(8f);
-            CargaMapaEnMundos();
-            j1EnMeta = false;
-            j2EnMeta = false;   
-        }else if (j1EnMeta && j2EnMeta && indiceMapaActual == 3)
-        {
-            pantallaGanador.gameObject.SetActive(true);
-            if(rondasJugador1 == 3) pantallaGanador.SetGanador(Player.jugador1);
-            else pantallaGanador.SetGanador(Player.jugador2);
-
-            rondasJugador1 = 0;
-            rondasJugador2 = 0;
-
-            indiceMapaActual = 1;
-            j1EnMeta = false;
-            j2EnMeta = false;
-            Invoke("CambiaEscena", 8f);
-        }*/
-
         if (jugadorEnMeta == Player.jugador1) victoriasJ1++;
         else victoriasJ2++;
 
@@ -178,16 +150,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void CambiaEscena()
-    {
-        Controles.instance.SetEnMenuPrincipal(true);
-        SceneManager.LoadScene("Menu");
-    }
-
+    /// <summary>
+    /// Le dice a la UI que actualize las gemas
+    /// </summary>
+    /// <param name="gema"></param>
+    /// <param name="jugador"></param>
+    /// <param name="poder"></param>
     public void ActualizaGemas(int gema, Player jugador, Poderes poder)
     {
         ui.ActualizaGema(gema, jugador, poder);
-    }
+    }   
 
     /// <summary>
     /// Llama al metodo ActualizarLlave del UIManager
@@ -217,6 +189,10 @@ public class GameManager : MonoBehaviour
         volumenSonidos = vol;
     }
 
+    /// <summary>
+    /// Devuelve volumenSonidos
+    /// </summary>
+    /// <returns></returns>
     public float GetVolumenSonidos()
     {
         return volumenSonidos;
@@ -232,29 +208,36 @@ public class GameManager : MonoBehaviour
         ConfiguraVolumenMusica();
     }
 
+    /// <summary>
+    /// Devuelve volumenMusica
+    /// </summary>
+    /// <returns></returns>
     public float GetVolumenMusica()
     {
         return volumenMusica;
     }
 
+    /// <summary>
+    /// Cambia la musica
+    /// </summary>
+    /// <param name="musicaManager"></param>
     public void SetAudioSourceMusica(AudioSource musicaManager)
     {
         if (primerAudioSource)
         {
             musicaManagerJ1 = musicaManager;
             primerAudioSource = false;
-        }else musicaManagerJ2 = musicaManager;
-    }
-
-    void ConfiguraVolumenMusica()
-    {
-        if (musicaManagerJ1 != null && musicaManagerJ2 != null)
-        {
-            musicaManagerJ1.volume = volumenMusica;
-            musicaManagerJ2.volume = volumenMusica;
         }
+        else musicaManagerJ2 = musicaManager;
     }
-
+   
+    /// <summary>
+    /// Llamado para que la seleccion de graficos desde el menu siga en vigor
+    /// </summary>
+    /// <param name="pantallaCompleta"></param>
+    /// <param name="indiceGraficos"></param>
+    /// <param name="indiceResolucion"></param>
+    /// <param name="resolucionActual"></param>
     public void GuardaConfiguracionGraficos(bool pantallaCompleta, int indiceGraficos, int indiceResolucion, Resolution resolucionActual)
     {
         configuracionGraficos.pantallaCompleta = pantallaCompleta;
@@ -272,11 +255,21 @@ public class GameManager : MonoBehaviour
         audioManager = AM;
     }
 
+    /// <summary>
+    /// Llama a audioManager para que ejecute un audio
+    /// </summary>
+    /// <param name="audioSource"></param>
+    /// <param name="nombreSonido"></param>
     public void EjecutarSonido(AudioSource audioSource, string nombreSonido)
     {
         audioManager.EjecutarSonido(audioSource, nombreSonido, volumenSonidos);
     }
 
+    /// <summary>
+    /// Llama a audioManager para que ejecute un audio
+    /// </summary>
+    /// <param name="nombreSonido"></param>
+    /// <param name="eleccion"></param>
     public void EjecutarSonido(string nombreSonido, int eleccion)
     {
         audioManager.EjecutarSonido(nombreSonido, eleccion, volumenSonidos);
@@ -322,7 +315,8 @@ public class GameManager : MonoBehaviour
     /// <param name="goMundo">Referencia al GO del mundo en cuestión</param>
     /// <param name="tr">Transform del jugador correspondiente a ese mundo</param>
     public void SetMundoYJugador(Mundos mundo, GameObject goMundo, Transform tr)
-    {//Cambiar a bool y adaptar ControlMundos cuando implemente una forma de comprobar que realmente se ha cargado todo -> pensar detenidamente
+    {
+        //Cambiar a bool y adaptar ControlMundos cuando implemente una forma de comprobar que realmente se ha cargado todo -> pensar detenidamente
         if (mundo == Mundos.mundoJ1)
         {
             mundoJ1 = goMundo;
@@ -438,17 +432,6 @@ public class GameManager : MonoBehaviour
     }    
 
     /// <summary>
-    /// Configura el juego para establecer una pausa y muestra la pantalla de menu inGame, se activa en caso de que algún jugador abre dicho menú.
-    /// </summary>
-    void PausaJuego()
-    {
-        enMenu = true;
-        Time.timeScale = 0;
-
-        InterruptorMundos(false);
-    }
-
-    /// <summary>
     /// Restablece el juego de su pausa y cierra el menú.
     /// </summary>
     public void QuitaPausaJuego()
@@ -459,9 +442,45 @@ public class GameManager : MonoBehaviour
         InterruptorMundos(true);
     }
 
+    /// <summary>
+    /// Cambia el mapa a cargar
+    /// </summary>
+    /// <param name="indice"></param>
     public void SetIndiceMapa(int indice)
     {
         indiceMapaActual = indice;
+    }
+
+    /// <summary>
+    /// Cambia la escena a menu
+    /// </summary>
+    void CambiaEscena()
+    {
+        Controles.instance.SetEnMenuPrincipal(true);
+        SceneManager.LoadScene("Menu");
+    }
+
+    /// <summary>
+    /// Actualiza el volumen a la que se escucha la musica
+    /// </summary>
+    void ConfiguraVolumenMusica()
+    {
+        if (musicaManagerJ1 != null && musicaManagerJ2 != null)
+        {
+            musicaManagerJ1.volume = volumenMusica;
+            musicaManagerJ2.volume = volumenMusica;
+        }
+    }
+
+    /// <summary>
+    /// Configura el juego para establecer una pausa y muestra la pantalla de menu inGame, se activa en caso de que algún jugador abre dicho menú.
+    /// </summary>
+    void PausaJuego()
+    {
+        enMenu = true;
+        Time.timeScale = 0;
+
+        InterruptorMundos(false);
     }
 
     /// <summary>
