@@ -21,23 +21,6 @@ public class DropDownMapas : MonoBehaviour {
 	}
 
     /// <summary>
-    /// Configura el Drop Down de mapas para los cheats.
-    /// </summary>
-    void ConfiguraDropDownCheats()
-    {
-        if (dropDownCheats != null)
-        {
-            dropDownCheats.ClearOptions();
-            List<string> opciones = new List<string>();
-            for (int x = 1; x <= 3; x++) opciones.Add("Mapa " + x);
-
-            dropDownCheats.AddOptions(opciones);            
-            dropDownCheats.value = 0;
-            dropDownCheats.RefreshShownValue();
-        }        
-    }
-
-    /// <summary>
     /// Configura el índice del mapa a cargar según que mapa se ha elegido en el drop down.
     /// </summary>
     /// <param name="indice"></param>
@@ -55,5 +38,22 @@ public class DropDownMapas : MonoBehaviour {
     {
         botonCargarMapa.enabled = false;
         GameManager.instance.CargaMapaEnMundos();
+    }
+
+    /// <summary>
+    /// Configura el Drop Down de mapas para los cheats.
+    /// </summary>
+    void ConfiguraDropDownCheats()
+    {
+        if (dropDownCheats != null)
+        {
+            dropDownCheats.ClearOptions();
+            List<string> opciones = new List<string>();
+            for (int x = 1; x <= 3; x++) opciones.Add("Mapa " + x);
+
+            dropDownCheats.AddOptions(opciones);
+            dropDownCheats.value = 0;
+            dropDownCheats.RefreshShownValue();
+        }
     }
 }
