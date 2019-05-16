@@ -10,10 +10,10 @@ public class MenuGraficosSonido : MonoBehaviour {
     public Slider sliderSonido, sliderMusica;
 
     Resolution[] resoluciones;
+    Resolution resolucionActual;
 
     bool pantallaCompleta;
     int indiceGraficos, indiceResolucion;
-    Resolution resolucionActual;
 
     float volumenSonidos=1, volumenMusica=0.09f;
 

@@ -7,14 +7,14 @@ public class CubitoHielo : MonoBehaviour {
     //golpes necesarios para romper el bloque de hielo
     public int GolpesParaRomper;
 
-    //numero de golpes que ya ha recibido el cubo de hielo
-    int GolpesRecibidos;
-
     //variables de acceso a otros componentes
     RomperParedes picar;
     PoderesManager pm;
 
     AudioSource audioSource;
+
+    //numero de golpes que ya ha recibido el cubo de hielo
+    int GolpesRecibidos;
 
 	// Use this for initialization
 	void Start ()
