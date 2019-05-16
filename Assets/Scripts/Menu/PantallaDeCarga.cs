@@ -18,7 +18,31 @@ public class PantallaDeCarga : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-	}
+	}  
+
+    /// <summary>
+    /// Pantalla de carga Dinámica.
+    /// Sección para mostrar los resultados de los jugadores.
+    /// </summary>
+    /// <param name="rondasJ1">Rondas ganadas J1</param>
+    /// <param name="rondasJ2">Rondas ganadas J2</param>
+    /// <param name="mapa">indice mapa</param>
+    /// <param name="tiempoMostrarResultados">tiempo que se mostrarán los resultados</param>
+    public void MostrarResultados(int rondasJ1, int rondasJ2, int mapa, float tiempoMostrarResultados)
+    { 
+        textoConsejo.enabled = false;
+        imagenCargando.SetActive(false);
+
+        jugador1.SetActive(true);
+        jugador2.SetActive(true);
+
+        jugador1.GetComponentInChildren<Text>().text = "" + rondasJ1;
+        jugador2.GetComponentInChildren<Text>().text = "" + rondasJ2;
+
+        this.mapa = mapa;
+
+        Invoke("CambiaPieDeCarga", tiempoMostrarResultados/2);
+    }
 
     /// <summary>
     /// Consejos dinámicos.
@@ -46,34 +70,9 @@ public class PantallaDeCarga : MonoBehaviour {
         imagenCargando.SetActive(true);
 
         imagenCargando.GetComponent<Image>().sprite = piePantallaCarga[mapa - 1];
-        textoConsejo.text = ConsejoDinamico();        
+        textoConsejo.text = ConsejoDinamico();
 
         jugador1.SetActive(false);
         jugador2.SetActive(false);
-        
-    }
-
-    /// <summary>
-    /// Pantalla de carga Dinámica.
-    /// Sección para mostrar los resultados de los jugadores.
-    /// </summary>
-    /// <param name="rondasJ1">Rondas ganadas J1</param>
-    /// <param name="rondasJ2">Rondas ganadas J2</param>
-    /// <param name="mapa">indice mapa</param>
-    /// <param name="tiempoMostrarResultados">tiempo que se mostrarán los resultados</param>
-    public void MostrarResultados(int rondasJ1, int rondasJ2, int mapa, float tiempoMostrarResultados)
-    { 
-        textoConsejo.enabled = false;
-        imagenCargando.SetActive(false);
-
-        jugador1.SetActive(true);
-        jugador2.SetActive(true);
-
-        jugador1.GetComponentInChildren<Text>().text = "" + rondasJ1;
-        jugador2.GetComponentInChildren<Text>().text = "" + rondasJ2;
-
-        this.mapa = mapa;
-
-        Invoke("CambiaPieDeCarga", tiempoMostrarResultados/2);
     }
 }
