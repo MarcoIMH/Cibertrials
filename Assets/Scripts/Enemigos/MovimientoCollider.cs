@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MovimientoCollider : MonoBehaviour {
 
-    SpriteRenderer spriteEnemigo;
-    Collider2D colliderVision;
+    private SpriteRenderer spriteEnemigo;
+    private Collider2D colliderVision;
 
-    float colliderVisionPosX;
-    float colliderVisionNegX;
+    private float colliderVisionPosX;
+    private float colliderVisionNegX;
 
     // Use this for initialization
     void Start ()

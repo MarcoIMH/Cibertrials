@@ -131,31 +131,7 @@ public class ControladorJugador : MonoBehaviour
             anim.SetBool("Saltando", salto); 
         }
     }
-
-
-    private void FixedUpdate()
-    {
-        //salto
-        if (salto && !volar)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, velocidadY);
-            salto = false;
-        }
-
-        if (volar && CheatsManager.instance.GetEstadoCheats())
-        {
-            rb.velocity = new Vector2(rb.velocity.x, velocidadY*deltaY);
-        }/*
-        else if(!volar && CheatsManager.instance.GetEstadoCheats())
-        {
-            rb.velocity = new Vector2(rb.velocity.x, 0f);
-        }*/
-
-        //mov horizontal
-        if (movHorizontal && !enPared)
-            rb.velocity = new Vector2(deltaX * velocidadX, rb.velocity.y);
-    }
-
+    
     public void SetVolar(bool est)
     {
         volar = est;
@@ -302,5 +278,29 @@ public class ControladorJugador : MonoBehaviour
         aux = teclaRodar;
         teclaRodar = teclaSaltar;
         teclaSaltar = aux;
+    }
+
+
+    private void FixedUpdate()
+    {
+        //salto
+        if (salto && !volar)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, velocidadY);
+            salto = false;
+        }
+
+        if (volar && CheatsManager.instance.GetEstadoCheats())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, velocidadY * deltaY);
+        }/*
+        else if(!volar && CheatsManager.instance.GetEstadoCheats())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+        }*/
+
+        //mov horizontal
+        if (movHorizontal && !enPared)
+            rb.velocity = new Vector2(deltaX * velocidadX, rb.velocity.y);
     }
 }

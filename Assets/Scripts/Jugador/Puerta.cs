@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class Puerta : MonoBehaviour
 {
-    
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Cuando la puerta colisiona con el jugador,si tiene una llave ponemos la variable tieneLlave a false 

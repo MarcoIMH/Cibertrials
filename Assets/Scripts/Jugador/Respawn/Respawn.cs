@@ -4,17 +4,7 @@ using UnityEngine;
 
 public class Respawn : MonoBehaviour {
 
-    Transform spawn;
-
-    void Start()
-    {
-
-    }
-
-    private void Update()
-    {
-        //Debug.Log(spawn.position.x);
-    }
+    private Transform spawn;
 
     /// <summary>
     /// Recoloca al jugador en el ultimo punto guardado

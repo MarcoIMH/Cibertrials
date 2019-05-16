@@ -16,19 +16,7 @@ public class EscenasManager : MonoBehaviour
         }
         else Destroy(this.gameObject);
     }
-
-    // Use this for initialization
-    void Start()
-    {
-       
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    
     /// <summary>
     /// Metodo para cargar las escenas
     /// </summary>

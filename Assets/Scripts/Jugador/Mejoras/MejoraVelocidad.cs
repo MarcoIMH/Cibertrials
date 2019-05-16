@@ -6,18 +6,7 @@ public class MejoraVelocidad : MonoBehaviour {
 
     public float duracion = 5f;
     public float aumentoVelocidad = 20f;
-
-	void Start ()
-    {
-		
-	}
-	
-	
-	void Update ()
-    {
-		
-	}
-
+    
     /// <summary>
     /// Cuando el jugador colisiona con el powerUp se le aumenta la velocidad durante un tiempo
     /// y luego restaura a su valor original y finalmente se destruye el powerUp

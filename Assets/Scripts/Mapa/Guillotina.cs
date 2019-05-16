@@ -5,6 +5,7 @@ using UnityEngine;
 public class Guillotina : MonoBehaviour {
 
     public Transform puntoArriba, puntoAbajo; //acceso a los puntos entre los que se mueve
+
     public float vBajada, vSubida, tEspera; //valores para configuarar el movimiento
 
     Vector3 movimiento;
