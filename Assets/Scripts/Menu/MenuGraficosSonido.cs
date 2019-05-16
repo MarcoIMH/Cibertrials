@@ -56,6 +56,9 @@ public class MenuGraficosSonido : MonoBehaviour {
         }        
     }
 
+    /// <summary>
+    /// Este metodo establece y configura las distintas opciones de calidad
+    /// </summary>
     void ConfiguraDropDownCalidadGraficos()
     {
         if (calidadGraficaDropDown != null)
@@ -73,12 +76,18 @@ public class MenuGraficosSonido : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Este metodo establece y configura la checkbox de pantalla
+    /// </summary>
     public void ConfiguraTooglePantallaCompleta()
     {
         if (pantallaCompleta) togglePantallaCompleta.isOn = true;
         else togglePantallaCompleta.isOn = false;
     }
 
+    /// <summary>
+    /// Este metodo establece y configura el slider del volumen
+    /// </summary>
     public void ConfiguraSlidersSonidoMusica()
     {
         if(GameManager.instance != null)

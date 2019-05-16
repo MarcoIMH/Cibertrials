@@ -33,6 +33,9 @@ public class EstadoFantasma : MonoBehaviour {
         GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(3, true);
     }
 
+    /// <summary>
+    /// Quita el estado fantasma del jugador y desactiva el feedback visual
+    /// </summary>
     public void DesactivaEstadoFantasma()
     {
         estadoFantasma = false;

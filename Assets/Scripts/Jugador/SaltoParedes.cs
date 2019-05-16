@@ -54,6 +54,20 @@ public class SaltoParedes : MonoBehaviour
         }                                                              //Autorizamos o no el salto en paredes en función de los parámetros de entrada
     }
 
+    //Estos metodos establecen las teclas respecto a los controles del salto en paredes
+    public void SetTeclaSaltoParedes(KeyCode nuevaTecla)
+    {
+        teclaSaltoParedes = nuevaTecla;
+    }
+    public void SetTeclaIzqdaParedes(KeyCode nuevaTecla)
+    {
+        teclaIzqdaParedes = nuevaTecla;
+    }
+    public void SetTeclaDchaParedes(KeyCode nuevaTecla)
+    {
+        teclaDchaParedes = nuevaTecla;
+    }
+
     /// <summary>
     /// Método para realizar el salto en paredes del jugador.
     /// </summary>
@@ -62,21 +76,6 @@ public class SaltoParedes : MonoBehaviour
         if (pared == Muros.izquierda) direccion = new Vector2(x, y);                          //Si la pared es la izquierda, la dirección X del salto será positiva
         else direccion = new Vector2(-x, y);                                                  //Si la pared es la derecha, la dirección X del salto será negativa
         rb.AddForce(direccion * fuerzaSalto, ForceMode2D.Impulse);
-    }
-
-    public void SetTeclaSaltoParedes(KeyCode nuevaTecla)
-    {
-        teclaSaltoParedes = nuevaTecla;
-    }
-
-    public void SetTeclaIzqdaParedes(KeyCode nuevaTecla)
-    {
-        teclaIzqdaParedes = nuevaTecla;
-    }
-
-    public void SetTeclaDchaParedes(KeyCode nuevaTecla)
-    {
-        teclaDchaParedes = nuevaTecla;
     }
 
     /// <summary>
