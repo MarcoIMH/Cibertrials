@@ -8,16 +8,9 @@ public class DropDownMapas : MonoBehaviour {
     public Dropdown dropDownCheats;
     public Button botonCargarMapa;
 
-    bool mapaSeleccionado = false;
-
 	// Use this for initialization
 	void Start () {
         ConfiguraDropDownCheats();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 
     /// <summary>
@@ -26,8 +19,9 @@ public class DropDownMapas : MonoBehaviour {
     /// <param name="indice"></param>
     public void SetIndiceMapa(int indice)
     {
-        botonCargarMapa.enabled = true;        
-        GameManager.instance.SetIndiceMapa(indice + 1);        
+        botonCargarMapa.enabled = true;
+        if (GameManager.instance != null)
+            GameManager.instance.SetIndiceMapa(indice + 1);        
     }
 
     /// <summary>
@@ -37,7 +31,8 @@ public class DropDownMapas : MonoBehaviour {
     public void CargarMapa()
     {
         botonCargarMapa.enabled = false;
-        GameManager.instance.CargaMapaEnMundos();
+        if(GameManager.instance!=null)
+            GameManager.instance.CargaMapaEnMundos();
     }
 
     /// <summary>

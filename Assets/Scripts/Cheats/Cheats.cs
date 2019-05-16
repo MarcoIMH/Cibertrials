@@ -12,16 +12,6 @@ public class Cheats : MonoBehaviour {
     float gravedadPorDefecto = 0;
     bool volar = false, invencibilidad = false, gravedadRecogida = false;
 
-    // Use this for initialization
-    void Start () {
-        
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     /// <summary>
     /// Activa y desactiva la función incenvibilidad en el modo Cheats.
     /// </summary>

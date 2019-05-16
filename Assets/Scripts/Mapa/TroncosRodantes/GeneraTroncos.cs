@@ -23,6 +23,6 @@ public class GeneraTroncos : MonoBehaviour {
     /// </summary>
     void GeneraTronco()
     {
-        GameObject newTronco = Instantiate(tronco, tran);
+        Instantiate(tronco, tran);
     }
 }

@@ -3,17 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Neblina : MonoBehaviour {
-    public float cantidadRalentizar;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public float cantidadRalentizar;
 
     /// <summary>
     /// Método para detectar que se ha entrado en el campo de la Neblina

@@ -6,14 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject mapPrefab, mapPrefab2, mapPrefab3;
-
-    GameObject mapaJ1, mapaJ2;
+    public GameObject mapPrefab, mapPrefab2, mapPrefab3;    
 
     UIManager ui;
     AudioManager audioManager;
     AudioSource musicaManagerJ1, musicaManagerJ2;
-    GameObject mundoJ1, mundoJ2;
+    GameObject mundoJ1, mundoJ2, mapaJ1, mapaJ2;
     Transform[] coordPoderesMapa;
     Transform transformJ1, transformJ2, puntoInicialJ1, puntoInicialJ2;
     KeyCode teclaMenuJ1, teclaMenuJ2;
@@ -29,7 +27,7 @@ public class GameManager : MonoBehaviour
     int victoriasJ1, victoriasJ2, indiceMapaActual = 1;
     float volumenSonidos, volumenMusica;   
 
-    bool j1EnMeta = false, j2EnMeta = false, enMenu = false, primeraCarga = true, primerAudioSource=true;
+    bool enMenu = false, primeraCarga = true, primerAudioSource=true;
 
     //Asegurarse de que solo hay una instancia
     public static GameManager instance = null;

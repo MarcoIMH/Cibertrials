@@ -15,9 +15,4 @@ public class TextGO : MonoBehaviour {
         if (CheatsManager.instance != null) CheatsManager.instance.SetGameObjectText(this.gameObject.GetComponent<Text>());
         Destroy(this);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

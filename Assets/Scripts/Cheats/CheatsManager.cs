@@ -24,11 +24,6 @@ public class CheatsManager : MonoBehaviour {
     void Start () {
         estadoCheats = false;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     /// <summary>
     /// Método para recuperar referencias del Text hijo del InputField para configurarlo tras las cargas de escenas.

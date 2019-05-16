@@ -7,8 +7,8 @@ public class Piedra : MonoBehaviour {
     public float vCaida;
     public float tDestruccion;
 
-    bool destruido=false;
     Vector2 mov;
+    bool destruido=false;    
 
 	// Use this for initialization
 	void Start ()
