@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rebote : MonoBehaviour {
-    
+public class Rebote : MonoBehaviour {   
+
     private Rigidbody2D rb2d;
     private ControladorJugador controlador;
 
@@ -11,12 +11,6 @@ public class Rebote : MonoBehaviour {
     {
         rb2d = GetComponent<Rigidbody2D>();
         controlador = GetComponent<ControladorJugador>();
-    }
-
-
-    void Update()
-    {
-
     }
   
     /// <summary>

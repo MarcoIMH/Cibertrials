@@ -4,22 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PantallaDeCarga : MonoBehaviour {
+
     public Sprite[] piePantallaCarga;
     public GameObject imagenCargando, jugador1, jugador2;
     public Text textoConsejo;
 
-    int mapa;
-
-	// Use this for initialization
-	void Start () {
+    private int mapa;
+	
+	void Start ()
+    {
         textoConsejo.text = ConsejoDinamico();
 	}
-	
-	// Update is called once per frame
-	void Update () {
 		
-	}  
-
     /// <summary>
     /// Pantalla de carga Dinámica.
     /// Sección para mostrar los resultados de los jugadores.

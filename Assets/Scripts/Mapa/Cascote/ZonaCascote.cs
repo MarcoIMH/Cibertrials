@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ZonaCascote : MonoBehaviour {
- 
-    Piedra piedra;
 
-	// Use this for initialization
+   private Piedra piedra;
+
 	void Start ()
     {
         if(GetComponentInChildren<Piedra>() != null)
@@ -14,16 +13,10 @@ public class ZonaCascote : MonoBehaviour {
             piedra = GetComponentInChildren<Piedra>();
         }
     }
-	
-	// Update is called once per frame
-	void Update ()
-    {
 
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)//cuando el jugador entra en la zona
+	//cuando el jugador entra en la zona
+    private void OnTriggerEnter2D(Collider2D other)
     {
         piedra.IniciaMov();
     }
-
 }

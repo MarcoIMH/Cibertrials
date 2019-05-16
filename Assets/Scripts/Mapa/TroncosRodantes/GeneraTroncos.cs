@@ -9,14 +9,15 @@ public class GeneraTroncos : MonoBehaviour {
     //referencia al prefab
     public GameObject tronco;
 
-    Transform tran;
-    // Use this for initialization
-    void Start () {
-
+    private Transform tran;
+   
+    void Start ()
+    {
         tran = transform;
         //Genera 1 tronco cada periodo segundos
         InvokeRepeating("GeneraTronco", 1, periodo);        
 	}
+
 	/// <summary>
     /// hace un Instantiate del tronco en la posicion del objeto generador
     /// </summary>

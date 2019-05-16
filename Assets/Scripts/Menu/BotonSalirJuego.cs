@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class BotonSalirJuego : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    /// <summary>
+    /// Metodo que cierra el juego
+    /// </summary>
     public void SalirDelJuego()
     {
         Application.Quit();

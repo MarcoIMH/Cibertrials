@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class PoderesManager : MonoBehaviour {
+public class PoderesManager : MonoBehaviour {  
     
     public GameObject jugadorContrario, mundoContrario, muro, neblina, cuboHielo;         //GO para gestionar el jugador contrario. Prefabs de poderes.
     public Player jugador;    
     public int gemasMax;
     public float segundosInversionControles, tiempoNeblina;
 
-    GameObject nieblaAux;
-    Transform[] coordsPoderesMapa;            //Vector para almacenar todas las coordenadas de poderes del mapa que se cargue en escena
-    PerdidasControl pcJC;                           //Perdidas de control del jugador contrario
-    ControladorJugador controlesJugadorContrario;   //Controles del jugador contrario
-    AudioSource audioSourceJC;
-    KeyCode teclaPoder;
+    private  GameObject nieblaAux;
+    private Transform[] coordsPoderesMapa;            //Vector para almacenar todas las coordenadas de poderes del mapa que se cargue en escena
+    private PerdidasControl pcJC;                           //Perdidas de control del jugador contrario
+    private ControladorJugador controlesJugadorContrario;   //Controles del jugador contrario
+    private AudioSource audioSourceJC;
+    private KeyCode teclaPoder;
 
     //Poderes[] poder = new Poderes[4]; //array de poderes
     Poderes[] poder = { Poderes.inversionControles, Poderes.cubito , Poderes.muro, Poderes.neblina}; //array de poderes
@@ -24,7 +24,8 @@ public class PoderesManager : MonoBehaviour {
     int gemas;
     bool habilidadActiva;
 
-   	void Start () {
+   	void Start ()
+    {
         gemas = 0;
         poderUsar = Poderes.sinPoder;
         poderUsado = Poderes.sinPoder;
@@ -40,9 +41,9 @@ public class PoderesManager : MonoBehaviour {
         }       
     }                                                                        
 
+    void Update ()
+    {
 
-    // Update is called once per frame
-    void Update () {
         if(Input.GetKeyDown(teclaPoder) && habilidadActiva) 
         {
             habilidadActiva = false;           
@@ -111,7 +112,6 @@ public class PoderesManager : MonoBehaviour {
         GameObject newCuboHielo = Instantiate<GameObject>(cuboHielo, jugadorContrario.transform);
     }
 
-
     /// <summary>
     /// reactiva los controles
     /// </summary>
@@ -153,6 +153,10 @@ public class PoderesManager : MonoBehaviour {
         jugadorContrario.GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(6, false);
     }    
 
+    /// <summary>
+    /// Establece la tecla para usar los poderes
+    /// </summary>
+    /// <param name="nuevaTecla">la tecla que vamos a establecer</param>
     public void SetTeclaPoder(KeyCode nuevaTecla)
     {
         teclaPoder = nuevaTecla;

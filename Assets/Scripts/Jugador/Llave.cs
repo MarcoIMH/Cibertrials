@@ -2,18 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Llave : MonoBehaviour
-{
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
-
+public class Llave : MonoBehaviour {
 
     /// <summary>
     /// Se encarga de poner la variable tieneLlave(de la script AbrirPuertas) a true

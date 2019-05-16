@@ -7,17 +7,11 @@ public class AtaquePanzudo : MonoBehaviour {
     public float fuerzaRebote = 100f;
     public float tiempo = 1f;
 
-    AudioSource audioSource;
+    private AudioSource audioSource;
 
 	void Start ()
     {
         audioSource = GetComponent<AudioSource>();
-	}
-	
-	
-	void Update ()
-    {
-		
 	}
 
     private void OnCollisionEnter2D(Collision2D collision)

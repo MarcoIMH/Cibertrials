@@ -2,16 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camara : MonoBehaviour
-{
+public class Camara : MonoBehaviour {
 
     public Transform transformJugador;
     public float distanciaX, distanciaY; //para justar el espacio que se ve alrededor del jugador
-
-    private void Start()
-    {
-
-    }
 
     private void LateUpdate()
     {
