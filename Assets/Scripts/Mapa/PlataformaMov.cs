@@ -5,18 +5,8 @@ using UnityEngine;
 public class PlataformaMov : MonoBehaviour {
 
     Transform mapa;
-	// Use this for initialization
-	void Start ()
-    {
+    // Use this for initialization
 
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-
-	}
     private void OnTriggerEnter2D(Collider2D other)
     {
         mapa = other.gameObject.transform.parent;

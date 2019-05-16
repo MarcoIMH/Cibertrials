@@ -15,22 +15,13 @@ public class CambiarPanel : MonoBehaviour {
         if(GetComponent<Animator>() != null)
             panel = GetComponent<Animator>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+    
     /// <summary>
     /// Metodo para que desparezca el panel
     /// </summary>
     public void Desvanecerse()
     {
-        //if (panel.gameObject.activeSelf)
-        {
-            panel.SetTrigger("fadeOut");
-        }
-        
+        panel.SetTrigger("fadeOut");
     }
 
     /// <summary>

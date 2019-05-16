@@ -13,19 +13,14 @@ public class ControlMundos : MonoBehaviour
     {
         InformaGameManager();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     /// <summary>
     /// Método para informar a GameManager de la relación mundo y jugador y que este tenga control sobre ellos.
     /// </summary>
     void InformaGameManager()
     {
         if (jugador != null && mundo != null) GameManager.instance.SetMundoYJugador(tipoMundo, mundo, jugador);
-        Destroy(this);      //Destruye todas las referencias públicas tras el informe para evitar que estén en memoria innecesariamente. GameManager es el único que necesita conocerlos.
+        //Destruimos todas las referencias públicas tras el informe para evitar que estén en memoria innecesariamente. 
+        //GameManager es el único que necesita conocerlos.
+        Destroy(this);     
     }
 }

@@ -5,15 +5,13 @@ using UnityEngine;
 public class GoombaStun : MonoBehaviour {
 
     public float segundos;
-
     AudioSource audioSource;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
-
-    /// <summary>
+/// <summary>
     /// Este metodo se llama si el enemigo goomba colisiona por trigger con algun otro objeto
     /// </summary>
     /// /// <param name="other"></param> El que ha colisionado con el enemigo
@@ -28,6 +26,5 @@ public class GoombaStun : MonoBehaviour {
             GameManager.instance.EjecutarSonido(audioSource, "Goomba");
             pc.DesactivaControles(segundos, 0);
         }
-
     }
 }

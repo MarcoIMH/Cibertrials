@@ -36,7 +36,6 @@ public class AudioManager : MonoBehaviour {
         audioSource.Play();               
     }
   
-    
     /// <summary>
     /// Ejecuta un sonido.Sirve para los objetos que se destruyen(PowerUps,Gemas...)
     /// </summary>
@@ -81,11 +80,10 @@ public class AudioManager : MonoBehaviour {
             if(sonidos[i].nombre == identificador)
             {
                 sonido = sonidos[i].sonido;
+                encontrado = true;
             }
-
             i++;
         }
-
         return sonido;
     }
 }

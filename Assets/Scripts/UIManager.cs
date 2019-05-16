@@ -8,9 +8,10 @@ public class UIManager : MonoBehaviour
     public GameObject menuIngame, pantallaDeCarga, pantallaGanador, pantallaCheats;
     public MenuControles menuControles;
 
-    public Image[] gemaJugador; //0..v.lentgh/2-1 -->Jug1, v.Lentgh/2...v.Lentgh-1 -->Jug2
-    public Image[] poderesJug;
-    public Image[] imagenLlaves; //0 -> jugador 1 , 1 -> jugador 2
+    public Image[] gemaJugador,//0..v.lentgh/2-1 -->Jug1, v.Lentgh/2...v.Lentgh-1 -->Jug2
+                   poderesJug ,
+                   imagenLlaves; //0 -> jugador 1 , 1 -> jugador 2
+
     int gemasMax, poderesMax;
     float tiempo=0;
     bool activarTiempo = false;
@@ -36,10 +37,18 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Actualiza la UI de la carga de las gemas en función del número de gemas
+    /// que se den, el jugador que las coja, y en caso de tener una carga completa
+    /// el poder que le ha tocado
+    /// </summary>
+    /// <param name="gema"></param>
+    /// <param name="jugador"></param>
+    /// <param name="poder"></param>
     public void ActualizaGema(int gema, Player jugador, Poderes poder)
     {
         //Gemas
-        if (gema == 0)
+        if (gema == 0) //Reiniciamos la UI
         {
             int min, max;
             if (jugador == Player.jugador1)
@@ -108,7 +117,10 @@ public class UIManager : MonoBehaviour
             imagenLlaves[1].gameObject.SetActive(activado);
         }
     }
-
+    /// <summary>
+    /// Se carga el menú del juego según el jugador que lo active
+    /// </summary>
+    /// <param name="jugador"></param>
     public void AbreMenuIngame(Player jugador)
     {
         if(jugador == Player.jugador1) menuControles.CargaMenuControles(Player.jugador1);
@@ -118,25 +130,40 @@ public class UIManager : MonoBehaviour
         menuIngame.SetActive(true);
     }
 
+    /// <summary>
+    /// Quita la activación del panel de pausa y activa de nuevo el juego
+    /// </summary>
     public void CierraMenuIngame()
     {
         menuIngame.SetActive(false);
         this.gameObject.SetActive(true);
         GameManager.instance.QuitaPausaJuego();
     }
-
+    /// <summary>
+    /// Activa la pantalla de carga durante un tiempo
+    /// </summary>
+    /// <param name="tiempo"></param>
     public void AbrePantallaDeCarga(float tiempo)
     {
         pantallaDeCarga.SetActive(true);
         this.tiempo = tiempo;
         activarTiempo = true;
     }
-
+    /// <summary>
+    /// Cierra la pantalla de carga
+    /// </summary>
     public void CierraPantallaDeCarga()
     {
         pantallaDeCarga.SetActive(false);
     }
 
+    /// <summary>
+    /// Muestra los resultados del juego
+    /// </summary>
+    /// <param name="rondasJ1"> rondas del jugador 1</param>
+    /// <param name="rondasJ2">rondas del jugador 2</param>
+    /// <param name="mapa"></param>
+    /// <param name="tiempoMostrarResultados">tiempo que dura el panel</param>
     public void CargaResultados(int rondasJ1, int rondasJ2, int mapa, float tiempoMostrarResultados)
     {
         AbrePantallaDeCarga(tiempoMostrarResultados);

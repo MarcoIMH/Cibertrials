@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PerdidasControl : MonoBehaviour {
 
-    PerdidaControles estadoActual;
+ 
     //segundos que dura la modificacion de velocidad
     public float segundosModificaVelocidad;
 
-    int casoFeedBack;
+    PerdidaControles estadoActual;
     ControladorJugador controles;
-
+    int casoFeedBack;
+    
     private void Start()
     {
         //acceso al controlador jugador para llamar al switch
@@ -72,6 +73,9 @@ public class PerdidasControl : MonoBehaviour {
         controles.RestauraVelocidad();
         GetComponent<FeedbackVisual>().ActivarDesactivarFeedBack(7, false);
     }
+    /// <summary>
+    /// Desactiva el feedback correspondiente a la neblina
+    /// </summary>
     public void DesactivaModificaVelocidadNeblina()
     {
         controles.RestauraVelocidad();

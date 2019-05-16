@@ -11,12 +11,6 @@ public class CrearCoordenadasMapa : MonoBehaviour {
         spawns = GetComponentsInChildren<Transform>();
         OrdenaCoordenadasSpawn();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     /// <summary>
     /// Método para ordenar el vector de coordenadas de menor a mayor respecto al eje de las X antes de entregárselo al GM
     /// </summary>
@@ -25,13 +19,14 @@ public class CrearCoordenadasMapa : MonoBehaviour {
         for(int x = 0; x+1 < spawns.Length; x++)
         {
             for(int j=x+1; j<spawns.Length;j++)
-                if(spawns[x].position.x > spawns[j].position.x)
+                if(spawns[x].position.x > spawns[j].position.x) 
                 {
                     Transform trAux = spawns[x];
                     spawns[x] = spawns[j];
                     spawns[j] = trAux;
                 }
         }
+        //Mandamos las coordenadas al GameManager
         GameManager.instance.SetCoordenadasPoderes(spawns);
         Destroy(this);
     }
