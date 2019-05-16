@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FeedbackVisual : MonoBehaviour {
-
     public GameObject stun, ralentizar, powerupPico, powerupFantasma, resucitar, powerUpVel, inversion, despacio;
 
     // Use this for initialization
@@ -16,6 +15,11 @@ public class FeedbackVisual : MonoBehaviour {
 		
 	}
 
+    /// <summary>
+    /// Activación/desactivación de Feedbacks visuales.
+    /// </summary>
+    /// <param name="caso"></param>
+    /// <param name="actdes"></param>
     public void ActivarDesactivarFeedBack(int caso, bool actdes)
     {
         switch (caso)
@@ -46,6 +50,10 @@ public class FeedbackVisual : MonoBehaviour {
                 break;
         }
     }
+
+    /// <summary>
+    /// Método para desactivar todos los feedbacks. Se utiliza como "limpieza" en casos de cambios de escenas y situaciones similares.
+    /// </summary>
     public void DesactivaTodos()
     {
         stun.SetActive(false);

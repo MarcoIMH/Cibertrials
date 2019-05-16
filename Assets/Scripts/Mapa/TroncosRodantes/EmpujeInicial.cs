@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EmpujeInicial : MonoBehaviour {
-
-    Rigidbody2D rb;
     public float empuje;
+
+    Rigidbody2D rb;    
 
 	// Use this for initialization
 	void Start () {

@@ -15,6 +15,10 @@ public class BotonSalir : MonoBehaviour {
 		
 	}
 
+    /// <summary>
+    /// Gestión del cambio de escena a través del SceneManager
+    /// </summary>
+    /// <param name="nombre"></param>
     public void CambiarAEscenaMenu(string nombre)
     {
         Time.timeScale = 1;

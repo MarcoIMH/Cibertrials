@@ -22,7 +22,7 @@ public class Neblina : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<PerdidasControl>() != null)
-            other.GetComponent<PerdidasControl>().ActivaModificaVelocidad(cantidadRalentizar, 1);                     //En caso de entrar en la Neblina activa la modificación de velocidad con la cantidad a ralentizar
+            other.GetComponent<PerdidasControl>().ActivaModificaVelocidad(cantidadRalentizar, 1);   //En caso de entrar en la Neblina activa la modificación de velocidad con la cantidad a ralentizar
     }
 
     /// <summary>
@@ -32,6 +32,6 @@ public class Neblina : MonoBehaviour {
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.GetComponent<PerdidasControl>() != null)
-            other.GetComponent<PerdidasControl>().DesactivaModificaVelocidadNeblina();                                    //En caso de salir de la Neblina desactiva la reducción de velocidad.
+            other.GetComponent<PerdidasControl>().DesactivaModificaVelocidadNeblina();  //En caso de salir de la Neblina desactiva la reducción de velocidad.
     }
 }

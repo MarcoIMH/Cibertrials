@@ -36,10 +36,11 @@ public class VisionVigilante : MonoBehaviour {
             pc.ActivaModificaVelocidad(reduccionVelVigilante, 7);
         }
         
-        if (this.gameObject.GetComponentInParent<SeguirObjetivo>() != null && est != null)                                  //Si este enemigo dispone de la capacidad de seguir al jugador
+        if (this.gameObject.GetComponentInParent<SeguirObjetivo>() != null && est != null)  //Si este enemigo dispone de la capacidad de seguir al jugador
         {
             SeguirObjetivo so = this.gameObject.GetComponentInParent<SeguirObjetivo>();                                     
-            if (!est.CogerEstadoFantasma() && so.PuedeIniciarSeguimiento()) so.SigueAlJugador(other.transform);        //Si no está en modo fantasma y el enemigo puede iniciar un seguimiento
-        }                                                                                                                   //Autorizamos el seguimiento al jugador y pasamos su transform para gestionar su posición
+            if (!est.CogerEstadoFantasma() && so.PuedeIniciarSeguimiento())
+                so.SigueAlJugador(other.transform);        //Si no está en modo fantasma y el enemigo puede iniciar un seguimiento
+        }                                                  //Autorizamos el seguimiento al jugador y pasamos su transform para gestionar su posición
     }   
 }

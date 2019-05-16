@@ -4,11 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PantallaDeCarga : MonoBehaviour {
-
     public Sprite[] piePantallaCarga;
-
     public GameObject imagenCargando, jugador1, jugador2;
-
     public Text textoConsejo;
 
     int mapa;
@@ -23,6 +20,11 @@ public class PantallaDeCarga : MonoBehaviour {
 		
 	}
 
+    /// <summary>
+    /// Consejos dinámicos.
+    /// Devuelve un consejo aleatorio guardado en el array para mostrar en la pantalla de carga.
+    /// </summary>
+    /// <returns></returns>
     string ConsejoDinamico()
     {
         int indice = Random.Range(0, 4);
@@ -34,6 +36,10 @@ public class PantallaDeCarga : MonoBehaviour {
         return consejos[indice];
     }
 
+    /// <summary>
+    /// Pie de carga dinámico.
+    /// Cambia el pie de carga para mostrar los consejos y el mapa que se está cargando durante el tiempo de carga.
+    /// </summary>
     void CambiaPieDeCarga()
     {
         textoConsejo.enabled = true;
@@ -47,6 +53,14 @@ public class PantallaDeCarga : MonoBehaviour {
         
     }
 
+    /// <summary>
+    /// Pantalla de carga Dinámica.
+    /// Sección para mostrar los resultados de los jugadores.
+    /// </summary>
+    /// <param name="rondasJ1">Rondas ganadas J1</param>
+    /// <param name="rondasJ2">Rondas ganadas J2</param>
+    /// <param name="mapa">indice mapa</param>
+    /// <param name="tiempoMostrarResultados">tiempo que se mostrarán los resultados</param>
     public void MostrarResultados(int rondasJ1, int rondasJ2, int mapa, float tiempoMostrarResultados)
     { 
         textoConsejo.enabled = false;

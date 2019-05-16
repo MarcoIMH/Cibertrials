@@ -22,6 +22,9 @@ public class Piedra : MonoBehaviour {
         transform.Translate(mov * Time.deltaTime);
 	}
 
+    /// <summary>
+    /// Inicia el movimiento de caída de las piedras y destruye el go transcurrido tDestruccion segundos.
+    /// </summary>
     public void IniciaMov()
     {
         mov = new Vector2(0, -vCaida);
